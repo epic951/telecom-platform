@@ -3,6 +3,7 @@ package com.epic951.data.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -42,6 +43,7 @@ public class Service implements Serializable {
 	}
 
 	@Id
+	@GeneratedValue
 	public int getService_id() {
 		return service_id;
 	}
@@ -92,5 +94,45 @@ public class Service implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + operator_id;
+		result = prime * result + operator_package_id;
+		result = prime * result + operator_service_id;
+		result = prime * result + service_id;
+		result = prime * result + ((service_name == null) ? 0 : service_name.hashCode());
+		result = prime * result + (service_type ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Service))
+			return false;
+		Service other = (Service) obj;
+		if (operator_id != other.operator_id)
+			return false;
+		if (operator_package_id != other.operator_package_id)
+			return false;
+		if (operator_service_id != other.operator_service_id)
+			return false;
+		if (service_id != other.service_id)
+			return false;
+		if (service_name == null) {
+			if (other.service_name != null)
+				return false;
+		} else if (!service_name.equals(other.service_name))
+			return false;
+		if (service_type != other.service_type)
+			return false;
+		return true;
 	}
 }

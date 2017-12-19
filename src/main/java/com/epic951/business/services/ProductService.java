@@ -15,6 +15,16 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 
+	public Product addProduct(Product p) {
+		// Validation is required ..
+		
+		
+		Product newProduct = null;
+		if (p.getProduct_name() != null) {
+			newProduct = productRepository.save(p);
+		}
+		return newProduct;
+	}
 
 	public List<Product> getAllProducts() {
 		List<Product> products = new ArrayList<>();

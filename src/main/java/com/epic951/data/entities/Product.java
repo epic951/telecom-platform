@@ -3,6 +3,7 @@ package com.epic951.data.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -31,6 +32,7 @@ public class Product implements Serializable {
 	}
 
 	@Id
+	@GeneratedValue
 	public int getProduct_id() {
 		return product_id;
 	}
@@ -79,5 +81,45 @@ public class Product implements Serializable {
 	public String toString() {
 		return "Product [product_id=" + product_id + ", product_name=" + product_name + ", product_description="
 				+ product_description + ", min_price=" + min_price + ", max_price=" + max_price + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + max_price;
+		result = prime * result + min_price;
+		result = prime * result + ((product_description == null) ? 0 : product_description.hashCode());
+		result = prime * result + product_id;
+		result = prime * result + ((product_name == null) ? 0 : product_name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Product))
+			return false;
+		Product other = (Product) obj;
+		if (max_price != other.max_price)
+			return false;
+		if (min_price != other.min_price)
+			return false;
+		if (product_description == null) {
+			if (other.product_description != null)
+				return false;
+		} else if (!product_description.equals(other.product_description))
+			return false;
+		if (product_id != other.product_id)
+			return false;
+		if (product_name == null) {
+			if (other.product_name != null)
+				return false;
+		} else if (!product_name.equals(other.product_name))
+			return false;
+		return true;
 	}
 }

@@ -3,6 +3,7 @@ package com.epic951.data.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -33,6 +34,7 @@ public class Operator implements Serializable {
 	}
 
 	@Id
+	@GeneratedValue
 	public int getOperator_id() {
 		return operator_id;
 	}
@@ -59,5 +61,39 @@ public class Operator implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((operator_country == null) ? 0 : operator_country.hashCode());
+		result = prime * result + operator_id;
+		result = prime * result + ((operator_name == null) ? 0 : operator_name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Operator))
+			return false;
+		Operator other = (Operator) obj;
+		if (operator_country == null) {
+			if (other.operator_country != null)
+				return false;
+		} else if (!operator_country.equals(other.operator_country))
+			return false;
+		if (operator_id != other.operator_id)
+			return false;
+		if (operator_name == null) {
+			if (other.operator_name != null)
+				return false;
+		} else if (!operator_name.equals(other.operator_name))
+			return false;
+		return true;
 	}
 }
