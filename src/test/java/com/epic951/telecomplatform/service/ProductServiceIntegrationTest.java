@@ -1,4 +1,4 @@
-package com.epic951.telecomplatform;
+package com.epic951.telecomplatform.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

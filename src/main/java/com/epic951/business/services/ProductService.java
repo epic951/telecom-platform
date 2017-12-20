@@ -16,14 +16,15 @@ public class ProductService {
 	private ProductRepository productRepository;
 
 	public Product addProduct(Product p) {
+
 		// Validation is required ..
-		
-		
-		Product newProduct = null;
-		if (p.getProduct_name() != null) {
-			newProduct = productRepository.save(p);
+		if (p.getProduct_id() > 0) {
+			if (p.getProduct_name() != null && !p.getProduct_name().isEmpty()) {
+				Product newProduct = productRepository.save(p);
+				return newProduct;
+			}
 		}
-		return newProduct;
+		return null;
 	}
 
 	public List<Product> getAllProducts() {

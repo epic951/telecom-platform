@@ -27,9 +27,9 @@ public class ProductController {
 	@PostMapping(value = "/addproduct")
 	public String processAddProduct(@RequestBody Product p) {
 		Product newProduct = productService.addProduct(p);
-		if (newProduct != null)
+		if (newProduct != null) {
 			return "success";
-		else
-			return "failure";
+		}
+		return "failure";
 	}
 }

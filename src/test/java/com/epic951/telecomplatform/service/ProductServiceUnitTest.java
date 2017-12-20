@@ -1,7 +1,6 @@
-package com.epic951.telecomplatform;
+package com.epic951.telecomplatform.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
@@ -39,19 +38,17 @@ public class ProductServiceUnitTest {
 
 		// Create a Product
 		Product sms = new Product();
-		sms.setProduct_name("Short Messaging Service");
-		sms.setMin_price(100);
-		sms.setMax_price(300);
-		sms.setProduct_description("Casual messaging service used to exchange brief text-based messages");
-		sms.setProduct_id(544);
+		sms.setProduct_name("Silent");
+		sms.setProduct_description("messages");
+		sms.setProduct_id(44);
 
 		when(productRepository.save(any(Product.class))).thenReturn(sms);
 
-		// Save the product
-		Product p = productService.addProduct(null);
+		Product newProduct = productService.addProduct(new Product(55, "rrrr", "ttt", 5, 66));
 
-		// Verify the save
-		assertNotNull(p);
-		assertEquals(544, p.getProduct_id());
+		// Verify mocked object is passed to the service no matter what is passed to
+		// addproduct method
+		assertEquals("Silent", newProduct.getProduct_name());
+		System.err.println(newProduct.toString());
 	}
 }

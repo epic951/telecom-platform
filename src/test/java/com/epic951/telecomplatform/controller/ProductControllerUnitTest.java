@@ -1,15 +1,13 @@
-package com.epic951.telecomplatform;
+package com.epic951.telecomplatform.controller;
 
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -43,6 +40,7 @@ public class ProductControllerUnitTest {
 	@InjectMocks
 	private ProductController productController;
 
+	private MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
 			MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 
@@ -66,24 +64,17 @@ public class ProductControllerUnitTest {
 		newProduct.setProduct_id(218);
 
 		// simulate the form submit (POST)
-		mockMvc.perform(post("/test/addproduct", newProduct).content(this.json(new Product())).contentType(contentType))
-				.andExpect(status().isOk()).andReturn();
-	}
-
-	private HttpMessageConverter mappingJackson2HttpMessageConverter;
-
-	@Autowired
-	void setConverters(HttpMessageConverter<?>[] converters) {
-
-		this.mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
-				.filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter).findAny().orElse(null);
-
-		assertNotNull("the JSON message converter must not be null", this.mappingJackson2HttpMessageConverter);
+		mockMvc.perform(
+				post("/test/addproduct", newProduct).content(this.json(newProduct)).contentType(contentType))
+				.andDo(print()).andExpect(status().isOk()).andReturn();
+		// System.err.println(newProduct.toString());
+		// mockMvc.perform(post("/test/addproduct",
+		// newProduct)).andExpect(status().isOk()).andReturn();
 	}
 
 	protected String json(Object o) throws IOException {
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
-		this.mappingJackson2HttpMessageConverter.write(o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
+		this.jsonConverter.write(o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
 		return mockHttpOutputMessage.getBodyAsString();
 	}
 }

@@ -2,8 +2,10 @@ package com.epic951.data.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -31,8 +33,13 @@ public class Product implements Serializable {
 		this.max_price = max_price;
 	}
 
+	// @SequenceGenerator(name = "sequence_Generator", sequenceName =
+	// "sequence_Generator", allocationSize = 1)
+	// @ColumnDefault(value = "-1")
+
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "product_id")
 	public int getProduct_id() {
 		return product_id;
 	}
@@ -41,6 +48,7 @@ public class Product implements Serializable {
 		this.product_id = product_id;
 	}
 
+	@Column(name = "product_name", nullable = false)
 	public String getProduct_name() {
 		return product_name;
 	}
@@ -49,6 +57,7 @@ public class Product implements Serializable {
 		this.product_name = product_name;
 	}
 
+	@Column(name = "product_description")
 	public String getProduct_description() {
 		return product_description;
 	}
@@ -57,6 +66,7 @@ public class Product implements Serializable {
 		this.product_description = product_description;
 	}
 
+	@Column(name = "min_price")
 	public int getMin_price() {
 		return min_price;
 	}
@@ -65,6 +75,7 @@ public class Product implements Serializable {
 		this.min_price = min_price;
 	}
 
+	@Column(name = "max_price")
 	public int getMax_price() {
 		return max_price;
 	}
