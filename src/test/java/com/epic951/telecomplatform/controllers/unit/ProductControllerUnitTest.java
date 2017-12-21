@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -57,10 +62,10 @@ public class ProductControllerUnitTest {
 		newProduct.setProductId(218);
 
 		// simulate the form submit (POST)
-		mockMvc.perform(post("/test/addproduct", newProduct).content(HTTPUtilities.json(newProduct))
+		mockMvc.perform(post("/test/addproduct", newProduct).content(this.json(newProduct))
 				.contentType(HTTPUtilities.JSON_CONTENT_TYPE)).andDo(print()).andExpect(status().isOk()).andReturn();
 		System.err.println(newProduct.toString());
-		System.err.println(HTTPUtilities.json(newProduct));
+		System.err.println(this.json(newProduct));
 
 		mockMvc.perform(get("/lol")).andExpect(status().isNotFound());
 
@@ -69,4 +74,10 @@ public class ProductControllerUnitTest {
 		// newProduct)).andDo(print()).andExpect(status().isOk()).andReturn();
 	}
 
+	private String json(Object o) throws IOException {
+		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
+		jsonConverter.write(o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
+		return mockHttpOutputMessage.getBodyAsString();
+	}
 }
