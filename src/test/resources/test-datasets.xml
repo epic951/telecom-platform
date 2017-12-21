@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<product productName="Alpha" productDescription="First" />
+	<product productName="Beta" productDescription="Second" />
+	<product productname="Omega" productDescription="Third" />
+</dataset>

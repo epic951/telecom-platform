@@ -39,7 +39,7 @@ public class TelecomService implements Serializable {
 	}
 
 	@Id
-	@SequenceGenerator(name = "serviceidseq", sequenceName = "serviceidseq", allocationSize = 5)
+	@SequenceGenerator(name = "serviceidseq", sequenceName = "serviceidseq", allocationSize = 25)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serviceidseq")
 	@Column(name = "telecomserviceid", updatable = false, nullable = false)
 	public int getTelecomServiceId() {

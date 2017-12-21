@@ -32,7 +32,7 @@ public class Operator implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operatoridseq")
-	@SequenceGenerator(name = "operatoridseq", sequenceName = "operatoridseq", allocationSize = 5)
+	@SequenceGenerator(name = "operatoridseq", sequenceName = "operatoridseq", allocationSize = 15)
 	@Column(name = "operatorid", updatable = false, nullable = false)
 	public int getOperatorId() {
 		return operatorId;
