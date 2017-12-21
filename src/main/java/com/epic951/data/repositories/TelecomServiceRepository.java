@@ -7,5 +7,5 @@ import com.epic951.data.entities.TelecomService;
 
 @Repository
 public interface TelecomServiceRepository extends CrudRepository<TelecomService, Long> {
-
+	public TelecomService findByTelecomServiceName(String telecomserviceName);
 }

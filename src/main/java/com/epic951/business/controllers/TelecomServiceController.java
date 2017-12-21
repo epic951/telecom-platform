@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epic951.business.services.ProductService;
-import com.epic951.data.entities.Product;
+import com.epic951.business.services.TelecomServiceHandler;
+import com.epic951.data.entities.TelecomService;
 
 @RestController
-public class ProductController {
+public class TelecomServiceController {
 
 	@Autowired
-	private ProductService productService;
+	private TelecomServiceHandler telecomService;
 
-	@GetMapping(value = "/getproducts")
-	public List<Product> getAllProducts() {
-		return productService.getAllProducts();
+	@GetMapping(value = "/getservices")
+	public List<TelecomService> getAllTelecomServices() {
+		return telecomService.getAllTelecomServices();
 	}
 
-	@PostMapping(value = "/addproduct")
+	@PostMapping(value = "/addservice")
 	@ResponseBody
-	public String processAddProduct(@RequestBody Product p) {
-		Product newProduct = productService.addProduct(p);
-		if (newProduct != null) {
+	public String processAddService(@RequestBody TelecomService s) {
+		TelecomService newService = telecomService.addService(s);
+		if (newService != null) {
 			return "success";
 		}
 		return "failure";

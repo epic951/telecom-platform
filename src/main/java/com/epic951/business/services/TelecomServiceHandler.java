@@ -23,7 +23,7 @@ public class TelecomServiceHandler {
 		return null;
 	}
 
-	public List<TelecomService> getAllOperators() {
+	public List<TelecomService> getAllTelecomServices() {
 		List<TelecomService> services = new ArrayList<>();
 		serviceRepository.findAll().forEach(services::add);
 		return services;

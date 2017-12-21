@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epic951.business.services.ProductService;
-import com.epic951.data.entities.Product;
+import com.epic951.business.services.OperatorService;
+import com.epic951.data.entities.Operator;
 
 @RestController
-public class ProductController {
+public class OperatorController {
 
 	@Autowired
-	private ProductService productService;
+	private OperatorService operatorService;
 
-	@GetMapping(value = "/getproducts")
-	public List<Product> getAllProducts() {
-		return productService.getAllProducts();
+	@GetMapping(value = "/getoperators")
+	public List<Operator> getAllOperator() {
+		return operatorService.getAllOperators();
 	}
 
-	@PostMapping(value = "/addproduct")
+	@PostMapping(value = "/addoperator")
 	@ResponseBody
-	public String processAddProduct(@RequestBody Product p) {
-		Product newProduct = productService.addProduct(p);
-		if (newProduct != null) {
+	public String processAddOperator(@RequestBody Operator o) {
+		Operator newOperator = operatorService.addOperator(o);
+		if (newOperator != null) {
 			return "success";
 		}
 		return "failure";

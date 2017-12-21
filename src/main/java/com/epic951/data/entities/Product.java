@@ -34,14 +34,6 @@ public class Product implements Serializable {
 		this.maxPrice = maxPrice;
 	}
 
-	// @SequenceGenerator(name = "sequence_Generator", sequenceName =
-	// "sequence_Generator", allocationSize = 1)
-	// @ColumnDefault(value = "-1")
-
-	// @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "identifier")
-	// @GeneratedValue(generator = "UUID")
-	// @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productidseq")
 	@SequenceGenerator(name = "productidseq", sequenceName = "productidseq", allocationSize = 5)
