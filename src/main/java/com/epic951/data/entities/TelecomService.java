@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "serviceId" }) })
+@Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "telecomserviceid" }) })
 public class TelecomService implements Serializable {
 
 	private static final long serialVersionUID = 5747837806045222851L;
@@ -39,9 +39,9 @@ public class TelecomService implements Serializable {
 	}
 
 	@Id
-	@SequenceGenerator(name = "serviceIdSeq", sequenceName = "serviceIdSeq", allocationSize = 5)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serviceIdSeq")
-	@Column(name = "serviceId", updatable = false, nullable = false)
+	@SequenceGenerator(name = "serviceidseq", sequenceName = "serviceidseq", allocationSize = 5)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serviceidseq")
+	@Column(name = "telecomserviceid", updatable = false, nullable = false)
 	public int getTelecomServiceId() {
 		return telecomserviceId;
 	}
@@ -50,7 +50,7 @@ public class TelecomService implements Serializable {
 		this.telecomserviceId = serviceId;
 	}
 
-	@Column(name = "serviceName", nullable = false)
+	@Column(name = "telecomservicename", nullable = false)
 	public String getTelecomServiceName() {
 		return telecomserviceName;
 	}
@@ -59,7 +59,7 @@ public class TelecomService implements Serializable {
 		this.telecomserviceName = serviceName;
 	}
 
-	@Column(name = "serviceType")
+	@Column(name = "telecomservicetype")
 	public boolean isTelecomServiceType() {
 		return telecomserviceType;
 	}
@@ -68,7 +68,7 @@ public class TelecomService implements Serializable {
 		this.telecomserviceType = serviceType;
 	}
 
-	@Column(name = "operatorId")
+	@Column(name = "operatorid")
 	public int getOperatorId() {
 		return operatorId;
 	}
@@ -77,7 +77,7 @@ public class TelecomService implements Serializable {
 		this.operatorId = operatorId;
 	}
 
-	@Column(name = "operatorServiceId")
+	@Column(name = "operatorserviceid")
 	public int getOperatorServiceId() {
 		return operatorServiceId;
 	}
@@ -86,7 +86,7 @@ public class TelecomService implements Serializable {
 		this.operatorServiceId = operatorServiceId;
 	}
 
-	@Column(name = "operatorPackageId")
+	@Column(name = "operatorpackageid")
 	public int getOperatorPackageId() {
 		return operatorPackageId;
 	}

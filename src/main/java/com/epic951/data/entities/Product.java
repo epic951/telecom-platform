@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "product", uniqueConstraints = { @UniqueConstraint(columnNames = { "productId" }) })
+@Table(name = "product", uniqueConstraints = { @UniqueConstraint(columnNames = { "productid" }) })
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = -2830047822179023846L;
@@ -43,9 +43,9 @@ public class Product implements Serializable {
 	// @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productId_seq")
-	@SequenceGenerator(name = "productId_seq", sequenceName = "productId_seq", allocationSize = 5)
-	@Column(name = "productId", updatable = false, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productidseq")
+	@SequenceGenerator(name = "productidseq", sequenceName = "productidseq", allocationSize = 5)
+	@Column(name = "productid", updatable = false, nullable = false)
 	public int getProductId() {
 		return productId;
 	}
@@ -54,7 +54,7 @@ public class Product implements Serializable {
 		this.productId = productId;
 	}
 
-	@Column(name = "productName", nullable = false)
+	@Column(name = "productname", nullable = false)
 	public String getProductName() {
 		return productName;
 	}
@@ -63,7 +63,7 @@ public class Product implements Serializable {
 		this.productName = productName;
 	}
 
-	@Column(name = "productDescription")
+	@Column(name = "productdescription")
 	public String getProductDescription() {
 		return productDescription;
 	}
@@ -72,7 +72,7 @@ public class Product implements Serializable {
 		this.productDescription = productDescription;
 	}
 
-	@Column(name = "minPrice")
+	@Column(name = "minprice")
 	public int getMinPrice() {
 		return minPrice;
 	}
@@ -81,7 +81,7 @@ public class Product implements Serializable {
 		this.minPrice = minPrice;
 	}
 
-	@Column(name = "maxPrice")
+	@Column(name = "maxprice")
 	public int getMaxPrice() {
 		return maxPrice;
 	}

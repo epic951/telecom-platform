@@ -15,7 +15,6 @@ import com.epic951.data.entities.Operator;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
-
 public class OperatorServiceIntegrationTest {
 
 	@Autowired

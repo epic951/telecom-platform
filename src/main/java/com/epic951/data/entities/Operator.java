@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "operator", uniqueConstraints = { @UniqueConstraint(columnNames = { "operatorId" }) })
+@Table(name = "operator", uniqueConstraints = { @UniqueConstraint(columnNames = { "operatorid" }) })
 public class Operator implements Serializable {
 
 	private static final long serialVersionUID = 8006120004530718792L;
@@ -31,9 +31,9 @@ public class Operator implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operatorId_seq")
-	@SequenceGenerator(name = "operatorId_seq", sequenceName = "operatorId_seq", allocationSize = 5)
-	@Column(name = "operatorId", updatable = false, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operatoridseq")
+	@SequenceGenerator(name = "operatoridseq", sequenceName = "operatoridseq", allocationSize = 5)
+	@Column(name = "operatorid", updatable = false, nullable = false)
 	public int getOperatorId() {
 		return operatorId;
 	}
@@ -42,7 +42,7 @@ public class Operator implements Serializable {
 		this.operatorId = operatorId;
 	}
 
-	@Column(name = "operatorName", nullable = false)
+	@Column(name = "operatorname", nullable = false)
 	public String getOperatorName() {
 		return operatorName;
 	}
@@ -51,7 +51,7 @@ public class Operator implements Serializable {
 		this.operatorName = operatorName;
 	}
 
-	@Column(name = "operatorCountry")
+	@Column(name = "operatorcountry")
 	public String getOperatorCountry() {
 		return operatorCountry;
 	}
