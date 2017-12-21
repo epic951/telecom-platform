@@ -2,9 +2,12 @@ package com.epic951.data.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -27,14 +30,10 @@ public class Operator implements Serializable {
 		this.operator_country = operator_country;
 	}
 
-	@Override
-	public String toString() {
-		return "Operator [operator_id=" + operator_id + ", operator_name=" + operator_name + ", operator_country="
-				+ operator_country + "]";
-	}
-
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operator_id_seq")
+	@SequenceGenerator(name = "operator_id_seq", sequenceName = "operator_id_seq", allocationSize = 5)
+	@Column(name = "operator_id", updatable = false, nullable = false)
 	public int getOperator_id() {
 		return operator_id;
 	}
@@ -43,6 +42,7 @@ public class Operator implements Serializable {
 		this.operator_id = operator_id;
 	}
 
+	@Column(name = "operator_name", nullable = false)
 	public String getOperator_name() {
 		return operator_name;
 	}
@@ -51,6 +51,7 @@ public class Operator implements Serializable {
 		this.operator_name = operator_name;
 	}
 
+	@Column(name = "operator_country")
 	public String getOperator_country() {
 		return operator_country;
 	}
@@ -61,6 +62,12 @@ public class Operator implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "Operator [operator_id=" + operator_id + ", operator_name=" + operator_name + ", operator_country="
+				+ operator_country + "]";
 	}
 
 	@Override

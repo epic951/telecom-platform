@@ -38,6 +38,6 @@ public class ProductServiceIntegrationTest {
 		assertNotNull(p);
 		assertNotNull(p.getProduct_id());
 		assertEquals("Short Messaging Service", p.getProduct_name());
-		System.err.println(p.toString() + "\n");
+		System.err.println(p.toString());
 	}
 }

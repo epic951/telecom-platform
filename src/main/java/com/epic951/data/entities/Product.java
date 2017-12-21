@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -37,9 +38,14 @@ public class Product implements Serializable {
 	// "sequence_Generator", allocationSize = 1)
 	// @ColumnDefault(value = "-1")
 
+	// @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "identifier")
+	// @GeneratedValue(generator = "UUID")
+	// @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "product_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_seq")
+	@SequenceGenerator(name = "product_id_seq", sequenceName = "product_id_seq", allocationSize = 5)
+	@Column(name = "product_id", updatable = false, nullable = false)
 	public int getProduct_id() {
 		return product_id;
 	}

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.epic951.business.services.ProductService;
@@ -24,7 +25,11 @@ public class ProductController {
 		return productService.getAllProducts();
 	}
 
+	// ,consumes= { MediaType.APPLICATION_JSON_VALUE
+	// },produces=MediaType.APPLICATION_JSON_VALUE }
+
 	@PostMapping(value = "/addproduct")
+	@ResponseBody
 	public String processAddProduct(@RequestBody Product p) {
 		Product newProduct = productService.addProduct(p);
 		if (newProduct != null) {
