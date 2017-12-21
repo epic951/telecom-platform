@@ -16,7 +16,7 @@ public class TelecomServiceHandler {
 
 	public TelecomService addService(TelecomService s) {
 		// Validation is required ..
-		if (s.getTelecomService_name() != null && !s.getTelecomService_name().isEmpty()) {
+		if (s.getTelecomServiceName() != null && !s.getTelecomServiceName().isEmpty()) {
 			TelecomService newService = serviceRepository.save(s);
 			return newService;
 		}

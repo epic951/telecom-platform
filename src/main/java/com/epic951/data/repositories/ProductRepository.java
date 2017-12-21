@@ -7,5 +7,5 @@ import com.epic951.data.entities.Product;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
-
+	public Product findByProductName(String productName);
 }

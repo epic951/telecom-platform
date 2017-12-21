@@ -1,4 +1,4 @@
-package com.epic951.telecomplatform.service;
+package com.epic951.telecomplatform.services.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -38,9 +38,9 @@ public class ProductServiceUnitTest {
 
 		// Create a Product
 		Product sms = new Product();
-		sms.setProduct_name("Silent");
-		sms.setProduct_description("messages");
-		sms.setProduct_id(44);
+		sms.setProductName("Silent");
+		sms.setProductDescription("messages");
+		sms.setProductId(44);
 
 		when(productRepository.save(any(Product.class))).thenReturn(sms);
 
@@ -48,7 +48,7 @@ public class ProductServiceUnitTest {
 
 		// Verify mocked object is passed to the service no matter what is passed to
 		// addproduct method
-		assertEquals("Silent", newProduct.getProduct_name());
+		assertEquals("Silent", newProduct.getProductName());
 		System.err.println(newProduct.toString());
 	}
 }

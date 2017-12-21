@@ -12,87 +12,87 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "service_id" }) })
+@Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "serviceId" }) })
 public class TelecomService implements Serializable {
 
 	private static final long serialVersionUID = 5747837806045222851L;
-	private int telecomservice_id;
-	private String telecomservice_name;
-	private boolean telecomservice_type;
+	private int telecomserviceId;
+	private String telecomserviceName;
+	private boolean telecomserviceType;
 
-	private int operator_id;
-	private int operator_service_id;
-	private int operator_package_id;
+	private int operatorId;
+	private int operatorServiceId;
+	private int operatorPackageId;
 
 	public TelecomService() {
 	}
 
-	public TelecomService(int service_id, String service_name, boolean service_type, int operator_id, int operator_service_id,
-			int operator_package_id) {
+	public TelecomService(int telecomserviceId, String telecomserviceName, boolean telecomserviceType, int operatorId,
+			int operatorServiceId, int operatorPackageId) {
 		super();
-		this.telecomservice_id = service_id;
-		this.telecomservice_name = service_name;
-		this.telecomservice_type = service_type;
-		this.operator_id = operator_id;
-		this.operator_service_id = operator_service_id;
-		this.operator_package_id = operator_package_id;
+		this.telecomserviceId = telecomserviceId;
+		this.telecomserviceName = telecomserviceName;
+		this.telecomserviceType = telecomserviceType;
+		this.operatorId = operatorId;
+		this.operatorServiceId = operatorServiceId;
+		this.operatorPackageId = operatorPackageId;
 	}
 
 	@Id
-	@SequenceGenerator(name = "service_id_seq", sequenceName = "service_id_seq", allocationSize = 5)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_id_seq")
-	@Column(name = "service_id", updatable = false, nullable = false)
-	public int getTelecomService_id() {
-		return telecomservice_id;
+	@SequenceGenerator(name = "serviceIdSeq", sequenceName = "serviceIdSeq", allocationSize = 5)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serviceIdSeq")
+	@Column(name = "serviceId", updatable = false, nullable = false)
+	public int getTelecomServiceId() {
+		return telecomserviceId;
 	}
 
-	public void setTelecomService_id(int service_id) {
-		this.telecomservice_id = service_id;
+	public void setTelecomServiceId(int serviceId) {
+		this.telecomserviceId = serviceId;
 	}
 
-	@Column(name = "service_name", nullable = false)
-	public String getTelecomService_name() {
-		return telecomservice_name;
+	@Column(name = "serviceName", nullable = false)
+	public String getTelecomServiceName() {
+		return telecomserviceName;
 	}
 
-	public void setTelecomService_name(String service_name) {
-		this.telecomservice_name = service_name;
+	public void setTelecomServiceName(String serviceName) {
+		this.telecomserviceName = serviceName;
 	}
 
-	@Column(name = "service_type")
-	public boolean isTelecomService_type() {
-		return telecomservice_type;
+	@Column(name = "serviceType")
+	public boolean isTelecomServiceType() {
+		return telecomserviceType;
 	}
 
-	public void setTelecomService_type(boolean service_type) {
-		this.telecomservice_type = service_type;
+	public void setTelecomServiceType(boolean serviceType) {
+		this.telecomserviceType = serviceType;
 	}
 
-	@Column(name = "operator_id")
-	public int getOperator_id() {
-		return operator_id;
+	@Column(name = "operatorId")
+	public int getOperatorId() {
+		return operatorId;
 	}
 
-	public void setOperator_id(int operator_id) {
-		this.operator_id = operator_id;
+	public void setOperatorId(int operatorId) {
+		this.operatorId = operatorId;
 	}
 
-	@Column(name = "operator_service_id")
-	public int getOperator_service_id() {
-		return operator_service_id;
+	@Column(name = "operatorServiceId")
+	public int getOperatorServiceId() {
+		return operatorServiceId;
 	}
 
-	public void setOperator_service_id(int operator_service_id) {
-		this.operator_service_id = operator_service_id;
+	public void setOperatorServiceId(int operatorServiceId) {
+		this.operatorServiceId = operatorServiceId;
 	}
 
-	@Column(name = "operator_package_id")
-	public int getOperator_package_id() {
-		return operator_package_id;
+	@Column(name = "operatorPackageId")
+	public int getOperatorPackageId() {
+		return operatorPackageId;
 	}
 
-	public void setOperator_package_id(int operator_package_id) {
-		this.operator_package_id = operator_package_id;
+	public void setOperatorPackageId(int operatorPackageId) {
+		this.operatorPackageId = operatorPackageId;
 	}
 
 	public static long getSerialversionuid() {
@@ -103,20 +103,20 @@ public class TelecomService implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + operator_id;
-		result = prime * result + operator_package_id;
-		result = prime * result + operator_service_id;
-		result = prime * result + telecomservice_id;
-		result = prime * result + ((telecomservice_name == null) ? 0 : telecomservice_name.hashCode());
-		result = prime * result + (telecomservice_type ? 1231 : 1237);
+		result = prime * result + operatorId;
+		result = prime * result + operatorPackageId;
+		result = prime * result + operatorServiceId;
+		result = prime * result + telecomserviceId;
+		result = prime * result + ((telecomserviceName == null) ? 0 : telecomserviceName.hashCode());
+		result = prime * result + (telecomserviceType ? 1231 : 1237);
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "Service [service_id=" + telecomservice_id + ", service_name=" + telecomservice_name + ", service_type=" + telecomservice_type
-				+ ", operator_id=" + operator_id + ", operator_service_id=" + operator_service_id
-				+ ", operator_package_id=" + operator_package_id + "]";
+		return "Service [serviceId=" + telecomserviceId + ", serviceName=" + telecomserviceName + ", serviceType="
+				+ telecomserviceType + ", operatorId=" + operatorId + ", operatorServiceId=" + operatorServiceId
+				+ ", operatorPackageId=" + operatorPackageId + "]";
 	}
 
 	@Override
@@ -128,20 +128,20 @@ public class TelecomService implements Serializable {
 		if (!(obj instanceof TelecomService))
 			return false;
 		TelecomService other = (TelecomService) obj;
-		if (operator_id != other.operator_id)
+		if (operatorId != other.operatorId)
 			return false;
-		if (operator_package_id != other.operator_package_id)
+		if (operatorPackageId != other.operatorPackageId)
 			return false;
-		if (operator_service_id != other.operator_service_id)
+		if (operatorServiceId != other.operatorServiceId)
 			return false;
-		if (telecomservice_id != other.telecomservice_id)
+		if (telecomserviceId != other.telecomserviceId)
 			return false;
-		if (telecomservice_name == null) {
-			if (other.telecomservice_name != null)
+		if (telecomserviceName == null) {
+			if (other.telecomserviceName != null)
 				return false;
-		} else if (!telecomservice_name.equals(other.telecomservice_name))
+		} else if (!telecomserviceName.equals(other.telecomserviceName))
 			return false;
-		if (telecomservice_type != other.telecomservice_type)
+		if (telecomserviceType != other.telecomserviceType)
 			return false;
 		return true;
 	}

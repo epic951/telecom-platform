@@ -12,52 +12,52 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "operator", uniqueConstraints = { @UniqueConstraint(columnNames = { "operator_id" }) })
+@Table(name = "operator", uniqueConstraints = { @UniqueConstraint(columnNames = { "operatorId" }) })
 public class Operator implements Serializable {
 
 	private static final long serialVersionUID = 8006120004530718792L;
-	private int operator_id;
-	private String operator_name;
-	private String operator_country;
+	private int operatorId;
+	private String operatorName;
+	private String operatorCountry;
 
 	public Operator() {
 	}
 
-	public Operator(int operator_id, String operator_name, String operator_country) {
+	public Operator(int operatorId, String operatorName, String operatorCountry) {
 		super();
-		this.operator_id = operator_id;
-		this.operator_name = operator_name;
-		this.operator_country = operator_country;
+		this.operatorId = operatorId;
+		this.operatorName = operatorName;
+		this.operatorCountry = operatorCountry;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operator_id_seq")
-	@SequenceGenerator(name = "operator_id_seq", sequenceName = "operator_id_seq", allocationSize = 5)
-	@Column(name = "operator_id", updatable = false, nullable = false)
-	public int getOperator_id() {
-		return operator_id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operatorId_seq")
+	@SequenceGenerator(name = "operatorId_seq", sequenceName = "operatorId_seq", allocationSize = 5)
+	@Column(name = "operatorId", updatable = false, nullable = false)
+	public int getOperatorId() {
+		return operatorId;
 	}
 
-	public void setOperator_id(int operator_id) {
-		this.operator_id = operator_id;
+	public void setOperatorId(int operatorId) {
+		this.operatorId = operatorId;
 	}
 
-	@Column(name = "operator_name", nullable = false)
-	public String getOperator_name() {
-		return operator_name;
+	@Column(name = "operatorName", nullable = false)
+	public String getOperatorName() {
+		return operatorName;
 	}
 
-	public void setOperator_name(String operator_name) {
-		this.operator_name = operator_name;
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
 	}
 
-	@Column(name = "operator_country")
-	public String getOperator_country() {
-		return operator_country;
+	@Column(name = "operatorCountry")
+	public String getOperatorCountry() {
+		return operatorCountry;
 	}
 
-	public void setOperator_country(String operator_country) {
-		this.operator_country = operator_country;
+	public void setOperatorCountry(String operatorCountry) {
+		this.operatorCountry = operatorCountry;
 	}
 
 	public static long getSerialversionuid() {
@@ -66,17 +66,17 @@ public class Operator implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Operator [operator_id=" + operator_id + ", operator_name=" + operator_name + ", operator_country="
-				+ operator_country + "]";
+		return "Operator [operatorId=" + operatorId + ", operatorName=" + operatorName + ", operatorCountry="
+				+ operatorCountry + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((operator_country == null) ? 0 : operator_country.hashCode());
-		result = prime * result + operator_id;
-		result = prime * result + ((operator_name == null) ? 0 : operator_name.hashCode());
+		result = prime * result + ((operatorCountry == null) ? 0 : operatorCountry.hashCode());
+		result = prime * result + operatorId;
+		result = prime * result + ((operatorName == null) ? 0 : operatorName.hashCode());
 		return result;
 	}
 
@@ -89,17 +89,17 @@ public class Operator implements Serializable {
 		if (!(obj instanceof Operator))
 			return false;
 		Operator other = (Operator) obj;
-		if (operator_country == null) {
-			if (other.operator_country != null)
+		if (operatorCountry == null) {
+			if (other.operatorCountry != null)
 				return false;
-		} else if (!operator_country.equals(other.operator_country))
+		} else if (!operatorCountry.equals(other.operatorCountry))
 			return false;
-		if (operator_id != other.operator_id)
+		if (operatorId != other.operatorId)
 			return false;
-		if (operator_name == null) {
-			if (other.operator_name != null)
+		if (operatorName == null) {
+			if (other.operatorName != null)
 				return false;
-		} else if (!operator_name.equals(other.operator_name))
+		} else if (!operatorName.equals(other.operatorName))
 			return false;
 		return true;
 	}

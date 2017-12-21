@@ -12,26 +12,26 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "product", uniqueConstraints = { @UniqueConstraint(columnNames = { "product_id" }) })
+@Table(name = "product", uniqueConstraints = { @UniqueConstraint(columnNames = { "productId" }) })
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = -2830047822179023846L;
-	private int product_id;
-	private String product_name;
-	private String product_description;
-	private int min_price;
-	private int max_price;
+	private int productId;
+	private String productName;
+	private String productDescription;
+	private int minPrice;
+	private int maxPrice;
 
 	public Product() {
 	}
 
-	public Product(int product_id, String product_name, String product_description, int min_price, int max_price) {
+	public Product(int productId, String productName, String productDescription, int minPrice, int maxPrice) {
 		super();
-		this.product_id = product_id;
-		this.product_name = product_name;
-		this.product_description = product_description;
-		this.min_price = min_price;
-		this.max_price = max_price;
+		this.productId = productId;
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.minPrice = minPrice;
+		this.maxPrice = maxPrice;
 	}
 
 	// @SequenceGenerator(name = "sequence_Generator", sequenceName =
@@ -43,51 +43,51 @@ public class Product implements Serializable {
 	// @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_seq")
-	@SequenceGenerator(name = "product_id_seq", sequenceName = "product_id_seq", allocationSize = 5)
-	@Column(name = "product_id", updatable = false, nullable = false)
-	public int getProduct_id() {
-		return product_id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productId_seq")
+	@SequenceGenerator(name = "productId_seq", sequenceName = "productId_seq", allocationSize = 5)
+	@Column(name = "productId", updatable = false, nullable = false)
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
-	@Column(name = "product_name", nullable = false)
-	public String getProduct_name() {
-		return product_name;
+	@Column(name = "productName", nullable = false)
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	@Column(name = "product_description")
-	public String getProduct_description() {
-		return product_description;
+	@Column(name = "productDescription")
+	public String getProductDescription() {
+		return productDescription;
 	}
 
-	public void setProduct_description(String product_description) {
-		this.product_description = product_description;
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 
-	@Column(name = "min_price")
-	public int getMin_price() {
-		return min_price;
+	@Column(name = "minPrice")
+	public int getMinPrice() {
+		return minPrice;
 	}
 
-	public void setMin_price(int min_price) {
-		this.min_price = min_price;
+	public void setMinPrice(int minPrice) {
+		this.minPrice = minPrice;
 	}
 
-	@Column(name = "max_price")
-	public int getMax_price() {
-		return max_price;
+	@Column(name = "maxPrice")
+	public int getMaxPrice() {
+		return maxPrice;
 	}
 
-	public void setMax_price(int max_price) {
-		this.max_price = max_price;
+	public void setMaxPrice(int maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 
 	public static long getSerialversionuid() {
@@ -96,19 +96,19 @@ public class Product implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [product_id=" + product_id + ", product_name=" + product_name + ", product_description="
-				+ product_description + ", min_price=" + min_price + ", max_price=" + max_price + "]";
+		return "Product [productId=" + productId + ", productName=" + productName + ", productDescription="
+				+ productDescription + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + max_price;
-		result = prime * result + min_price;
-		result = prime * result + ((product_description == null) ? 0 : product_description.hashCode());
-		result = prime * result + product_id;
-		result = prime * result + ((product_name == null) ? 0 : product_name.hashCode());
+		result = prime * result + maxPrice;
+		result = prime * result + minPrice;
+		result = prime * result + ((productDescription == null) ? 0 : productDescription.hashCode());
+		result = prime * result + productId;
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		return result;
 	}
 
@@ -121,21 +121,21 @@ public class Product implements Serializable {
 		if (!(obj instanceof Product))
 			return false;
 		Product other = (Product) obj;
-		if (max_price != other.max_price)
+		if (maxPrice != other.maxPrice)
 			return false;
-		if (min_price != other.min_price)
+		if (minPrice != other.minPrice)
 			return false;
-		if (product_description == null) {
-			if (other.product_description != null)
+		if (productDescription == null) {
+			if (other.productDescription != null)
 				return false;
-		} else if (!product_description.equals(other.product_description))
+		} else if (!productDescription.equals(other.productDescription))
 			return false;
-		if (product_id != other.product_id)
+		if (productId != other.productId)
 			return false;
-		if (product_name == null) {
-			if (other.product_name != null)
+		if (productName == null) {
+			if (other.productName != null)
 				return false;
-		} else if (!product_name.equals(other.product_name))
+		} else if (!productName.equals(other.productName))
 			return false;
 		return true;
 	}

@@ -1,4 +1,4 @@
-package com.epic951.telecomplatform.controller;
+package com.epic951.telecomplatform.controllers.integration;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -26,11 +26,11 @@ public class ProductControllerIntegrationTest {
 
 		// Create a Product
 		Product sms = new Product();
-		sms.setProduct_name("Short Messaging Service");
-		sms.setMin_price(100);
-		sms.setMax_price(300);
-		sms.setProduct_description("Casual messaging service used to exchange brief text-based messages");
-		sms.setProduct_id(544);
+		sms.setProductName("Short Messaging Service");
+		sms.setMinPrice(100);
+		sms.setMaxPrice(300);
+		sms.setProductDescription("Casual messaging service used to exchange brief text-based messages");
+		sms.setProductId(544);
 		// Product mms = new Product();
 		// mms.setProduct_name("Multimedia Messaging Service");
 		// mms.setMin_price(100);
@@ -50,8 +50,8 @@ public class ProductControllerIntegrationTest {
 	public void testAddProductWithoutName() {
 
 		Product p = new Product();
-		p.setProduct_id(1);
-		p.setMin_price(15);
+		p.setProductId(1);
+		p.setMinPrice(15);
 		
 		// POST the new product we just added and check the outcome
 		String outcome = productController.processAddProduct(p);

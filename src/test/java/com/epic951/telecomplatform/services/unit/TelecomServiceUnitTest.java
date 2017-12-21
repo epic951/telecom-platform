@@ -1,4 +1,4 @@
-package com.epic951.telecomplatform.service;
+package com.epic951.telecomplatform.services.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -37,9 +37,9 @@ public class TelecomServiceUnitTest {
 
 		// Create a telecomservice
 		TelecomService roaming = new TelecomService();
-		roaming.setTelecomService_name("Roaming");
-		roaming.setTelecomService_type(true); // Subscription
-		roaming.setOperator_package_id(55);
+		roaming.setTelecomServiceName("Roaming");
+		roaming.setTelecomServiceType(true); // Subscription
+		roaming.setOperatorPackageId(55);
 
 		when(telecomServiceRepository.save(any(TelecomService.class))).thenReturn(roaming);
 
@@ -47,7 +47,7 @@ public class TelecomServiceUnitTest {
 				.addService(new TelecomService(0, "Video Calling", false, 55, 75, 211));
 		// Verify mocked object is passed to the service no matter what is passed to
 		// addservice method
-		assertEquals("Roaming", newService.getTelecomService_name());
+		assertEquals("Roaming", newService.getTelecomServiceName());
 		System.err.println(newService.toString());
 	}
 }

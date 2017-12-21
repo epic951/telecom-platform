@@ -1,4 +1,4 @@
-package com.epic951.telecomplatform.service;
+package com.epic951.telecomplatform.services.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,19 +25,19 @@ public class ProductServiceIntegrationTest {
 
 		// Create a product
 		Product sms = new Product();
-		sms.setProduct_name("Short Messaging Service");
-		sms.setMin_price(100);
-		sms.setMax_price(300);
-		sms.setProduct_description("Casual messaging service used to exchange brief text-based messages");
-		sms.setProduct_id(544);
+		sms.setProductName("Short Messaging Service");
+		sms.setMinPrice(100);
+		sms.setMaxPrice(300);
+		sms.setProductDescription("Casual messaging service used to exchange brief text-based messages");
+		sms.setProductId(544);
 		// Test adding the product
 		Product p = productService.addProduct(sms);
 
 		// Verify the addition of the new product and the integrity of the specified
 		// data
 		assertNotNull(p);
-		assertNotNull(p.getProduct_id());
-		assertEquals("Short Messaging Service", p.getProduct_name());
+		assertNotNull(p.getProductId());
+		assertEquals("Short Messaging Service", p.getProductName());
 		System.err.println(p.toString());
 	}
 }

@@ -1,9 +1,7 @@
-package com.epic951.telecomplatform.service;
+package com.epic951.telecomplatform.services.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,9 +26,9 @@ public class OperatorServiceIntegrationTest {
 
 		// Create an Operator
 		Operator etisalat = new Operator();
-		etisalat.setOperator_country("EG");
-		etisalat.setOperator_id(3);
-		etisalat.setOperator_name("Etisalat");
+		etisalat.setOperatorCountry("EG");
+		etisalat.setOperatorId(3);
+		etisalat.setOperatorName("Etisalat");
 
 		// Test adding the operator
 		Operator o = operatorService.addOperator(etisalat);
@@ -38,8 +36,8 @@ public class OperatorServiceIntegrationTest {
 		// Verify the addition of the new operator and the integrity of the specified
 		// data
 		assertNotNull(o);
-		assertNotNull(o.getOperator_id());
-		assertEquals("Etisalat", o.getOperator_name());
+		assertNotNull(o.getOperatorId());
+		assertEquals("Etisalat", o.getOperatorName());
 		System.err.println(o.toString());
 	}
 }

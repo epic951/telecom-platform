@@ -18,7 +18,7 @@ public class ProductService {
 	public Product addProduct(Product p) {
 
 		// Validation is required ..
-		if (p.getProduct_name() != null && !p.getProduct_name().isEmpty()) {
+		if (p.getProductName() != null && !p.getProductName().isEmpty()) {
 			Product newProduct = productRepository.save(p);
 			return newProduct;
 		}

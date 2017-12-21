@@ -1,4 +1,4 @@
-package com.epic951.telecomplatform.controller;
+package com.epic951.telecomplatform.controllers.unit;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -46,15 +46,15 @@ public class ProductControllerUnitTest {
 
 		// setup mock product returned from the mocked service component
 		Product mockProduct = new Product();
-		mockProduct.setProduct_name("MMS");
-		mockProduct.setProduct_id(99);
+		mockProduct.setProductName("MMS");
+		mockProduct.setProductId(99);
 
 		when(productService.addProduct(Mockito.isA(Product.class))).thenReturn(mockProduct);
 
 		// simulate the form bean that would POST from the web page
 		Product newProduct = new Product();
-		newProduct.setProduct_name("Voice Calls");
-		newProduct.setProduct_id(218);
+		newProduct.setProductName("Voice Calls");
+		newProduct.setProductId(218);
 
 		// simulate the form submit (POST)
 		mockMvc.perform(post("/test/addproduct", newProduct).content(HTTPUtilities.json(newProduct))

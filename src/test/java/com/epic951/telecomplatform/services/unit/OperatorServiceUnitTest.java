@@ -1,4 +1,4 @@
-package com.epic951.telecomplatform.service;
+package com.epic951.telecomplatform.services.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -38,16 +38,16 @@ public class OperatorServiceUnitTest {
 
 		// Create an Operator
 		Operator etisalat = new Operator();
-		etisalat.setOperator_country("EG");
-		etisalat.setOperator_id(3);
-		etisalat.setOperator_name("Etisalat");
+		etisalat.setOperatorCountry("EG");
+		etisalat.setOperatorId(3);
+		etisalat.setOperatorName("Etisalat");
 
 		when(operatorRepository.save(any(Operator.class))).thenReturn(etisalat);
 
 		Operator newOperator = operatorService.addOperator(new Operator(2, "Vodafone", "EGY"));
 		// Verify mocked object is passed to the service no matter what is passed to
 		// addoperator method
-		assertEquals("Etisalat", newOperator.getOperator_name());
+		assertEquals("Etisalat", newOperator.getOperatorName());
 		System.err.println(newOperator.toString());
 	}
 }

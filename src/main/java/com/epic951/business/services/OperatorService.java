@@ -17,7 +17,7 @@ public class OperatorService {
 
 	public Operator addOperator(Operator o) {
 		// Validation is required ..
-		if (o.getOperator_name() != null && !o.getOperator_name().isEmpty()) {
+		if (o.getOperatorName() != null && !o.getOperatorName().isEmpty()) {
 			Operator newOperator = operatorRepository.save(o);
 			return newOperator;
 		}

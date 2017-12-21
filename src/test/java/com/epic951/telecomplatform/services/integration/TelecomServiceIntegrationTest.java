@@ -1,4 +1,4 @@
-package com.epic951.telecomplatform.service;
+package com.epic951.telecomplatform.services.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,9 +25,9 @@ public class TelecomServiceIntegrationTest {
 
 		// Create a telecomservice
 		TelecomService roaming = new TelecomService();
-		roaming.setTelecomService_name("Roaming");
-		roaming.setTelecomService_type(true); // Subscription
-		roaming.setOperator_package_id(55);
+		roaming.setTelecomServiceName("Roaming");
+		roaming.setTelecomServiceType(true); // Subscription
+		roaming.setOperatorPackageId(55);
 
 		// Test adding the telecomservice
 		TelecomService t = telecomServiceHandler.addService(roaming);
@@ -35,8 +35,8 @@ public class TelecomServiceIntegrationTest {
 		// Verify the addition of the new telecomservice and the integrity of the
 		// specified data
 		assertNotNull(t);
-		assertNotNull(t.getTelecomService_id());
-		assertEquals("Roaming", t.getTelecomService_name());
+		assertNotNull(t.getTelecomServiceId());
+		assertEquals("Roaming", t.getTelecomServiceName());
 		System.err.println(t.toString());
 	}
 
