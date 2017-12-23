@@ -4,8 +4,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.Optional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +49,10 @@ public class TelecomServiceRepositoryIntegrationTest {
 	public void testDeleteByTelecomServiceName() {
 
 		// setup data scenario
-		TelecomService newTelecomService = TestUtilities.createTestTelecomService(8335, "Zain", "GPRS", false, 732, 32, 74);
+		TelecomService newTelecomService = TestUtilities.createTestTelecomService(8335, "Zain", "GPRS", false, 732, 32,
+				74);
 		testEntityManager.merge(newTelecomService);
-		
+
 		Integer result = telecomServiceRepository.deleteByTelecomServiceName("GPRS");
 
 		// Assertion
