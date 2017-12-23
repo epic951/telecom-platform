@@ -12,16 +12,34 @@ import com.epic951.data.repositories.OperatorRepository;
 @Service
 public class OperatorService {
 
-	@Autowired
 	private OperatorRepository operatorRepository;
 
-	public Operator addOperator(Operator o) {
+	@Autowired
+	public OperatorService(OperatorRepository operatorRepository) {
+		this.operatorRepository = operatorRepository;
+	}
+
+	public void setOperatorRepository(OperatorRepository operatorRepository) {
+		this.operatorRepository = operatorRepository;
+	}
+
+	public Operator addOrUpdateOperator(Operator o) {
 		// Validation is required ..
-		if (o.getOperatorName() != null && !o.getOperatorName().isEmpty()) {
-			Operator newOperator = operatorRepository.save(o);
+		Operator newOperator = null;
+		boolean alreadyAdded = operatorRepository.findByOperatorName(o.getOperatorName()).isPresent();
+		boolean viableForUpdate = operatorRepository.findByOperatorId(o.getOperatorId()).isPresent();
+		if (!alreadyAdded && o.getOperatorName() != null && !o.getOperatorName().isEmpty()) {
+			newOperator = operatorRepository.save(o);
 			return newOperator;
 		}
-		return null;
+		if (viableForUpdate) {
+			newOperator = operatorRepository.save(o);
+		}
+		return newOperator;
+	}
+
+	public Integer deleteOperatorByOperatorName(String name) {
+		return operatorRepository.deleteByOperatorName(name);
 	}
 
 	public List<Operator> getAllOperators() {

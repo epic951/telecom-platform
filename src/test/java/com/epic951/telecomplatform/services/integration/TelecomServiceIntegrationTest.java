@@ -3,6 +3,8 @@ package com.epic951.telecomplatform.services.integration;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.epic951.business.services.TelecomServiceHandler;
 import com.epic951.data.entities.TelecomService;
+import com.epic951.utilities.TestUtilities;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
@@ -21,16 +24,14 @@ public class TelecomServiceIntegrationTest {
 	private TelecomServiceHandler telecomServiceHandler;
 
 	@Test
+	@Transactional
 	public void testAddTelecomService() {
 
 		// Create a telecomservice
-		TelecomService roaming = new TelecomService();
-		roaming.setTelecomServiceName("Roaming");
-		roaming.setTelecomServiceType(true); // Subscription
-		roaming.setOperatorPackageId(55);
+		TelecomService roaming = TestUtilities.createTestTelecomService(5, "Zain", "Roaming", false, 77, 23, 75);
 
 		// Test adding the telecomservice
-		TelecomService t = telecomServiceHandler.addService(roaming);
+		TelecomService t = telecomServiceHandler.addOrUpdateService(roaming);
 
 		// Verify the addition of the new telecomservice and the integrity of the
 		// specified data

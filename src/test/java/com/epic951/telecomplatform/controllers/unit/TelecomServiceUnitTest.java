@@ -22,24 +22,24 @@ import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.epic951.business.controllers.ProductController;
-import com.epic951.business.services.ProductService;
-import com.epic951.data.entities.Product;
+import com.epic951.business.controllers.TelecomServiceController;
+import com.epic951.business.services.TelecomServiceHandler;
+import com.epic951.data.entities.TelecomService;
 import com.epic951.utilities.HTTPUtilities;
 import com.epic951.utilities.TestUtilities;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = ProductController.class, secure = false)
-public class ProductControllerUnitTest {
+@WebMvcTest(value = TelecomServiceController.class, secure = false)
+public class TelecomServiceUnitTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private ProductService productService;
+	private TelecomServiceHandler telecomServiceHandler;
 
 	@InjectMocks
-	private ProductController productController;
+	private TelecomServiceController telecomServiceController;
 
 	@Before
 	public void setup() {
@@ -50,18 +50,20 @@ public class ProductControllerUnitTest {
 	public void testAddProduct() throws Exception {
 
 		// setup mock product returned from the mocked service component
-		Product mockProduct = TestUtilities.createTestProduct("MMS", 9384, "Video messages");
+		TelecomService mockTelecomService = TestUtilities.createTestTelecomService(87, "Zain", "Stickers", false, 6363,
+				858, 326);
 
-		when(productService.addOrUpdateProduct(Mockito.isA(Product.class))).thenReturn(mockProduct);
+		when(telecomServiceHandler.addOrUpdateService(Mockito.isA(TelecomService.class)))
+				.thenReturn(mockTelecomService);
 
 		// simulate the form bean that would POST from the web page
-		Product newProduct = TestUtilities.createTestProduct(null, 0, null);
+		TelecomService newTelecomService = TestUtilities.createTestTelecomService(0, null, null, false, 0, 0, 0);
 
 		// simulate the form submit (POST)
-		mockMvc.perform(post("/addproduct", newProduct).content(this.json(newProduct))
+		mockMvc.perform(post("/addservice", newTelecomService).content(this.json(newTelecomService))
 				.contentType(HTTPUtilities.JSON_CONTENT_TYPE)).andDo(print()).andExpect(status().isOk()).andReturn();
-		System.err.println(newProduct.toString());
-		System.err.println(this.json(newProduct));
+		System.err.println(newTelecomService.toString());
+		System.err.println(this.json(newTelecomService));
 
 	}
 

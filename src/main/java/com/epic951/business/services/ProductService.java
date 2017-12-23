@@ -12,17 +12,49 @@ import com.epic951.data.repositories.ProductRepository;
 @Service
 public class ProductService {
 
-	@Autowired
 	private ProductRepository productRepository;
 
-	public Product addProduct(Product p) {
+	@Autowired
+	public ProductService(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 
+	public ProductService() {
+	}
+
+	public void setProductRepository(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
+
+	public Product addOrUpdateProduct(Product p) {
 		// Validation is required ..
-		if (p.getProductName() != null && !p.getProductName().isEmpty()) {
-			Product newProduct = productRepository.save(p);
+		Product newProduct = null;
+		boolean alreadyAdded = productRepository.findByProductName(p.getProductName()).isPresent();
+		boolean viableForUpdate = productRepository.findByProductId(p.getProductId()).isPresent();
+		// System.err.println("alreadyAdded " + alreadyAdded + " --- viableForUpdate " +
+		// viableForUpdate + " values "
+		// + p.getProductId() + " " + p.getProductName());
+		if (!alreadyAdded && p.getProductName() != null && !p.getProductName().isEmpty()) {
+			newProduct = productRepository.save(p);
 			return newProduct;
 		}
-		return null;
+		if (viableForUpdate) {
+			newProduct = productRepository.save(p);
+		}
+		// System.err.println("service ~~ " + newProduct.toString());
+		return newProduct;
+	}
+
+	public Product findProduct(Product product) {
+		Product foundProduct = null;
+		for (Product pr : productRepository.findAll()) {
+			if (pr.getProductId() == product.getProductId()) {
+				foundProduct = pr;
+				break;
+			}
+		}
+		System.err.println(foundProduct.toString());
+		return foundProduct;
 	}
 
 	public List<Product> getAllProducts() {
@@ -30,5 +62,9 @@ public class ProductService {
 		List<Product> products = new ArrayList<>();
 		productRepository.findAll().forEach(products::add);
 		return products;
+	}
+
+	public Integer deleteProductByProductName(String productName) {
+		return productRepository.deleteByProductName(productName);
 	}
 }

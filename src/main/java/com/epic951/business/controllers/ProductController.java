@@ -2,15 +2,21 @@ package com.epic951.business.controllers;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.epic951.business.services.ProductService;
+import com.epic951.data.entities.Operator;
 import com.epic951.data.entities.Product;
+import com.epic951.data.entities.TelecomService;
 
 @RestController
 public class ProductController {
@@ -26,10 +32,29 @@ public class ProductController {
 	@PostMapping(value = "/addproduct")
 	@ResponseBody
 	public String processAddProduct(@RequestBody Product p) {
-		Product newProduct = productService.addProduct(p);
+		Product newProduct = productService.addOrUpdateProduct(p);
 		if (newProduct != null) {
 			return "success";
 		}
 		return "failure";
 	}
+
+	@Transactional
+	@DeleteMapping(value = "/deleteproduct")
+	public String processDeleteProductByProductName(@RequestBody Product p) {
+		if (productService.deleteProductByProductName(p.getProductName()) == 1) {
+			return "success";
+		}
+		return "failure";
+	}
+
+	@Transactional
+	@PutMapping(value = "/updateproduct")
+	public String processUpdateProduct(@RequestBody Product p) {
+		if (productService.addOrUpdateProduct(p) != null) {
+			return "success";
+		}
+		return "failure";
+	}
+
 }

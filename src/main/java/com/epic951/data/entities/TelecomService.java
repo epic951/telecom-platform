@@ -16,11 +16,12 @@ import javax.persistence.UniqueConstraint;
 public class TelecomService implements Serializable {
 
 	private static final long serialVersionUID = 5747837806045222851L;
-	private int telecomserviceId;
-	private String telecomserviceName;
-	private boolean telecomserviceType;
+	private int telecomServiceId;
+	private String telecomServiceName;
+	private boolean telecomServiceType;
 
 	private int operatorId;
+	private String operatorName;
 	private int operatorServiceId;
 	private int operatorPackageId;
 
@@ -28,12 +29,13 @@ public class TelecomService implements Serializable {
 	}
 
 	public TelecomService(int telecomserviceId, String telecomserviceName, boolean telecomserviceType, int operatorId,
-			int operatorServiceId, int operatorPackageId) {
+			String operatorName, int operatorServiceId, int operatorPackageId) {
 		super();
-		this.telecomserviceId = telecomserviceId;
-		this.telecomserviceName = telecomserviceName;
-		this.telecomserviceType = telecomserviceType;
+		this.telecomServiceId = telecomserviceId;
+		this.telecomServiceName = telecomserviceName;
+		this.telecomServiceType = telecomserviceType;
 		this.operatorId = operatorId;
+		this.operatorName = operatorName;
 		this.operatorServiceId = operatorServiceId;
 		this.operatorPackageId = operatorPackageId;
 	}
@@ -43,29 +45,29 @@ public class TelecomService implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serviceidseq")
 	@Column(name = "telecomserviceid", updatable = false, nullable = false)
 	public int getTelecomServiceId() {
-		return telecomserviceId;
+		return telecomServiceId;
 	}
 
 	public void setTelecomServiceId(int serviceId) {
-		this.telecomserviceId = serviceId;
+		this.telecomServiceId = serviceId;
 	}
 
 	@Column(name = "telecomservicename", nullable = false)
 	public String getTelecomServiceName() {
-		return telecomserviceName;
+		return telecomServiceName;
 	}
 
 	public void setTelecomServiceName(String serviceName) {
-		this.telecomserviceName = serviceName;
+		this.telecomServiceName = serviceName;
 	}
 
 	@Column(name = "telecomservicetype")
 	public boolean isTelecomServiceType() {
-		return telecomserviceType;
+		return telecomServiceType;
 	}
 
 	public void setTelecomServiceType(boolean serviceType) {
-		this.telecomserviceType = serviceType;
+		this.telecomServiceType = serviceType;
 	}
 
 	@Column(name = "operatorid")
@@ -85,6 +87,15 @@ public class TelecomService implements Serializable {
 	public void setOperatorServiceId(int operatorServiceId) {
 		this.operatorServiceId = operatorServiceId;
 	}
+	
+	@Column(name="operatorname")
+	public String getOperatorName() {
+		return operatorName;
+	}
+
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
+	}
 
 	@Column(name = "operatorpackageid")
 	public int getOperatorPackageId() {
@@ -100,23 +111,25 @@ public class TelecomService implements Serializable {
 	}
 
 	@Override
+	public String toString() {
+		return "TelecomService [telecomServiceId=" + telecomServiceId + ", telecomServiceName=" + telecomServiceName
+				+ ", telecomServiceType=" + telecomServiceType + ", operatorId=" + operatorId + ", operatorName="
+				+ operatorName + ", operatorServiceId=" + operatorServiceId + ", operatorPackageId=" + operatorPackageId
+				+ "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + operatorId;
+		result = prime * result + ((operatorName == null) ? 0 : operatorName.hashCode());
 		result = prime * result + operatorPackageId;
 		result = prime * result + operatorServiceId;
-		result = prime * result + telecomserviceId;
-		result = prime * result + ((telecomserviceName == null) ? 0 : telecomserviceName.hashCode());
-		result = prime * result + (telecomserviceType ? 1231 : 1237);
+		result = prime * result + telecomServiceId;
+		result = prime * result + ((telecomServiceName == null) ? 0 : telecomServiceName.hashCode());
+		result = prime * result + (telecomServiceType ? 1231 : 1237);
 		return result;
-	}
-
-	@Override
-	public String toString() {
-		return "Service [serviceId=" + telecomserviceId + ", serviceName=" + telecomserviceName + ", serviceType="
-				+ telecomserviceType + ", operatorId=" + operatorId + ", operatorServiceId=" + operatorServiceId
-				+ ", operatorPackageId=" + operatorPackageId + "]";
 	}
 
 	@Override
@@ -130,19 +143,25 @@ public class TelecomService implements Serializable {
 		TelecomService other = (TelecomService) obj;
 		if (operatorId != other.operatorId)
 			return false;
+		if (operatorName == null) {
+			if (other.operatorName != null)
+				return false;
+		} else if (!operatorName.equals(other.operatorName))
+			return false;
 		if (operatorPackageId != other.operatorPackageId)
 			return false;
 		if (operatorServiceId != other.operatorServiceId)
 			return false;
-		if (telecomserviceId != other.telecomserviceId)
+		if (telecomServiceId != other.telecomServiceId)
 			return false;
-		if (telecomserviceName == null) {
-			if (other.telecomserviceName != null)
+		if (telecomServiceName == null) {
+			if (other.telecomServiceName != null)
 				return false;
-		} else if (!telecomserviceName.equals(other.telecomserviceName))
+		} else if (!telecomServiceName.equals(other.telecomServiceName))
 			return false;
-		if (telecomserviceType != other.telecomserviceType)
+		if (telecomServiceType != other.telecomServiceType)
 			return false;
 		return true;
 	}
+
 }

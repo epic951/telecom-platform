@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.epic951.business.controllers.TelecomServiceController;
 import com.epic951.data.entities.TelecomService;
+import com.epic951.utilities.TestUtilities;
 
 @RunWith(SpringRunner.class)
+@Transactional
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class TelecomServiceIntegrationTest {
 
@@ -24,14 +28,25 @@ public class TelecomServiceIntegrationTest {
 	@Test
 	public void testAddService() {
 		// Create a service
-		TelecomService gpsTracking = new TelecomService();
-		gpsTracking.setTelecomServiceName("GPS Tracking");
-		gpsTracking.setTelecomServiceType(true);
+		TelecomService gpsTracking = TestUtilities.createTestTelecomService(92934, "Zain", "GPS-tracking", false, 89,
+				6585, 799);
 
 		// POST the new service we just added and check the outcome
 		String outcome = telecomServiceController.processAddService(gpsTracking);
 
 		// Assert that the outcome is as expected
 		assertThat(outcome, is(equalTo("success")));
+	}
+
+	@Test
+	public void testAddServiceWithoutTelecomServiceName() {
+		// Create a service
+		TelecomService gpsTracking = TestUtilities.createTestTelecomService(1, "Zain", null, false, 8, 9, 4);
+
+		// POST the new service we just added and check the outcome
+		String outcome = telecomServiceController.processAddService(gpsTracking);
+
+		// Assert that the outcome is as expected
+		assertThat(outcome, is(equalTo("failure")));
 	}
 }

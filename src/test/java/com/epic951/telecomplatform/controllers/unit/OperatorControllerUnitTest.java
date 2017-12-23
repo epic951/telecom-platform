@@ -22,24 +22,24 @@ import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.epic951.business.controllers.ProductController;
-import com.epic951.business.services.ProductService;
-import com.epic951.data.entities.Product;
+import com.epic951.business.controllers.OperatorController;
+import com.epic951.business.services.OperatorService;
+import com.epic951.data.entities.Operator;
 import com.epic951.utilities.HTTPUtilities;
 import com.epic951.utilities.TestUtilities;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = ProductController.class, secure = false)
-public class ProductControllerUnitTest {
+@WebMvcTest(value = OperatorController.class, secure = false)
+public class OperatorControllerUnitTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private ProductService productService;
+	private OperatorService operatorService;
 
 	@InjectMocks
-	private ProductController productController;
+	private OperatorController operatorController;
 
 	@Before
 	public void setup() {
@@ -47,21 +47,20 @@ public class ProductControllerUnitTest {
 	}
 
 	@Test
-	public void testAddProduct() throws Exception {
-
+	public void testAddOperator() throws Exception {
 		// setup mock product returned from the mocked service component
-		Product mockProduct = TestUtilities.createTestProduct("MMS", 9384, "Video messages");
+		Operator mockOperator = TestUtilities.createTestOperator(353, "UAE", "Zain");
 
-		when(productService.addOrUpdateProduct(Mockito.isA(Product.class))).thenReturn(mockProduct);
+		when(operatorService.addOrUpdateOperator(Mockito.isA(Operator.class))).thenReturn(mockOperator);
 
 		// simulate the form bean that would POST from the web page
-		Product newProduct = TestUtilities.createTestProduct(null, 0, null);
+		Operator newOperator = TestUtilities.createTestOperator(0, null, null);
 
 		// simulate the form submit (POST)
-		mockMvc.perform(post("/addproduct", newProduct).content(this.json(newProduct))
+		mockMvc.perform(post("/addoperator", newOperator).content(this.json(newOperator))
 				.contentType(HTTPUtilities.JSON_CONTENT_TYPE)).andDo(print()).andExpect(status().isOk()).andReturn();
-		System.err.println(newProduct.toString());
-		System.err.println(this.json(newProduct));
+		System.err.println(newOperator.toString());
+		System.err.println(this.json(newOperator));
 
 	}
 
@@ -71,4 +70,5 @@ public class ProductControllerUnitTest {
 		jsonConverter.write(o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
 		return mockHttpOutputMessage.getBodyAsString();
 	}
+
 }
