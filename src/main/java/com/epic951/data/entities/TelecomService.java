@@ -12,19 +12,41 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "telecomserviceid" }) })
 public class TelecomService implements Serializable {
 
 	private static final long serialVersionUID = 5747837806045222851L;
+
+	@NotNull
+	@Min(5)
+	@Max(9999)
 	private int telecomServiceId;
+
+	@NotNull
+	@Size(min = 3, max = 15)
 	private String telecomServiceName;
+
 	private boolean telecomServiceType;
 
+	@Min(1)
+	@Max(99)
 	private int operatorId;
+
+	@Size(min = 3, max = 15)
 	private String operatorName;
+
+	@Min(1)
+	@Max(999)
 	private int operatorServiceId;
+
+	@Min(1)
+	@Max(999)
 	private int operatorPackageId;
 
 	@ManyToOne

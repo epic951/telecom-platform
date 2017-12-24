@@ -12,14 +12,27 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "operator", uniqueConstraints = { @UniqueConstraint(columnNames = { "operatorid" }) })
 public class Operator implements Serializable {
 
 	private static final long serialVersionUID = 8006120004530718792L;
+
+	@NotNull
+	@Min(21)
+	@Max(99)
 	private int operatorId;
+
+	@NotNull
+	@Size(min = 2, max = 15)
 	private String operatorName;
+
+	@Size(min = 2, max = 15)
 	private String operatorCountry;
 
 	@OneToMany(mappedBy = "operator")

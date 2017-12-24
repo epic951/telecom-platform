@@ -12,16 +12,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "product", uniqueConstraints = { @UniqueConstraint(columnNames = { "productid" }) })
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = -2830047822179023846L;
+
+	@NotNull
+	@Min(1)
+	@Max(99)
 	private int productId;
+
+	@NotNull
+	@Size(min = 3, max = 15)
 	private String productName;
+
+	@Size(min = 3, max = 15)
 	private String productDescription;
+
+	@Min(1)
+	@Max(99)
 	private int minPrice;
+
+	@Min(1)
+	@Max(99)
 	private int maxPrice;
 
 	@OneToMany(mappedBy = "product")
