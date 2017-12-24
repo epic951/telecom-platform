@@ -24,15 +24,15 @@ public class Operator implements Serializable {
 	private static final long serialVersionUID = 8006120004530718792L;
 
 	@NotNull
-	@Min(21)
-	@Max(99)
+	@Min(1)
+	@Max(9999)
 	private int operatorId;
 
 	@NotNull
-	@Size(min = 2, max = 15)
+	@Size(min = 2, max = 50)
 	private String operatorName;
 
-	@Size(min = 2, max = 15)
+	@Size(min = 2, max = 50)
 	private String operatorCountry;
 
 	@OneToMany(mappedBy = "operator")

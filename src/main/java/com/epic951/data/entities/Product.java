@@ -25,22 +25,22 @@ public class Product implements Serializable {
 
 	@NotNull
 	@Min(1)
-	@Max(99)
+	@Max(9999)
 	private int productId;
 
 	@NotNull
-	@Size(min = 3, max = 15)
+	@Size(min = 2, max = 50)
 	private String productName;
 
-	@Size(min = 3, max = 15)
+	@Size(min = 2, max = 50)
 	private String productDescription;
 
 	@Min(1)
-	@Max(99)
+	@Max(9999)
 	private int minPrice;
 
 	@Min(1)
-	@Max(99)
+	@Max(9999)
 	private int maxPrice;
 
 	@OneToMany(mappedBy = "product")

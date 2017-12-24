@@ -24,7 +24,7 @@ public class TelecomService implements Serializable {
 	private static final long serialVersionUID = 5747837806045222851L;
 
 	@NotNull
-	@Min(5)
+	@Min(1)
 	@Max(9999)
 	private int telecomServiceId;
 
@@ -35,18 +35,19 @@ public class TelecomService implements Serializable {
 	private boolean telecomServiceType;
 
 	@Min(1)
-	@Max(99)
+	@Max(9999)
 	private int operatorId;
 
-	@Size(min = 3, max = 15)
+	@NotNull
+	@Size(min = 2, max = 50)
 	private String operatorName;
 
 	@Min(1)
-	@Max(999)
+	@Max(9999)
 	private int operatorServiceId;
 
 	@Min(1)
-	@Max(999)
+	@Max(9999)
 	private int operatorPackageId;
 
 	@ManyToOne
