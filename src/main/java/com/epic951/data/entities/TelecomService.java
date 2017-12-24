@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -24,6 +26,10 @@ public class TelecomService implements Serializable {
 	private String operatorName;
 	private int operatorServiceId;
 	private int operatorPackageId;
+
+	@ManyToOne
+	@JoinColumn(name = "productid")
+	private Product product;
 
 	public TelecomService() {
 	}
@@ -87,8 +93,8 @@ public class TelecomService implements Serializable {
 	public void setOperatorServiceId(int operatorServiceId) {
 		this.operatorServiceId = operatorServiceId;
 	}
-	
-	@Column(name="operatorname")
+
+	@Column(name = "operatorname")
 	public String getOperatorName() {
 		return operatorName;
 	}

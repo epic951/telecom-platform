@@ -40,7 +40,7 @@ public class OperatorController {
 	}
 
 	@Transactional
-	@DeleteMapping(value = "/deleteoperator")
+	@DeleteMapping(value = "/deleteoperatorbyname")
 	public String processDeleteOperatorByOperatorName(@RequestBody Operator o) {
 		if (operatorService.deleteOperatorByOperatorName(o.getOperatorName()) == 1) {
 			return "success";

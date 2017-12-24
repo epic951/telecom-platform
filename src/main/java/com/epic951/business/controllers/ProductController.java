@@ -40,7 +40,7 @@ public class ProductController {
 	}
 
 	@Transactional
-	@DeleteMapping(value = "/deleteproduct")
+	@DeleteMapping(value = "/deleteproductbyname")
 	public String processDeleteProductByProductName(@RequestBody Product p) {
 		if (productService.deleteProductByProductName(p.getProductName()) == 1) {
 			return "success";
