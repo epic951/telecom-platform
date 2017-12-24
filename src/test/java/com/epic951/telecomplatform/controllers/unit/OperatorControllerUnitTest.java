@@ -57,7 +57,7 @@ public class OperatorControllerUnitTest {
 		Operator newOperator = TestUtilities.createTestOperator(0, null, null);
 
 		// simulate the form submit (POST)
-		mockMvc.perform(post("/addoperator", newOperator).content(this.json(newOperator))
+		mockMvc.perform(post("/api/addoperator", newOperator).content(this.json(newOperator))
 				.contentType(HTTPUtilities.JSON_CONTENT_TYPE)).andDo(print()).andExpect(status().isOk()).andReturn();
 		System.err.println(newOperator.toString());
 		System.err.println(this.json(newOperator));

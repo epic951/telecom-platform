@@ -29,7 +29,7 @@ public class ProductServiceIntegrationTest {
 
 		// Create a product
 		Product sms = TestUtilities.createTestProduct("Short Messaging Service", 544,
-				"Casual messaging service used to exchange brief text-based messages");
+				"Casual messaging service used to exchange brief text-based messages", 43, 12);
 
 		// Test adding the product
 		Product p = productService.addOrUpdateProduct(sms);

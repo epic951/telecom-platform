@@ -6,11 +6,13 @@ import com.epic951.data.entities.TelecomService;
 
 public class TestUtilities {
 
-	public static Product createTestProduct(String productName, int productId, String productDescription) {
+	public static Product createTestProduct(String productName, int productId, String productDescription,int minPrice,int maxPrice) {
 		Product testProduct = new Product();
 		testProduct.setProductName(productName);
 		testProduct.setProductId(productId);
 		testProduct.setProductDescription(productDescription);
+		testProduct.setMinPrice(minPrice);
+		testProduct.setMaxPrice(maxPrice);
 		return testProduct;
 	}
 
