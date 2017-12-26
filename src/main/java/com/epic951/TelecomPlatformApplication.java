@@ -20,8 +20,9 @@ public class TelecomPlatformApplication {
 		return new WebMvcConfigurerAdapter() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/*").allowedOrigins("http://localhost:4200").allowCredentials(true)
-						.allowedMethods("GET", "POST", "PUT", "DELETE");
+				registry.addMapping("/*")
+						.allowedOrigins("http://localhost:4200", "https://telecom-platform-frontend.herokuapp.com/")
+						.allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE");
 			}
 		};
 	}
