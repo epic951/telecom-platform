@@ -21,8 +21,9 @@ public class TelecomPlatformApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/*")
-						.allowedOrigins("http://localhost:4200", "https://telecom-platform-frontend.herokuapp.com/")
-						.allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE");
+						.allowedOrigins("http://localhost:4200", "http://localhost:5000",
+								"https://telecom-platform-frontend.herokuapp.com/")
+						.allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
 			}
 		};
 	}
