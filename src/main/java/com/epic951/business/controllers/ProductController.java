@@ -5,7 +5,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +24,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
-	@CrossOrigin
+
 	@GetMapping(value = "/getproducts")
 	public List<Product> getAllProducts() {
 		return productService.getAllProducts();
