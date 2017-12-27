@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RedirectController {
 
 	@GetMapping(value = "/")
-	public String forwardToAngularFrontEnd(HttpServletResponse response) {
-		// response.setHeader("Location",
-		// "https://telecom-platform-frontend.herokuapp.com/");
-		return "forward:https://telecom-platform-frontend.herokuapp.com/";
+	public void forwardToAngularFrontEnd(HttpServletResponse response) {
+		response.setHeader("Location", "https://telecom-platform-frontend.herokuapp.com/");
+		// return "forward:https://telecom-platform-frontend.herokuapp.com/";
 	}
 }
