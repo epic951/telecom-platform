@@ -23,7 +23,8 @@ public class TelecomPlatformApplication {
 				registry.addMapping("/*")
 						.allowedOrigins("http://localhost:4200", "http://localhost:5000",
 								"https://telecom-platform-frontend.herokuapp.com/")
-						.allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+						.allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+						.allowedHeaders("*");
 			}
 		};
 	}
