@@ -30,8 +30,8 @@ public class SimpleCORSFilter implements Filter {
 			throws IOException, ServletException, ForbiddenException {
 		HttpServletResponse response = (HttpServletResponse) resp;
 		HttpServletRequest request = (HttpServletRequest) req;
-		response.setHeader("Access-Control-Allow-Origin", determineAllowedOrigin(request.getHeader("Origin"))
-				+ " https://telecom-platform.herokuapp.com" + " http://localhost:8080");
+		response.setHeader("Access-Control-Allow-Origin",
+				determineAllowedOrigin(request.getHeader("Origin"), request.getHeader("Host")));
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Headers",
@@ -44,7 +44,7 @@ public class SimpleCORSFilter implements Filter {
 		}
 	}
 
-	private String determineAllowedOrigin(String header) {
+	private String determineAllowedOrigin(String header, String host) {
 		String[] allowedOrigins = { "https://telecom-platform-frontend.herokuapp.com", "http://localhost:4200",
 				"http://localhost:5000" };
 		for (String origin : allowedOrigins) {
@@ -52,6 +52,9 @@ public class SimpleCORSFilter implements Filter {
 				System.err.println("origin " + origin + "   header " + header);
 				return origin;
 			}
+		}
+		if (host.equals("telecom-platform.herokuapp.com") || host.equals("localhost:8080")) {
+			return "https://" + host;
 		}
 		System.err.println(header);
 		throw new ForbiddenException();
