@@ -45,8 +45,8 @@ public class SimpleCORSFilter implements Filter {
 	}
 
 	private String determineAllowedOrigin(String header) {
-		String[] allowedOrigins = { "https://telecom-platform-frontend.herokuapp.com", "http://localhost:4200",
-				"http://localhost:5000" };
+		String[] allowedOrigins = { "https://telecom-platform.herokuapp.com",
+				"https://telecom-platform-frontend.herokuapp.com", "http://localhost:4200", "http://localhost:5000" };
 		for (String origin : allowedOrigins) {
 			if (origin.equals(header)) {
 				return origin;
