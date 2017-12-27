@@ -12,6 +12,6 @@ public class RedirectController {
 	public String forwardToAngularFrontEnd(HttpServletResponse response) {
 		// response.setHeader("Location",
 		// "https://telecom-platform-frontend.herokuapp.com/");
-		return "redirect:https://telecom-platform-frontend.herokuapp.com/";
+		return "forward:https://telecom-platform-frontend.herokuapp.com/";
 	}
 }
