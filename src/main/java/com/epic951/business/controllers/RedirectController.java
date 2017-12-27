@@ -10,6 +10,6 @@ public class RedirectController {
 
 	@GetMapping(value = "/")
 	public String forwardToAngularFrontEnd() {
-		return "redirect:/https://telecom-platform-frontend.herokuapp.com/";
+		return "forward:https://telecom-platform-frontend.herokuapp.com/";
 	}
 }
