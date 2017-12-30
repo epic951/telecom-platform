@@ -43,19 +43,23 @@ public class Product implements Serializable {
 	@Max(9999)
 	private int maxPrice;
 
+	private String imageUrl;
+
 	@OneToMany(mappedBy = "product")
 	private List<TelecomService> telecomServices;
 
 	public Product() {
 	}
 
-	public Product(int productId, String productName, String productDescription, int minPrice, int maxPrice) {
+	public Product(int productId, String productName, String productDescription, int minPrice, int maxPrice,
+			String imageUrl) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.minPrice = minPrice;
 		this.maxPrice = maxPrice;
+		this.imageUrl = imageUrl;
 	}
 
 	@Id
@@ -106,25 +110,29 @@ public class Product implements Serializable {
 		this.maxPrice = maxPrice;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", productDescription="
-				+ productDescription + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + "]";
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
 		result = prime * result + maxPrice;
 		result = prime * result + minPrice;
 		result = prime * result + ((productDescription == null) ? 0 : productDescription.hashCode());
 		result = prime * result + productId;
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((telecomServices == null) ? 0 : telecomServices.hashCode());
 		return result;
 	}
 
@@ -137,6 +145,11 @@ public class Product implements Serializable {
 		if (!(obj instanceof Product))
 			return false;
 		Product other = (Product) obj;
+		if (imageUrl == null) {
+			if (other.imageUrl != null)
+				return false;
+		} else if (!imageUrl.equals(other.imageUrl))
+			return false;
 		if (maxPrice != other.maxPrice)
 			return false;
 		if (minPrice != other.minPrice)
@@ -153,6 +166,19 @@ public class Product implements Serializable {
 				return false;
 		} else if (!productName.equals(other.productName))
 			return false;
+		if (telecomServices == null) {
+			if (other.telecomServices != null)
+				return false;
+		} else if (!telecomServices.equals(other.telecomServices))
+			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productDescription="
+				+ productDescription + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", imageUrl=" + imageUrl
+				+ ", telecomServices=" + telecomServices + "]";
+	}
+
 }
