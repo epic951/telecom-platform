@@ -42,7 +42,7 @@ public class Product implements Serializable {
 	@Min(1)
 	@Max(9999)
 	private int maxPrice;
-
+	
 	private String imageUrl;
 
 	@OneToMany(mappedBy = "product")
@@ -109,7 +109,8 @@ public class Product implements Serializable {
 	public void setMaxPrice(int maxPrice) {
 		this.maxPrice = maxPrice;
 	}
-
+	
+	@Column(name="imageurl")
 	public String getImageUrl() {
 		return imageUrl;
 	}
