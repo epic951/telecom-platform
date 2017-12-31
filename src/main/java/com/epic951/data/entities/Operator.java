@@ -35,17 +35,20 @@ public class Operator implements Serializable {
 	@Size(min = 2, max = 50)
 	private String operatorCountry;
 
+	private String imageUrl;
+
 	@OneToMany(mappedBy = "operator")
 	private List<TelecomService> telecomServices;
 
 	public Operator() {
 	}
 
-	public Operator(int operatorId, String operatorName, String operatorCountry) {
+	public Operator(int operatorId, String operatorName, String operatorCountry, String imageUrl) {
 		super();
 		this.operatorId = operatorId;
 		this.operatorName = operatorName;
 		this.operatorCountry = operatorCountry;
+		this.imageUrl = imageUrl;
 	}
 
 	@Id
@@ -78,6 +81,15 @@ public class Operator implements Serializable {
 		this.operatorCountry = operatorCountry;
 	}
 
+	@Column(name = "imageurl")
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -85,16 +97,18 @@ public class Operator implements Serializable {
 	@Override
 	public String toString() {
 		return "Operator [operatorId=" + operatorId + ", operatorName=" + operatorName + ", operatorCountry="
-				+ operatorCountry + "]";
+				+ operatorCountry + ", imageUrl=" + imageUrl + ", telecomServices=" + telecomServices + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
 		result = prime * result + ((operatorCountry == null) ? 0 : operatorCountry.hashCode());
 		result = prime * result + operatorId;
 		result = prime * result + ((operatorName == null) ? 0 : operatorName.hashCode());
+		result = prime * result + ((telecomServices == null) ? 0 : telecomServices.hashCode());
 		return result;
 	}
 
@@ -107,6 +121,11 @@ public class Operator implements Serializable {
 		if (!(obj instanceof Operator))
 			return false;
 		Operator other = (Operator) obj;
+		if (imageUrl == null) {
+			if (other.imageUrl != null)
+				return false;
+		} else if (!imageUrl.equals(other.imageUrl))
+			return false;
 		if (operatorCountry == null) {
 			if (other.operatorCountry != null)
 				return false;
@@ -119,6 +138,12 @@ public class Operator implements Serializable {
 				return false;
 		} else if (!operatorName.equals(other.operatorName))
 			return false;
+		if (telecomServices == null) {
+			if (other.telecomServices != null)
+				return false;
+		} else if (!telecomServices.equals(other.telecomServices))
+			return false;
 		return true;
 	}
+
 }

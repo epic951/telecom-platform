@@ -58,7 +58,7 @@ public class TelecomServiceUnitTest {
 		// addservice method
 		assertEquals(roaming, mockedTelecomServiceHandler.addOrUpdateService(stickers));
 		assertEquals(roaming, mockedTelecomServiceHandler
-				.addOrUpdateService(new TelecomService(334, "Call Keeper", false, 78, "Vodafone", 16, 88)));
+				.addOrUpdateService(new TelecomService(334, "Call Keeper", false, 78, "Vodafone", 16, 88, " ")));
 	}
 
 	@Test
@@ -71,7 +71,7 @@ public class TelecomServiceUnitTest {
 		when(mockedTelecomServiceRepository.findByTelecomServiceId(Mockito.anyInt())).thenReturn(Optional.empty());
 		when(mockedTelecomServiceRepository.findByTelecomServiceName(anyString())).thenReturn(Optional.empty());
 		when(mockedTelecomServiceRepository.save(any(TelecomService.class))).thenReturn(roaming);
-		
+
 		TelecomService persisted = mockedTelecomServiceHandler.addOrUpdateService(roaming);
 		int result = mockedTelecomServiceHandler.deleteServiceByTelecomServiceName(persisted.getTelecomServiceName());
 		assertEquals(1, result);
