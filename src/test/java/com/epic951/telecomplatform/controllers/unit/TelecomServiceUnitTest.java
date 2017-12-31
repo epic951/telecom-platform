@@ -60,7 +60,8 @@ public class TelecomServiceUnitTest {
 		TelecomService newTelecomService = TestUtilities.createTestTelecomService(0, null, null, false, 0, 0, 0);
 
 		// simulate the form submit (POST)
-		mockMvc.perform(post("/api/addservice", newTelecomService).content(this.json(newTelecomService))
+		mockMvc.perform(post("/api/addservice", newTelecomService).header("Origin", "")
+				.header("Host", "telecom-platform.herokuapp.com").content(this.json(newTelecomService))
 				.contentType(HTTPUtilities.JSON_CONTENT_TYPE)).andDo(print()).andExpect(status().isOk()).andReturn();
 		System.err.println(newTelecomService.toString());
 		System.err.println(this.json(newTelecomService));
