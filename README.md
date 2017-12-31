@@ -3,7 +3,9 @@ Various implementations of Spring controllers exposing RESTful API endoints and 
 
 Drived by Test-Driven Development through Unit testing and Integration testing for repositories,services and controllers
 
-Upon visiting the app's link on Heroku  (https://telecom-platform.herokuapp.com) you will be redirected to the Angular 4 frontend present in this GitHub repo 
+Upon visiting the app's link on Heroku  (https://telecom-platform.herokuapp.com) => Takes roughly a minute to go live ^^
+
+you will be redirected to the Angular 4 frontend present in this GitHub repo 
 (https://github.com/epic951/telecom-platform-frontend)
 the credentials are static (username: admin , password: admin)<br>
 
