@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.epic951</groupId>
-	<artifactId>telecom-platform</artifactId>
+	<artifactId>telecom-platform-backend</artifactId>
 	<version>0.8.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>telecom-platform</name>
+	<name>telecom-platform-backend</name>
 	<description>Telecom Platform assignment</description>
 
 	<parent>
