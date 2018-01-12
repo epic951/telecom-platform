@@ -53,7 +53,7 @@ public class SimpleCORSFilter implements Filter {
 				return origin;
 			}
 		}
-		if (host.equals("telecom-platform.herokuapp.com") || host.equals("localhost:8080")) {
+		if (host.equals("telecom-platform-backend.herokuapp.com") || host.equals("localhost:8080")) {
 			return "https://" + host;
 		}
 		System.err.println(header);
