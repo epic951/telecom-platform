@@ -36,6 +36,7 @@ public class Operator implements Serializable {
 	private String operatorCountry;
 
 	private String imageUrl;
+	private float rating;
 
 	@OneToMany(mappedBy = "operator")
 	private List<TelecomService> telecomServices;
@@ -43,12 +44,13 @@ public class Operator implements Serializable {
 	public Operator() {
 	}
 
-	public Operator(int operatorId, String operatorName, String operatorCountry, String imageUrl) {
+	public Operator(int operatorId, String operatorName, String operatorCountry, String imageUrl, float rating) {
 		super();
 		this.operatorId = operatorId;
 		this.operatorName = operatorName;
 		this.operatorCountry = operatorCountry;
 		this.imageUrl = imageUrl;
+		this.rating = rating;
 	}
 
 	@Id
@@ -90,6 +92,15 @@ public class Operator implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
+	@Column(name = "rating")
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -97,7 +108,8 @@ public class Operator implements Serializable {
 	@Override
 	public String toString() {
 		return "Operator [operatorId=" + operatorId + ", operatorName=" + operatorName + ", operatorCountry="
-				+ operatorCountry + ", imageUrl=" + imageUrl + ", telecomServices=" + telecomServices + "]";
+				+ operatorCountry + ", imageUrl=" + imageUrl + ", rating=" + rating + ", telecomServices="
+				+ telecomServices + "]";
 	}
 
 	@Override
@@ -108,6 +120,7 @@ public class Operator implements Serializable {
 		result = prime * result + ((operatorCountry == null) ? 0 : operatorCountry.hashCode());
 		result = prime * result + operatorId;
 		result = prime * result + ((operatorName == null) ? 0 : operatorName.hashCode());
+		result = prime * result + Float.floatToIntBits(rating);
 		result = prime * result + ((telecomServices == null) ? 0 : telecomServices.hashCode());
 		return result;
 	}
@@ -137,6 +150,8 @@ public class Operator implements Serializable {
 			if (other.operatorName != null)
 				return false;
 		} else if (!operatorName.equals(other.operatorName))
+			return false;
+		if (Float.floatToIntBits(rating) != Float.floatToIntBits(other.rating))
 			return false;
 		if (telecomServices == null) {
 			if (other.telecomServices != null)

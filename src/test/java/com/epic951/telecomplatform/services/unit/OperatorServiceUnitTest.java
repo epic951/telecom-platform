@@ -57,7 +57,7 @@ public class OperatorServiceUnitTest {
 		// Verify mocked object is passed to the service no matter what is passed to
 		// addoperator method
 		assertEquals(etisalat, mockedOperatorService.addOrUpdateOperator(vodafone));
-		assertEquals(etisalat, mockedOperatorService.addOrUpdateOperator(new Operator(99, "Orange", "KSA", " ")));
+		assertEquals(etisalat, mockedOperatorService.addOrUpdateOperator(new Operator(99, "Orange", "KSA", " ", 0)));
 	}
 
 	@Test

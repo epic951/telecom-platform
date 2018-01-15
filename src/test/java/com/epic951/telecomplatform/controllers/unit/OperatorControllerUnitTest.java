@@ -58,7 +58,7 @@ public class OperatorControllerUnitTest {
 
 		// simulate the form submit (POST)
 		mockMvc.perform(post("/api/addoperator", newOperator).header("Origin", "")
-				.header("Host", "telecom-platform.herokuapp.com").content(this.json(newOperator))
+				.header("Host", "telecom-platform-backend.herokuapp.com").content(this.json(newOperator))
 				.contentType(HTTPUtilities.JSON_CONTENT_TYPE)).andDo(print()).andExpect(status().isOk()).andReturn();
 		System.err.println(newOperator.toString());
 		System.err.println(this.json(newOperator));

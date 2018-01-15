@@ -59,7 +59,7 @@ public class ProductControllerUnitTest {
 
 		// simulate the form submit (POST)
 		mockMvc.perform(post("/api/addproduct", newProduct).header("Origin", "")
-				.header("Host", "telecom-platform.herokuapp.com").content(this.json(newProduct))
+				.header("Host", "telecom-platform-backend.herokuapp.com").content(this.json(newProduct))
 				.contentType(HTTPUtilities.JSON_CONTENT_TYPE)).andDo(print()).andExpect(status().isOk()).andReturn();
 		System.err.println(newProduct.toString());
 		System.err.println(this.json(newProduct));

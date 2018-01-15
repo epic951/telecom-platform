@@ -56,11 +56,13 @@ public class TelecomService implements Serializable {
 	@JoinColumn(name = "productid")
 	private Product product;
 
+	private float rating;
+
 	public TelecomService() {
 	}
 
 	public TelecomService(int telecomserviceId, String telecomserviceName, boolean telecomserviceType, int operatorId,
-			String operatorName, int operatorServiceId, int operatorPackageId, String imageUrl) {
+			String operatorName, int operatorServiceId, int operatorPackageId, String imageUrl, float rating) {
 		super();
 		this.telecomServiceId = telecomserviceId;
 		this.telecomServiceName = telecomserviceName;
@@ -70,6 +72,7 @@ public class TelecomService implements Serializable {
 		this.operatorServiceId = operatorServiceId;
 		this.operatorPackageId = operatorPackageId;
 		this.imageUrl = imageUrl;
+		this.rating = rating;
 	}
 
 	@Id
@@ -147,6 +150,15 @@ public class TelecomService implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
+	@Column(name = "rating")
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -156,7 +168,7 @@ public class TelecomService implements Serializable {
 		return "TelecomService [telecomServiceId=" + telecomServiceId + ", telecomServiceName=" + telecomServiceName
 				+ ", telecomServiceType=" + telecomServiceType + ", operatorId=" + operatorId + ", operatorName="
 				+ operatorName + ", operatorServiceId=" + operatorServiceId + ", operatorPackageId=" + operatorPackageId
-				+ ", imageUrl=" + imageUrl + ", product=" + product + "]";
+				+ ", imageUrl=" + imageUrl + ", product=" + product + ", rating=" + rating + "]";
 	}
 
 	@Override
@@ -169,6 +181,7 @@ public class TelecomService implements Serializable {
 		result = prime * result + operatorPackageId;
 		result = prime * result + operatorServiceId;
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + Float.floatToIntBits(rating);
 		result = prime * result + telecomServiceId;
 		result = prime * result + ((telecomServiceName == null) ? 0 : telecomServiceName.hashCode());
 		result = prime * result + (telecomServiceType ? 1231 : 1237);
@@ -204,6 +217,8 @@ public class TelecomService implements Serializable {
 			if (other.product != null)
 				return false;
 		} else if (!product.equals(other.product))
+			return false;
+		if (Float.floatToIntBits(rating) != Float.floatToIntBits(other.rating))
 			return false;
 		if (telecomServiceId != other.telecomServiceId)
 			return false;

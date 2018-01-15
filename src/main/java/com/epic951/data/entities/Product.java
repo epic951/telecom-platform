@@ -42,8 +42,9 @@ public class Product implements Serializable {
 	@Min(1)
 	@Max(9999)
 	private int maxPrice;
-	
+
 	private String imageUrl;
+	private float rating;
 
 	@OneToMany(mappedBy = "product")
 	private List<TelecomService> telecomServices;
@@ -52,7 +53,7 @@ public class Product implements Serializable {
 	}
 
 	public Product(int productId, String productName, String productDescription, int minPrice, int maxPrice,
-			String imageUrl) {
+			String imageUrl, float rating) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -60,6 +61,7 @@ public class Product implements Serializable {
 		this.minPrice = minPrice;
 		this.maxPrice = maxPrice;
 		this.imageUrl = imageUrl;
+		this.rating = rating;
 	}
 
 	@Id
@@ -109,8 +111,8 @@ public class Product implements Serializable {
 	public void setMaxPrice(int maxPrice) {
 		this.maxPrice = maxPrice;
 	}
-	
-	@Column(name="imageurl")
+
+	@Column(name = "imageurl")
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -119,8 +121,24 @@ public class Product implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
+	@Column(name = "rating")
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productDescription="
+				+ productDescription + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", imageUrl=" + imageUrl
+				+ ", rating=" + rating + ", telecomServices=" + telecomServices + "]";
 	}
 
 	@Override
@@ -133,6 +151,7 @@ public class Product implements Serializable {
 		result = prime * result + ((productDescription == null) ? 0 : productDescription.hashCode());
 		result = prime * result + productId;
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + Float.floatToIntBits(rating);
 		result = prime * result + ((telecomServices == null) ? 0 : telecomServices.hashCode());
 		return result;
 	}
@@ -167,19 +186,14 @@ public class Product implements Serializable {
 				return false;
 		} else if (!productName.equals(other.productName))
 			return false;
+		if (Float.floatToIntBits(rating) != Float.floatToIntBits(other.rating))
+			return false;
 		if (telecomServices == null) {
 			if (other.telecomServices != null)
 				return false;
 		} else if (!telecomServices.equals(other.telecomServices))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", productDescription="
-				+ productDescription + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", imageUrl=" + imageUrl
-				+ ", telecomServices=" + telecomServices + "]";
 	}
 
 }

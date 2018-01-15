@@ -58,7 +58,7 @@ public class TelecomServiceUnitTest {
 		// addservice method
 		assertEquals(roaming, mockedTelecomServiceHandler.addOrUpdateService(stickers));
 		assertEquals(roaming, mockedTelecomServiceHandler
-				.addOrUpdateService(new TelecomService(334, "Call Keeper", false, 78, "Vodafone", 16, 88, " ")));
+				.addOrUpdateService(new TelecomService(334, "Call Keeper", false, 78, "Vodafone", 16, 88, " ", 0)));
 	}
 
 	@Test

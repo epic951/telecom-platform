@@ -72,7 +72,7 @@ public class ProductServiceUnitTest {
 		// Verify mocked object is passed to the service no matter what is passed to
 		// addproduct method
 		assertEquals(sms, mockedProductService.addOrUpdateProduct(mms));
-		assertEquals(sms, mockedProductService.addOrUpdateProduct(new Product(7723, "firebolt", "dd", 44, 33, " ")));
+		assertEquals(sms, mockedProductService.addOrUpdateProduct(new Product(7723, "firebolt", "dd", 44, 33, " ", 0)));
 	}
 
 	@Test
