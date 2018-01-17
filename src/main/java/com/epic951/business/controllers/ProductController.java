@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,11 @@ public class ProductController {
 	@GetMapping(value = "/getproducts")
 	public List<Product> getAllProducts() {
 		return productService.getAllProducts();
+	}
+
+	@GetMapping(value = "/findproduct/{id}")
+	public Product findProductById(@PathVariable(value = "id") int id) {
+		return productService.findProductById(id);
 	}
 
 	@PostMapping(value = "/addproduct")

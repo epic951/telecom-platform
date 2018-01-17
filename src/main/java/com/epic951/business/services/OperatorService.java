@@ -23,6 +23,10 @@ public class OperatorService {
 		this.operatorRepository = operatorRepository;
 	}
 
+	public Operator findOperatorById(int id) {
+		return operatorRepository.findByOperatorId(id).get();
+	}
+
 	public Operator addOrUpdateOperator(Operator o) {
 		// Validation is required ..
 		Operator newOperator = null;
@@ -47,4 +51,5 @@ public class OperatorService {
 		operatorRepository.findAll().forEach(operators::add);
 		return operators;
 	}
+
 }

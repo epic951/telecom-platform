@@ -56,6 +56,10 @@ public class TelecomServiceHandler {
 		return newService;
 	}
 
+	public TelecomService findServiceById(int id) {
+		return serviceRepository.findByTelecomServiceId(id).get();
+	}
+
 	public Integer deleteServiceByTelecomServiceName(String name) {
 		return serviceRepository.deleteByTelecomServiceName(name);
 	}
@@ -65,4 +69,5 @@ public class TelecomServiceHandler {
 		serviceRepository.findAll().forEach(services::add);
 		return services;
 	}
+
 }

@@ -57,6 +57,10 @@ public class ProductService {
 		return foundProduct;
 	}
 
+	public Product findProductById(int id) {
+		return productRepository.findByProductId(id).get();
+	}
+
 	public List<Product> getAllProducts() {
 
 		List<Product> products = new ArrayList<>();
