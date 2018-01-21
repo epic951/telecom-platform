@@ -48,6 +48,7 @@ public class ProductController {
 
 	@PostMapping(value = "/addproduct")
 	public ResponseEntity<String> processAddProduct(@RequestBody Product p) {
+		System.err.println("Controller " + p.toString());
 		Product newProduct = productService.addOrUpdateProduct(p);
 		if (newProduct != null) {
 			return HTTPUtilities.handleResponse("Success");

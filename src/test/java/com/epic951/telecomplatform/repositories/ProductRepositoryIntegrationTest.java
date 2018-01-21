@@ -32,7 +32,7 @@ public class ProductRepositoryIntegrationTest {
 	public void testFindByProductName() {
 
 		// setup data scenario
-		Product newProduct = TestUtilities.createTestProduct(9706, "Mobile Internet", "LTE service", 43, 23);
+		Product newProduct = TestUtilities.createTestProduct(9706, "Mobile Internet", "LTE service", 43, 23, 1);
 		Product persisted = testEntityManager.merge(newProduct);
 
 		// find and inserted record using repository class
@@ -46,7 +46,7 @@ public class ProductRepositoryIntegrationTest {
 	public void testDeleteByProductName() {
 
 		// setup data scenario
-		Product newProduct = TestUtilities.createTestProduct(3453, "Smartphone", "device", 234, 12);
+		Product newProduct = TestUtilities.createTestProduct(3453, "Smartphone", "device", 234, 12, 1);
 		testEntityManager.merge(newProduct);
 
 		Integer result = productRepository.deleteByProductName("Smartphone");

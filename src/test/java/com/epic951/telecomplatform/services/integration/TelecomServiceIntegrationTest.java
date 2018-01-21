@@ -28,7 +28,7 @@ public class TelecomServiceIntegrationTest {
 	public void testAddTelecomService() {
 
 		// Create a telecomservice
-		TelecomService roaming = TestUtilities.createTestTelecomService(5, "Zain", "Roaming", false, 77, 23, 75);
+		TelecomService roaming = TestUtilities.createTestTelecomService(5, "Zain", "Roaming", false, 77, 23, 75, 1);
 
 		// Test adding the telecomservice
 		TelecomService t = telecomServiceHandler.addOrUpdateService(roaming);

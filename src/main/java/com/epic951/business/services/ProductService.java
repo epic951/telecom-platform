@@ -31,15 +31,16 @@ public class ProductService {
 		Product newProduct = null;
 		boolean alreadyAdded = productRepository.findByProductName(p.getProductName()).isPresent();
 		boolean viableForUpdate = productRepository.findByProductId(p.getProductId()).isPresent();
-		// System.err.println("alreadyAdded " + alreadyAdded + " --- viableForUpdate " +
-		// viableForUpdate + " values "
-		// + p.getProductId() + " " + p.getProductName());
+		System.err.println("alreadyAdded " + alreadyAdded + " --- viableForUpdate " + viableForUpdate + " values "
+				+ p.getProductId() + " " + p.getProductName());
 		if (!alreadyAdded && p.getProductName() != null && !p.getProductName().isEmpty()) {
 			newProduct = productRepository.save(p);
+			System.err.println("Service add " + newProduct.toString());
 			return newProduct;
 		}
 		if (viableForUpdate) {
 			newProduct = productRepository.save(p);
+			System.err.println("Service update " + newProduct.toString());
 		}
 		return newProduct;
 	}

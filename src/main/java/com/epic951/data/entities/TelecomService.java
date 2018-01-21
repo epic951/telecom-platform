@@ -17,6 +17,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Entity
 @Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "telecomserviceid" }) })
 public class TelecomService implements Serializable {
@@ -52,6 +54,7 @@ public class TelecomService implements Serializable {
 
 	private String imageUrl;
 
+	@Value(value = "${rating:1}")
 	@Min(1)
 	@Max(5)
 	private float rating;

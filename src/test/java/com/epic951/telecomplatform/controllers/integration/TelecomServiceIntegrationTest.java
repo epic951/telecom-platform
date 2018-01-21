@@ -30,7 +30,7 @@ public class TelecomServiceIntegrationTest {
 	public void testAddService() {
 		// Create a service
 		TelecomService gpsTracking = TestUtilities.createTestTelecomService(92934, "Zain", "GPS-tracking", false, 89,
-				6585, 799);
+				6585, 799, 1);
 
 		// POST the new service we just added and check the outcome
 		ResponseEntity<String> outcome = telecomServiceController.processAddService(gpsTracking);
@@ -42,7 +42,7 @@ public class TelecomServiceIntegrationTest {
 	@Test
 	public void testAddServiceWithoutTelecomServiceName() {
 		// Create a service
-		TelecomService gpsTracking = TestUtilities.createTestTelecomService(1, "Zain", null, false, 8, 9, 4);
+		TelecomService gpsTracking = TestUtilities.createTestTelecomService(1, "Zain", null, false, 8, 9, 4, 1);
 
 		// POST the new service we just added and check the outcome
 		ResponseEntity<String> outcome = telecomServiceController.processAddService(gpsTracking);

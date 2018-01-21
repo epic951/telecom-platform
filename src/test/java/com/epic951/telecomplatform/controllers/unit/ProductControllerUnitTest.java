@@ -50,12 +50,12 @@ public class ProductControllerUnitTest {
 	public void testAddProduct() throws Exception {
 
 		// setup mock product returned from the mocked service component
-		Product mockProduct = TestUtilities.createTestProduct(9384, "MMS", "Video messages", 32, 51);
+		Product mockProduct = TestUtilities.createTestProduct(9384, "MMS", "Video messages", 32, 51, 1);
 
 		when(productService.addOrUpdateProduct(Mockito.isA(Product.class))).thenReturn(mockProduct);
 
 		// simulate the form bean that would POST from the web page
-		Product newProduct = TestUtilities.createTestProduct(0, null, null, 0, 0);
+		Product newProduct = TestUtilities.createTestProduct(0, null, null, 0, 0, 1);
 
 		// simulate the form submit (POST)
 		mockMvc.perform(post("/api/addproduct", newProduct).header("Origin", "")

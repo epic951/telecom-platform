@@ -28,7 +28,7 @@ public class OperatorServiceIntegrationTest {
 	public void testAddOperator() {
 
 		// Create an Operator
-		Operator orange = TestUtilities.createTestOperator(352, "STC", "UAE");
+		Operator orange = TestUtilities.createTestOperator(352, "STC", "UAE", 1);
 
 		// Test adding the operator
 		Operator o = operatorService.addOrUpdateOperator(orange);

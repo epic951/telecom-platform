@@ -31,7 +31,7 @@ public class ProductControllerIntegrationTest {
 
 		// Create a Product
 		Product mms = TestUtilities.createTestProduct(6621, "Video-Messaging-Service", "Video-messaging-service", 435,
-				121);
+				121, 1);
 
 		// POST the new product we just added and check the outcome
 		ResponseEntity<String> outcome = productController.processAddProduct(mms);
@@ -43,11 +43,11 @@ public class ProductControllerIntegrationTest {
 	@Test
 	public void testAddProductWithoutName() {
 
-		Product streaming = TestUtilities.createTestProduct(9238, null, "Youtube", 234, 12);
+		Product streaming = TestUtilities.createTestProduct(65, null, "Youtube", 7, 88, 2);
 
 		// POST the new product we just added and check the outcome
 		ResponseEntity<String> outcome = productController.processAddProduct(streaming);
-
+		System.err.println("Test " + outcome.getBody());
 		// Assert that the outcome is as expected
 		assertThat(outcome.getBody(), is(equalTo("Failure")));
 	}

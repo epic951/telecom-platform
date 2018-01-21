@@ -32,7 +32,7 @@ public class OperatorRepositoryIntegrationTest {
 	public void testFindByOperatorName() {
 
 		// setup data scenario
-		Operator newOperator = TestUtilities.createTestOperator(10, "UAE", "Zain");
+		Operator newOperator = TestUtilities.createTestOperator(10, "STC", "UAE", 1);
 		Operator persisted = testEntityManager.merge(newOperator);
 		System.err.println(persisted.toString());
 
@@ -40,17 +40,17 @@ public class OperatorRepositoryIntegrationTest {
 		Operator foundOperator = operatorRepository.findByOperatorName(persisted.getOperatorName()).get();
 
 		// Assertion
-		assertThat(foundOperator.getOperatorName(), is(equalTo("Zain")));
+		assertThat(foundOperator.getOperatorName(), is(equalTo("STC")));
 	}
 
 	@Test
 	public void testDeleteByOperatorName() {
 
 		// setup data scenario
-		Operator newOperator = TestUtilities.createTestOperator(36363, "UAE", "Zain");
+		Operator newOperator = TestUtilities.createTestOperator(36363, "STC", "UAE", 1);
 		testEntityManager.merge(newOperator);
 
-		Integer result = operatorRepository.deleteByOperatorName("Zain");
+		Integer result = operatorRepository.deleteByOperatorName("STC");
 
 		// Assertion
 		System.err.println(result);
