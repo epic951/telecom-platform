@@ -29,7 +29,8 @@ public class TelecomServiceHandler {
 		TelecomService newService = null;
 		boolean alreadyAdded = serviceRepository.findByTelecomServiceName(s.getTelecomServiceName()).isPresent();
 		boolean viableForUpdate = serviceRepository.findByTelecomServiceId(s.getTelecomServiceId()).isPresent();
-		if (!alreadyAdded && s.getTelecomServiceName() != null && !s.getTelecomServiceName().isEmpty()) {
+		if (!alreadyAdded && s.getTelecomServiceName() != null && !s.getTelecomServiceName().isEmpty()
+				&& s.getOperatorName() != null && !s.getOperatorName().isEmpty() && s.getOperatorId() > 0) {
 			switch (s.getOperatorName().toLowerCase()) {
 			case "vodafone":
 				if (s.getOperatorPackageId() > 0 && s.getOperatorServiceId() > 0) {
@@ -73,10 +74,11 @@ public class TelecomServiceHandler {
 
 	private TelecomService initializeProduct(TelecomService s, String status) {
 		TelecomService temp = null;
+		System.err.println(s.toString());
 		if (status.toLowerCase().equals("update")) {
 			temp = serviceRepository.findOne((long) s.getTelecomServiceId());
-		} else if (status.toLowerCase().equals("Create")) {
-			temp = TestUtilities.createTestTelecomService(0, null, null, false, 0, 1, 1, 1);
+		} else if (status.toLowerCase().equals("create")) {
+			temp = TestUtilities.createTestTelecomService(0, "", "", false, 0, 1, 1, 1);
 		}
 		temp = TestUtilities.createTestTelecomService(s.getTelecomServiceId(), s.getOperatorName(),
 				s.getTelecomServiceName(), s.isTelecomServiceType(),

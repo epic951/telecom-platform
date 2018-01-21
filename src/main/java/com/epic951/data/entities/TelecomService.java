@@ -32,7 +32,7 @@ public class TelecomService implements Serializable {
 	@Size(min = 3, max = 30)
 	private String telecomServiceName;
 
-	private boolean telecomServiceType;
+	private boolean telecomServiceType = false;
 
 	@Min(1)
 	@Max(9999)
@@ -44,17 +44,17 @@ public class TelecomService implements Serializable {
 
 	@Min(0)
 	@Max(9999)
-	private int operatorServiceId;
+	private int operatorServiceId = 0;
 
 	@Min(0)
 	@Max(9999)
-	private int operatorPackageId;
+	private int operatorPackageId = 0;
 
 	private String imageUrl;
 
 	@Min(1)
 	@Max(5)
-	private float rating;
+	private float rating = 0;
 
 	@ManyToOne
 	@JoinColumn(name = "productid")

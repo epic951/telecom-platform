@@ -58,7 +58,7 @@ public class OperatorService {
 		Operator temp = null;
 		if (status.toLowerCase().equals("update")) {
 			temp = operatorRepository.findOne((long) o.getOperatorId());
-		} else if (status.toLowerCase().equals("Create")) {
+		} else if (status.toLowerCase().equals("create")) {
 			temp = TestUtilities.createTestOperator(0, null, "Default", 1);
 		}
 		temp = TestUtilities.createTestOperator(o.getOperatorId(), o.getOperatorName(),

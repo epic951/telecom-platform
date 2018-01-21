@@ -76,7 +76,7 @@ public class ProductService {
 		Product temp = null;
 		if (status.toLowerCase().equals("update")) {
 			temp = productRepository.findOne((long) p.getProductId());
-		} else if (status.toLowerCase().equals("Create")) {
+		} else if (status.toLowerCase().equals("create")) {
 			temp = TestUtilities.createTestProduct(0, null, "Default", 1, 1, 1);
 		}
 		temp = TestUtilities.createTestProduct(p.getProductId(), p.getProductName(),
