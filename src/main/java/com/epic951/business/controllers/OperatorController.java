@@ -26,22 +26,24 @@ import com.epic951.data.entities.Operator;
 public class OperatorController {
 
 	private ResponseEntity<String> response;
+	private ResponseEntity<List<Operator>> listResponse;
+	private ResponseEntity<Operator> singleResponse;
 
 	@Autowired
 	private OperatorService operatorService;
 
 	@GetMapping(value = "/getoperators")
-	public ResponseEntity<String> getAllOperator() {
+	public ResponseEntity<List<Operator>> getAllOperator() {
 		List<Operator> body = operatorService.getAllOperators();
-		response = new ResponseEntity<String>(body.toString(), HttpStatus.OK);
-		return response;
+		listResponse = new ResponseEntity<List<Operator>>(body, HttpStatus.OK);
+		return listResponse;
 	}
 
 	@GetMapping(value = "/findoperator/{id}")
-	public ResponseEntity<String> findOpratorById(@PathVariable(value = "id") int id) {
+	public ResponseEntity<Operator> findOpratorById(@PathVariable(value = "id") int id) {
 		Operator body = operatorService.findOperatorById(id);
-		response = new ResponseEntity<String>(body.toString(), HttpStatus.OK);
-		return response;
+		singleResponse = new ResponseEntity<Operator>(body, HttpStatus.OK);
+		return singleResponse;
 	}
 
 	@PostMapping(value = "/addoperator")
