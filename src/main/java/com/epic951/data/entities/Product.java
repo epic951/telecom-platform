@@ -35,13 +35,13 @@ public class Product implements Serializable {
 	@Size(min = 2, max = 30)
 	private String productDescription;
 
-	@Min(1)
+	@Min(0)
 	@Max(9999)
-	private int minPrice;
+	private int minPrice = 0;
 
-	@Min(1)
+	@Min(0)
 	@Max(9999)
-	private int maxPrice;
+	private int maxPrice = 0;
 
 	private String imageUrl;
 
