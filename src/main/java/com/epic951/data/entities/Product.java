@@ -32,22 +32,22 @@ public class Product implements Serializable {
 	@Size(min = 3, max = 30)
 	private String productName;
 
-	@Size(min = 2, max = 30)
+	@Size(max = 30)
 	private String productDescription;
 
 	@Min(0)
 	@Max(9999)
-	private int minPrice = 0;
+	private int minPrice;
 
 	@Min(0)
 	@Max(9999)
-	private int maxPrice = 0;
+	private int maxPrice;
 
 	private String imageUrl;
 
 	@Min(1)
 	@Max(5)
-	private float rating = 1;
+	private float rating;
 
 	@OneToMany(mappedBy = "product")
 	private List<TelecomService> telecomServices;

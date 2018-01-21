@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.epic951.data.entities.Operator;
 import com.epic951.data.repositories.OperatorRepository;
+import com.epic951.utilities.TestUtilities;
 
 @Service
 public class OperatorService {
@@ -33,12 +34,12 @@ public class OperatorService {
 		boolean alreadyAdded = operatorRepository.findByOperatorName(o.getOperatorName()).isPresent();
 		boolean viableForUpdate = operatorRepository.findByOperatorId(o.getOperatorId()).isPresent();
 		if (!alreadyAdded && o.getOperatorName() != null && !o.getOperatorName().isEmpty()) {
-			newOperator = operatorRepository.save(o);
+			newOperator = operatorRepository.save(initializeOperator(o, "Create"));
 			System.err.println(newOperator.toString());
 			return newOperator;
 		}
 		if (viableForUpdate) {
-			newOperator = operatorRepository.save(o);
+			newOperator = operatorRepository.save(initializeOperator(o, "Update"));
 		}
 		return newOperator;
 	}
@@ -51,6 +52,20 @@ public class OperatorService {
 		List<Operator> operators = new ArrayList<>();
 		operatorRepository.findAll().forEach(operators::add);
 		return operators;
+	}
+
+	private Operator initializeOperator(Operator o, String status) {
+		Operator temp = null;
+		if (status.toLowerCase().equals("update")) {
+			temp = operatorRepository.findOne((long) o.getOperatorId());
+		} else if (status.toLowerCase().equals("Create")) {
+			temp = TestUtilities.createTestOperator(0, null, "Default", 1);
+		}
+		temp = TestUtilities.createTestOperator(o.getOperatorId(), o.getOperatorName(),
+				(o.getOperatorCountry() == null || o.getOperatorCountry().isEmpty() ? temp.getOperatorCountry()
+						: o.getOperatorCountry()),
+				(o.getRating() <= 0 ? temp.getRating() : o.getRating()));
+		return temp;
 	}
 
 }

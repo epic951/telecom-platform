@@ -17,8 +17,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Value;
-
 @Entity
 @Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "telecomserviceid" }) })
 public class TelecomService implements Serializable {
@@ -46,17 +44,17 @@ public class TelecomService implements Serializable {
 
 	@Min(0)
 	@Max(9999)
-	private int operatorServiceId = 0;
+	private int operatorServiceId;
 
 	@Min(0)
 	@Max(9999)
-	private int operatorPackageId = 0;
+	private int operatorPackageId;
 
 	private String imageUrl;
 
 	@Min(1)
 	@Max(5)
-	private float rating = 1;
+	private float rating;
 
 	@ManyToOne
 	@JoinColumn(name = "productid")

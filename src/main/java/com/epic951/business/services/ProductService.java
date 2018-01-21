@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.epic951.data.entities.Product;
 import com.epic951.data.repositories.ProductRepository;
+import com.epic951.utilities.TestUtilities;
 
 @Service
 public class ProductService {
@@ -35,11 +36,11 @@ public class ProductService {
 		// viableForUpdate + " values "
 		// + p.getProductId() + " " + p.getProductName());
 		if (!alreadyAdded && p.getProductName() != null && !p.getProductName().isEmpty()) {
-			newProduct = productRepository.save(p);
+			newProduct = productRepository.save(initializeProduct(p, "Create"));
 			return newProduct;
 		}
 		if (viableForUpdate) {
-			newProduct = productRepository.save(p);
+			newProduct = productRepository.save(initializeProduct(p, "Update"));
 		}
 		return newProduct;
 	}
@@ -69,5 +70,21 @@ public class ProductService {
 
 	public Integer deleteProductByProductName(String productName) {
 		return productRepository.deleteByProductName(productName);
+	}
+
+	private Product initializeProduct(Product p, String status) {
+		Product temp = null;
+		if (status.toLowerCase().equals("update")) {
+			temp = productRepository.findOne((long) p.getProductId());
+		} else if (status.toLowerCase().equals("Create")) {
+			temp = TestUtilities.createTestProduct(0, null, "Default", 1, 1, 1);
+		}
+		temp = TestUtilities.createTestProduct(p.getProductId(), p.getProductName(),
+				(p.getProductDescription() == null || p.getProductDescription().isEmpty() ? temp.getProductDescription()
+						: p.getProductDescription()),
+				(p.getMinPrice() <= 0 ? temp.getMinPrice() : p.getMinPrice()),
+				(p.getMaxPrice() <= 0 ? temp.getMaxPrice() : p.getMaxPrice()),
+				(p.getRating() <= 0 ? temp.getRating() : p.getRating()));
+		return temp;
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.epic951.data.entities.TelecomService;
 import com.epic951.data.repositories.TelecomServiceRepository;
+import com.epic951.utilities.TestUtilities;
 
 @Service
 public class TelecomServiceHandler {
@@ -32,26 +33,26 @@ public class TelecomServiceHandler {
 			switch (s.getOperatorName().toLowerCase()) {
 			case "vodafone":
 				if (s.getOperatorPackageId() > 0 && s.getOperatorServiceId() > 0) {
-					newService = serviceRepository.save(s);
+					newService = serviceRepository.save(initializeProduct(s, "Create"));
 				}
 				break;
 			case "etisalat":
 				if (s.getOperatorPackageId() > 0) {
-					newService = serviceRepository.save(s);
+					newService = serviceRepository.save(initializeProduct(s, "Create"));
 				}
 				break;
 			case "orange":
 				if (s.getOperatorServiceId() > 0) {
-					newService = serviceRepository.save(s);
+					newService = serviceRepository.save(initializeProduct(s, "Create"));
 				}
 				break;
 			default:
-				newService = serviceRepository.save(s);
+				newService = serviceRepository.save(initializeProduct(s, "Create"));
 				break;
 			}
 		}
 		if (viableForUpdate) {
-			newService = serviceRepository.save(s);
+			newService = serviceRepository.save(initializeProduct(s, "Update"));
 		}
 		return newService;
 	}
@@ -68,6 +69,22 @@ public class TelecomServiceHandler {
 		List<TelecomService> services = new ArrayList<>();
 		serviceRepository.findAll().forEach(services::add);
 		return services;
+	}
+
+	private TelecomService initializeProduct(TelecomService s, String status) {
+		TelecomService temp = null;
+		if (status.toLowerCase().equals("update")) {
+			temp = serviceRepository.findOne((long) s.getTelecomServiceId());
+		} else if (status.toLowerCase().equals("Create")) {
+			temp = TestUtilities.createTestTelecomService(0, null, null, false, 0, 1, 1, 1);
+		}
+		temp = TestUtilities.createTestTelecomService(s.getTelecomServiceId(), s.getOperatorName(),
+				s.getTelecomServiceName(), s.isTelecomServiceType(),
+				(s.getOperatorId() <= 0 ? temp.getOperatorId() : s.getOperatorId()),
+				(s.getOperatorServiceId() <= 0 ? temp.getOperatorServiceId() : s.getOperatorServiceId()),
+				(s.getOperatorPackageId() <= 0 ? temp.getOperatorPackageId() : s.getOperatorPackageId()),
+				(s.getRating() <= 0 ? temp.getRating() : s.getRating()));
+		return temp;
 	}
 
 }
