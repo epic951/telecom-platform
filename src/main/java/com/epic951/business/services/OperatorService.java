@@ -44,8 +44,13 @@ public class OperatorService {
 		return newOperator;
 	}
 
-	public Integer deleteOperatorByOperatorName(String name) {
-		return operatorRepository.deleteByOperatorName(name);
+	public Integer deleteOperator(Operator o) {
+		if (o.getOperatorName() != null && !o.getOperatorName().isEmpty()) {
+			return operatorRepository.deleteByOperatorName(o.getOperatorName());
+		} else if (o.getOperatorId() > 0) {
+			return operatorRepository.deleteByOperatorId(o.getOperatorId());
+		}
+		return 0;
 	}
 
 	public List<Operator> getAllOperators() {

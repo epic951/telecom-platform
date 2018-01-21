@@ -56,9 +56,9 @@ public class OperatorController {
 	}
 
 	@Transactional
-	@DeleteMapping(value = "/deleteoperatorbyname")
+	@DeleteMapping(value = "/deleteoperator")
 	public ResponseEntity<String> processDeleteOperatorByOperatorName(@RequestBody Operator o) {
-		if (operatorService.deleteOperatorByOperatorName(o.getOperatorName()) == 1) {
+		if (operatorService.deleteOperator(o) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
 		return HTTPUtilities.handleResponse("Failure");

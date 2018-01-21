@@ -68,8 +68,13 @@ public class ProductService {
 		return products;
 	}
 
-	public Integer deleteProductByProductName(String productName) {
-		return productRepository.deleteByProductName(productName);
+	public Integer deleteProduct(Product p) {
+		if (p.getProductName() != null && !p.getProductName().isEmpty()) {
+			return productRepository.deleteByProductName(p.getProductName());
+		} else if (p.getProductId() > 0) {
+			return productRepository.deleteByProductId(p.getProductId());
+		}
+		return 0;
 	}
 
 	private Product initializeProduct(Product p, String status) {

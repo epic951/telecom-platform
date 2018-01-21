@@ -43,8 +43,13 @@ public class TelecomServiceHandler {
 		return serviceRepository.findByTelecomServiceId(id).get();
 	}
 
-	public Integer deleteServiceByTelecomServiceName(String name) {
-		return serviceRepository.deleteByTelecomServiceName(name);
+	public Integer deleteService(TelecomService s) {
+		if (s.getTelecomServiceName() != null && !s.getTelecomServiceName().isEmpty()) {
+			return serviceRepository.deleteByTelecomServiceName(s.getTelecomServiceName());
+		} else if (s.getTelecomServiceId() > 0) {
+			return serviceRepository.deleteByTelecomServiceId(s.getTelecomServiceId());
+		}
+		return 0;
 	}
 
 	public List<TelecomService> getAllTelecomServices() {

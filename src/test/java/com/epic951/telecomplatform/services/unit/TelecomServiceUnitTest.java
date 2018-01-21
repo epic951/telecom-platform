@@ -74,7 +74,7 @@ public class TelecomServiceUnitTest {
 		when(mockedTelecomServiceRepository.save(any(TelecomService.class))).thenReturn(roaming);
 
 		TelecomService persisted = mockedTelecomServiceHandler.addOrUpdateService(roaming);
-		int result = mockedTelecomServiceHandler.deleteServiceByTelecomServiceName(persisted.getTelecomServiceName());
+		int result = mockedTelecomServiceHandler.deleteService(persisted);
 		assertEquals(1, result);
 	}
 }

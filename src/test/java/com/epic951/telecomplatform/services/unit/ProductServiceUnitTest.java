@@ -87,7 +87,7 @@ public class ProductServiceUnitTest {
 		when(mockedProductRepository.save(any(Product.class))).thenReturn(sms);
 
 		Product persisted = mockedProductService.addOrUpdateProduct(sms);
-		int result = mockedProductService.deleteProductByProductName(persisted.getProductName());
+		int result = mockedProductService.deleteProduct(persisted);
 		assertEquals(1, result);
 	}
 }

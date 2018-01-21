@@ -56,9 +56,9 @@ public class ProductController {
 	}
 
 	@Transactional
-	@DeleteMapping(value = "/deleteproductbyname")
+	@DeleteMapping(value = "/deleteproduct")
 	public ResponseEntity<String> processDeleteProductByProductName(@RequestBody Product p) {
-		if (productService.deleteProductByProductName(p.getProductName()) == 1) {
+		if (productService.deleteProduct(p) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
 		return HTTPUtilities.handleResponse("Failure");

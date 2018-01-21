@@ -57,9 +57,9 @@ public class TelecomServiceController {
 	}
 
 	@Transactional
-	@DeleteMapping(value = "/deleteservicebyname")
+	@DeleteMapping(value = "/deleteservice")
 	public ResponseEntity<String> processDeleteTelecomService(@RequestBody TelecomService s) {
-		if (telecomService.deleteServiceByTelecomServiceName(s.getTelecomServiceName()) == 1) {
+		if (telecomService.deleteService(s) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
 		return HTTPUtilities.handleResponse("Failure");

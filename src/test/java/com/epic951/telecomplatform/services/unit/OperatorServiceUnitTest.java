@@ -73,7 +73,7 @@ public class OperatorServiceUnitTest {
 		when(mockedOperatorRepository.save(any(Operator.class))).thenReturn(etisalat);
 
 		Operator persisted = mockedOperatorService.addOrUpdateOperator(etisalat);
-		int result = mockedOperatorService.deleteOperatorByOperatorName(persisted.getOperatorName());
+		int result = mockedOperatorService.deleteOperator(persisted);
 		assertEquals(1, result);
 	}
 
