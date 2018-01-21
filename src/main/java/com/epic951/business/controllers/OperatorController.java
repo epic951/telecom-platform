@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,43 +25,55 @@ import com.epic951.data.entities.Operator;
 @RequestMapping(value = "/api")
 public class OperatorController {
 
+	private ResponseEntity<String> response;
+
 	@Autowired
 	private OperatorService operatorService;
 
 	@GetMapping(value = "/getoperators")
-	public List<Operator> getAllOperator() {
-		return operatorService.getAllOperators();
+	public ResponseEntity<String> getAllOperator() {
+		List<Operator> body = operatorService.getAllOperators();
+		response = new ResponseEntity<String>(body.toString(), HttpStatus.OK);
+		return response;
 	}
 
 	@GetMapping(value = "/findoperator/{id}")
-	public Operator findOpratorById(@PathVariable(value = "id") int id) {
-		return operatorService.findOperatorById(id);
+	public ResponseEntity<String> findOpratorById(@PathVariable(value = "id") int id) {
+		Operator body = operatorService.findOperatorById(id);
+		response = new ResponseEntity<String>(body.toString(), HttpStatus.OK);
+		return response;
 	}
 
 	@PostMapping(value = "/addoperator")
-	public String processAddOperator(@RequestBody Operator o) {
+	public ResponseEntity<String> processAddOperator(@RequestBody Operator o) {
 		Operator newOperator = operatorService.addOrUpdateOperator(o);
 		if (newOperator != null) {
-			return "{success}";
+			response = new ResponseEntity<String>("Success", HttpStatus.OK);
+			return response;
 		}
-		return "{failure}";
+		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
+		return response;
 	}
 
 	@Transactional
 	@DeleteMapping(value = "/deleteoperatorbyname")
-	public String processDeleteOperatorByOperatorName(@RequestBody Operator o) {
+	public ResponseEntity<String> processDeleteOperatorByOperatorName(@RequestBody Operator o) {
 		if (operatorService.deleteOperatorByOperatorName(o.getOperatorName()) == 1) {
-			return "{success}";
+			response = new ResponseEntity<String>("Success", HttpStatus.OK);
+			return response;
 		}
-		return "{failure}";
+		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
+		return response;
 	}
 
 	@Transactional
 	@PutMapping(value = "/updateoperator")
-	public String processUpdateOperator(@RequestBody Operator o) {
+	public ResponseEntity<String> processUpdateOperator(@RequestBody Operator o) {
 		if (operatorService.addOrUpdateOperator(o) != null) {
-			return "{success}";
+			response = new ResponseEntity<String>("Success", HttpStatus.OK);
+			return response;
 		}
-		return "{failure}";
+		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
+		return response;
 	}
 }

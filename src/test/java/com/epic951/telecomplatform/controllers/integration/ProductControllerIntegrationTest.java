@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.epic951.business.controllers.ProductController;
@@ -33,10 +34,10 @@ public class ProductControllerIntegrationTest {
 				121);
 
 		// POST the new product we just added and check the outcome
-		String outcome = productController.processAddProduct(mms);
+		ResponseEntity<String> outcome = productController.processAddProduct(mms);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome, is(equalTo("success")));
+		assertThat(outcome.getBody(), is(equalTo("Success")));
 	}
 
 	@Test
@@ -45,9 +46,9 @@ public class ProductControllerIntegrationTest {
 		Product streaming = TestUtilities.createTestProduct(null, 9238, "Youtube", 234, 12);
 
 		// POST the new product we just added and check the outcome
-		String outcome = productController.processAddProduct(streaming);
+		ResponseEntity<String> outcome = productController.processAddProduct(streaming);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome, is(equalTo("failure")));
+		assertThat(outcome.getBody(), is(equalTo("Failure")));
 	}
 }

@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.epic951.business.controllers.TelecomServiceController;
@@ -32,10 +33,10 @@ public class TelecomServiceIntegrationTest {
 				6585, 799);
 
 		// POST the new service we just added and check the outcome
-		String outcome = telecomServiceController.processAddService(gpsTracking);
+		ResponseEntity<String> outcome = telecomServiceController.processAddService(gpsTracking);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome, is(equalTo("success")));
+		assertThat(outcome.getBody(), is(equalTo("Success")));
 	}
 
 	@Test
@@ -44,9 +45,9 @@ public class TelecomServiceIntegrationTest {
 		TelecomService gpsTracking = TestUtilities.createTestTelecomService(1, "Zain", null, false, 8, 9, 4);
 
 		// POST the new service we just added and check the outcome
-		String outcome = telecomServiceController.processAddService(gpsTracking);
+		ResponseEntity<String> outcome = telecomServiceController.processAddService(gpsTracking);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome, is(equalTo("failure")));
+		assertThat(outcome.getBody(), is(equalTo("Failure")));
 	}
 }

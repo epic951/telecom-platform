@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.epic951.business.controllers.OperatorController;
@@ -32,10 +33,10 @@ public class OperatorControllerIntegrationTest {
 		Operator zain = TestUtilities.createTestOperator(7479, "UAE", "Zain");
 
 		// POST the new operator we just added and check the outcome
-		String outcome = operatorController.processAddOperator(zain);
+		ResponseEntity<String> outcome = operatorController.processAddOperator(zain);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome, is(equalTo("success")));
+		assertThat(outcome.getBody(), is(equalTo("Success")));
 	}
 
 	@Test
@@ -44,9 +45,9 @@ public class OperatorControllerIntegrationTest {
 		Operator zain = TestUtilities.createTestOperator(7479, "UAE", null);
 
 		// POST the new operator we just added and check the outcome
-		String outcome = operatorController.processAddOperator(zain);
+		ResponseEntity<String> outcome = operatorController.processAddOperator(zain);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome, is(equalTo("failure")));
+		assertThat(outcome.getBody(), is(equalTo("Failure")));
 	}
 }
