@@ -40,27 +40,27 @@ public class ProductController {
 	public String processAddProduct(@RequestBody Product p) {
 		Product newProduct = productService.addOrUpdateProduct(p);
 		if (newProduct != null) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 
 	@Transactional
 	@DeleteMapping(value = "/deleteproductbyname")
 	public String processDeleteProductByProductName(@RequestBody Product p) {
 		if (productService.deleteProductByProductName(p.getProductName()) == 1) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 
 	@Transactional
 	@PutMapping(value = "/updateproduct")
 	public String processUpdateProduct(@RequestBody Product p) {
 		if (productService.addOrUpdateProduct(p) != null) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 
 }

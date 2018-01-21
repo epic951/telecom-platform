@@ -40,26 +40,26 @@ public class OperatorController {
 	public String processAddOperator(@RequestBody Operator o) {
 		Operator newOperator = operatorService.addOrUpdateOperator(o);
 		if (newOperator != null) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 
 	@Transactional
 	@DeleteMapping(value = "/deleteoperatorbyname")
 	public String processDeleteOperatorByOperatorName(@RequestBody Operator o) {
 		if (operatorService.deleteOperatorByOperatorName(o.getOperatorName()) == 1) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 
 	@Transactional
 	@PutMapping(value = "/updateoperator")
 	public String processUpdateOperator(@RequestBody Operator o) {
 		if (operatorService.addOrUpdateOperator(o) != null) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 }

@@ -41,27 +41,27 @@ public class TelecomServiceController {
 		System.err.println(s.getTelecomServiceName());
 		TelecomService newService = telecomService.addOrUpdateService(s);
 		if (newService != null) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 
 	@Transactional
 	@DeleteMapping(value = "/deleteservicebyname")
 	public String processDeleteTelecomService(@RequestBody TelecomService s) {
 		if (telecomService.deleteServiceByTelecomServiceName(s.getTelecomServiceName()) == 1) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 
 	@Transactional
 	@PutMapping(value = "/updateservice")
 	public String processUpdateTelecomService(@RequestBody TelecomService s) {
 		if (telecomService.addOrUpdateService(s) != null) {
-			return "success";
+			return "{success}";
 		}
-		return "failure";
+		return "{failure}";
 	}
 
 }
