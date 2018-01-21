@@ -31,29 +31,10 @@ public class TelecomServiceHandler {
 		boolean viableForUpdate = serviceRepository.findByTelecomServiceId(s.getTelecomServiceId()).isPresent();
 		if (!alreadyAdded && s.getTelecomServiceName() != null && !s.getTelecomServiceName().isEmpty()
 				&& s.getOperatorName() != null && !s.getOperatorName().isEmpty() && s.getOperatorId() > 0) {
-			switch (s.getOperatorName().toLowerCase()) {
-			case "vodafone":
-				if (s.getOperatorPackageId() > 0 && s.getOperatorServiceId() > 0) {
-					newService = serviceRepository.save(initializeProduct(s, "Create"));
-				}
-				break;
-			case "etisalat":
-				if (s.getOperatorPackageId() > 0) {
-					newService = serviceRepository.save(initializeProduct(s, "Create"));
-				}
-				break;
-			case "orange":
-				if (s.getOperatorServiceId() > 0) {
-					newService = serviceRepository.save(initializeProduct(s, "Create"));
-				}
-				break;
-			default:
-				newService = serviceRepository.save(initializeProduct(s, "Create"));
-				break;
-			}
+			newService = validateParameters(s, "Create");
 		}
 		if (viableForUpdate) {
-			newService = serviceRepository.save(initializeProduct(s, "Update"));
+			newService = validateParameters(s, "Update");
 		}
 		return newService;
 	}
@@ -89,4 +70,28 @@ public class TelecomServiceHandler {
 		return temp;
 	}
 
+	private TelecomService validateParameters(TelecomService s, String status) {
+		TelecomService temp = null;
+		switch (s.getOperatorName().toLowerCase()) {
+		case "vodafone":
+			if (s.getOperatorPackageId() > 0 && s.getOperatorServiceId() > 0) {
+				temp = serviceRepository.save(initializeProduct(s, status));
+			}
+			break;
+		case "etisalat":
+			if (s.getOperatorPackageId() > 0) {
+				temp = serviceRepository.save(initializeProduct(s, status));
+			}
+			break;
+		case "orange":
+			if (s.getOperatorServiceId() > 0) {
+				temp = serviceRepository.save(initializeProduct(s, status));
+			}
+			break;
+		default:
+			temp = serviceRepository.save(initializeProduct(s, status));
+			break;
+		}
+		return temp;
+	}
 }
