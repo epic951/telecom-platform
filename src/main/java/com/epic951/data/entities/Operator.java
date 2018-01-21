@@ -39,7 +39,7 @@ public class Operator implements Serializable {
 
 	@Min(1)
 	@Max(5)
-	private float rating;
+	private float rating = 1;
 
 	@OneToMany(mappedBy = "operator")
 	private List<TelecomService> telecomServices;

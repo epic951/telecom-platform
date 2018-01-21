@@ -29,18 +29,18 @@ public class TelecomServiceHandler {
 		boolean alreadyAdded = serviceRepository.findByTelecomServiceName(s.getTelecomServiceName()).isPresent();
 		boolean viableForUpdate = serviceRepository.findByTelecomServiceId(s.getTelecomServiceId()).isPresent();
 		if (!alreadyAdded && s.getTelecomServiceName() != null && !s.getTelecomServiceName().isEmpty()) {
-			switch (s.getOperatorName()) {
-			case "Vodafone":
+			switch (s.getOperatorName().toLowerCase()) {
+			case "vodafone":
 				if (s.getOperatorPackageId() > 0 && s.getOperatorServiceId() > 0) {
 					newService = serviceRepository.save(s);
 				}
 				break;
-			case "Etisalat":
+			case "etisalat":
 				if (s.getOperatorPackageId() > 0) {
 					newService = serviceRepository.save(s);
 				}
 				break;
-			case "Orange":
+			case "orange":
 				if (s.getOperatorServiceId() > 0) {
 					newService = serviceRepository.save(s);
 				}

@@ -44,20 +44,19 @@ public class TelecomService implements Serializable {
 	@Size(min = 3, max = 30)
 	private String operatorName;
 
-	@Min(1)
+	@Min(0)
 	@Max(9999)
-	private int operatorServiceId;
+	private int operatorServiceId = 0;
 
-	@Min(1)
+	@Min(0)
 	@Max(9999)
-	private int operatorPackageId;
+	private int operatorPackageId = 0;
 
 	private String imageUrl;
 
-	@Value(value = "${rating:1}")
 	@Min(1)
 	@Max(5)
-	private float rating;
+	private float rating = 1;
 
 	@ManyToOne
 	@JoinColumn(name = "productid")

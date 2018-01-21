@@ -44,10 +44,10 @@ public class Product implements Serializable {
 	private int maxPrice;
 
 	private String imageUrl;
-	
+
 	@Min(1)
 	@Max(5)
-	private float rating;
+	private float rating = 1;
 
 	@OneToMany(mappedBy = "product")
 	private List<TelecomService> telecomServices;
