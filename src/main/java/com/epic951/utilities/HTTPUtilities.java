@@ -13,7 +13,7 @@ public class HTTPUtilities {
 
 	public static final ResponseEntity<String> handleResponse(String status) {
 		ResponseEntity<String> response = null;
-		switch ("Success") {
+		switch (status) {
 		case "Success":
 			response = new ResponseEntity<String>("Success", HttpStatus.OK);
 			break;

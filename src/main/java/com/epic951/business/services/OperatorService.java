@@ -40,7 +40,6 @@ public class OperatorService {
 		if (viableForUpdate) {
 			newOperator = operatorRepository.save(o);
 		}
-		System.err.println(newOperator.toString());
 		return newOperator;
 	}
 

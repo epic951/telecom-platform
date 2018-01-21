@@ -47,7 +47,6 @@ public class ProductControllerIntegrationTest {
 
 		// POST the new product we just added and check the outcome
 		ResponseEntity<String> outcome = productController.processAddProduct(streaming);
-		System.err.println("Test " + outcome.getBody());
 		// Assert that the outcome is as expected
 		assertThat(outcome.getBody(), is(equalTo("Failure")));
 	}

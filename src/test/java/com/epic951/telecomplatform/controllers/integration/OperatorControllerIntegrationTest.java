@@ -30,7 +30,7 @@ public class OperatorControllerIntegrationTest {
 	public void testAddOperator() {
 
 		// Create an Operator
-		Operator zain = TestUtilities.createTestOperator(7479, "UAE", "Zain", 1);
+		Operator zain = TestUtilities.createTestOperator(7479, "STC", "UAE", 1);
 
 		// POST the new operator we just added and check the outcome
 		ResponseEntity<String> outcome = operatorController.processAddOperator(zain);
@@ -42,7 +42,7 @@ public class OperatorControllerIntegrationTest {
 	@Test
 	public void testAddOperatorWithoutName() {
 		// Create an Operator
-		Operator zain = TestUtilities.createTestOperator(7479, "UAE", null, 1);
+		Operator zain = TestUtilities.createTestOperator(7479, null, "UAE", 1);
 
 		// POST the new operator we just added and check the outcome
 		ResponseEntity<String> outcome = operatorController.processAddOperator(zain);
