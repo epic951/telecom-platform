@@ -76,7 +76,7 @@ public class TelecomServiceHandler {
 		TelecomService temp = null;
 		System.err.println(s.toString());
 		if (status.toLowerCase().equals("update")) {
-			temp = serviceRepository.findOne((long) s.getTelecomServiceId());
+			temp = serviceRepository.findByTelecomServiceId(s.getTelecomServiceId()).get();
 		} else if (status.toLowerCase().equals("create")) {
 			temp = TestUtilities.createTestTelecomService(0, "", "", false, 0, 1, 1, 1);
 		}

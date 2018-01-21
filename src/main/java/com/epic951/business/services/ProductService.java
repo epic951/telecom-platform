@@ -75,7 +75,7 @@ public class ProductService {
 	private Product initializeProduct(Product p, String status) {
 		Product temp = null;
 		if (status.toLowerCase().equals("update")) {
-			temp = productRepository.findOne((long) p.getProductId());
+			temp = productRepository.findByProductId(p.getProductId()).get();
 		} else if (status.toLowerCase().equals("create")) {
 			temp = TestUtilities.createTestProduct(0, null, "Default", 1, 1, 1);
 		}
