@@ -19,62 +19,58 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epic951.business.services.ProductService;
 import com.epic951.data.entities.Product;
+import com.epic951.utilities.HTTPUtilities;
 
 @RestController
 @ResponseBody
 @RequestMapping(value = "/api")
 public class ProductController {
 
-	private ResponseEntity<String> response;
+	private ResponseEntity<List<Product>> listResponse;
+	private ResponseEntity<Product> singleResponse;
 
 	@Autowired
 	private ProductService productService;
 
 	@GetMapping(value = "/getproducts")
-	public ResponseEntity<String> getAllProducts() {
+	public ResponseEntity<List<Product>> getAllProducts() {
 		List<Product> body = productService.getAllProducts();
-		response = new ResponseEntity<String>(body.toString(), HttpStatus.OK);
-		return response;
+		listResponse = new ResponseEntity<List<Product>>(body, HttpStatus.OK);
+		return listResponse;
 	}
 
 	@GetMapping(value = "/findproduct/{id}")
-	public ResponseEntity<String> findProductById(@PathVariable(value = "id") int id) {
+	public ResponseEntity<Product> findProductById(@PathVariable(value = "id") int id) {
 		Product body = productService.findProductById(id);
-		response = new ResponseEntity<String>(body.toString(), HttpStatus.OK);
-		return response;
+		singleResponse = new ResponseEntity<Product>(body, HttpStatus.OK);
+		return singleResponse;
 	}
 
 	@PostMapping(value = "/addproduct")
 	public ResponseEntity<String> processAddProduct(@RequestBody Product p) {
 		Product newProduct = productService.addOrUpdateProduct(p);
 		if (newProduct != null) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 
 	@Transactional
 	@DeleteMapping(value = "/deleteproductbyname")
 	public ResponseEntity<String> processDeleteProductByProductName(@RequestBody Product p) {
 		if (productService.deleteProductByProductName(p.getProductName()) == 1) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 
 	@Transactional
 	@PutMapping(value = "/updateproduct")
 	public ResponseEntity<String> processUpdateProduct(@RequestBody Product p) {
 		if (productService.addOrUpdateProduct(p) != null) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 
 }

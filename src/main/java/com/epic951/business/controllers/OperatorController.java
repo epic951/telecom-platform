@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epic951.business.services.OperatorService;
 import com.epic951.data.entities.Operator;
+import com.epic951.utilities.HTTPUtilities;
 
 @RestController
 @ResponseBody
 @RequestMapping(value = "/api")
 public class OperatorController {
 
-	private ResponseEntity<String> response;
 	private ResponseEntity<List<Operator>> listResponse;
 	private ResponseEntity<Operator> singleResponse;
 
@@ -50,32 +50,26 @@ public class OperatorController {
 	public ResponseEntity<String> processAddOperator(@RequestBody Operator o) {
 		Operator newOperator = operatorService.addOrUpdateOperator(o);
 		if (newOperator != null) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 
 	@Transactional
 	@DeleteMapping(value = "/deleteoperatorbyname")
 	public ResponseEntity<String> processDeleteOperatorByOperatorName(@RequestBody Operator o) {
 		if (operatorService.deleteOperatorByOperatorName(o.getOperatorName()) == 1) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 
 	@Transactional
 	@PutMapping(value = "/updateoperator")
 	public ResponseEntity<String> processUpdateOperator(@RequestBody Operator o) {
 		if (operatorService.addOrUpdateOperator(o) != null) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 }

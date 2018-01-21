@@ -19,29 +19,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epic951.business.services.TelecomServiceHandler;
 import com.epic951.data.entities.TelecomService;
+import com.epic951.utilities.HTTPUtilities;
 
 @RestController
 @RequestMapping(value = "/api")
 @ResponseBody
 public class TelecomServiceController {
 
-	private ResponseEntity<String> response;
+	private ResponseEntity<List<TelecomService>> listResponse;
+	private ResponseEntity<TelecomService> singleResponse;
 
 	@Autowired
 	private TelecomServiceHandler telecomService;
 
 	@GetMapping(value = "/getservices")
-	public ResponseEntity<String> getAllTelecomServices() {
+	public ResponseEntity<List<TelecomService>> getAllTelecomServices() {
 		List<TelecomService> body = telecomService.getAllTelecomServices();
-		response = new ResponseEntity<String>(body.toString(), HttpStatus.OK);
-		return response;
+		listResponse = new ResponseEntity<List<TelecomService>>(body, HttpStatus.OK);
+		return listResponse;
 	}
 
 	@GetMapping(value = "/findservice/{id}")
-	public ResponseEntity<String> findServiceById(@PathVariable(value = "id") int id) {
+	public ResponseEntity<TelecomService> findServiceById(@PathVariable(value = "id") int id) {
 		TelecomService body = telecomService.findServiceById(id);
-		response = new ResponseEntity<String>(body.toString(), HttpStatus.OK);
-		return response;
+		singleResponse = new ResponseEntity<TelecomService>(body, HttpStatus.OK);
+		return singleResponse;
 	}
 
 	@PostMapping(value = "/addservice")
@@ -49,33 +51,27 @@ public class TelecomServiceController {
 		System.err.println(s.getTelecomServiceName());
 		TelecomService newService = telecomService.addOrUpdateService(s);
 		if (newService != null) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 
 	@Transactional
 	@DeleteMapping(value = "/deleteservicebyname")
 	public ResponseEntity<String> processDeleteTelecomService(@RequestBody TelecomService s) {
 		if (telecomService.deleteServiceByTelecomServiceName(s.getTelecomServiceName()) == 1) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 
 	@Transactional
 	@PutMapping(value = "/updateservice")
 	public ResponseEntity<String> processUpdateTelecomService(@RequestBody TelecomService s) {
 		if (telecomService.addOrUpdateService(s) != null) {
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
-			return response;
+			return HTTPUtilities.handleResponse("Success");
 		}
-		response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
-		return response;
+		return HTTPUtilities.handleResponse("Failure");
 	}
 
 }
