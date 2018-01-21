@@ -17,8 +17,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Range;
-
 @Entity
 @Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "telecomserviceid" }) })
 public class TelecomService implements Serializable {
@@ -54,7 +52,8 @@ public class TelecomService implements Serializable {
 
 	private String imageUrl;
 
-	@Range(min = 1, max = 5)
+	@Min(1)
+	@Max(5)
 	private float rating;
 
 	@ManyToOne

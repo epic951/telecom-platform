@@ -30,7 +30,7 @@ public class ProductControllerIntegrationTest {
 	public void testAddProduct() {
 
 		// Create a Product
-		Product mms = TestUtilities.createTestProduct("Video-Messaging-Service", 6621, "Video-messaging-service", 435,
+		Product mms = TestUtilities.createTestProduct(6621, "Video-Messaging-Service", "Video-messaging-service", 435,
 				121);
 
 		// POST the new product we just added and check the outcome
@@ -43,7 +43,7 @@ public class ProductControllerIntegrationTest {
 	@Test
 	public void testAddProductWithoutName() {
 
-		Product streaming = TestUtilities.createTestProduct(null, 9238, "Youtube", 234, 12);
+		Product streaming = TestUtilities.createTestProduct(9238, null, "Youtube", 234, 12);
 
 		// POST the new product we just added and check the outcome
 		ResponseEntity<String> outcome = productController.processAddProduct(streaming);

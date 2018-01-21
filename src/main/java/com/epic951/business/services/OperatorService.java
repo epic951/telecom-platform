@@ -34,11 +34,13 @@ public class OperatorService {
 		boolean viableForUpdate = operatorRepository.findByOperatorId(o.getOperatorId()).isPresent();
 		if (!alreadyAdded && o.getOperatorName() != null && !o.getOperatorName().isEmpty()) {
 			newOperator = operatorRepository.save(o);
+			System.err.println(newOperator.toString());
 			return newOperator;
 		}
 		if (viableForUpdate) {
 			newOperator = operatorRepository.save(o);
 		}
+		System.err.println(newOperator.toString());
 		return newOperator;
 	}
 

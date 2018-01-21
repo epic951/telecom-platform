@@ -47,8 +47,8 @@ public class ProductServiceUnitTest {
 
 	@Test
 	public void testFindProduct() {
-		Product sms = TestUtilities.createTestProduct("Silent", 44, "messages", 23, 63);
-		Product mms = TestUtilities.createTestProduct("Loud", 55, "video", 23, 12);
+		Product sms = TestUtilities.createTestProduct(44, "Silent", "messages", 23, 63);
+		Product mms = TestUtilities.createTestProduct(55, "Loud", "video", 23, 12);
 		List<Product> products = new ArrayList<>();
 		products.add(sms);
 		products.add(mms);
@@ -61,8 +61,8 @@ public class ProductServiceUnitTest {
 	public void testAddProduct() {
 
 		// Create a Product
-		Product sms = TestUtilities.createTestProduct("Silent", 44, "messages", 2, 6);
-		Product mms = TestUtilities.createTestProduct("Loud", 55, "video", 2342, 12);
+		Product sms = TestUtilities.createTestProduct(44, "Silent", "messages", 2, 6);
+		Product mms = TestUtilities.createTestProduct(55, "Loud", "video", 2342, 12);
 
 		// stub repository methods
 		when(mockedProductRepository.findByProductId(Mockito.anyInt())).thenReturn(Optional.empty());
@@ -78,7 +78,7 @@ public class ProductServiceUnitTest {
 	@Test
 	public void testDeleteByProductName() {
 		// Create a Product
-		Product sms = TestUtilities.createTestProduct("Silent", 44, "messages", 12, 52);
+		Product sms = TestUtilities.createTestProduct(44, "Silent", "messages", 12, 52);
 
 		// stub repository methods
 		when(mockedProductRepository.deleteByProductName(anyString())).thenReturn(1);

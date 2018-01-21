@@ -28,7 +28,7 @@ public class OperatorServiceIntegrationTest {
 	public void testAddOperator() {
 
 		// Create an Operator
-		Operator orange = TestUtilities.createTestOperator(352, "UAE", "Zain");
+		Operator orange = TestUtilities.createTestOperator(352, "STC", "UAE");
 
 		// Test adding the operator
 		Operator o = operatorService.addOrUpdateOperator(orange);
@@ -38,7 +38,7 @@ public class OperatorServiceIntegrationTest {
 		System.err.println(o.toString());
 		assertNotNull(o);
 		assertNotNull(o.getOperatorId());
-		assertEquals("Zain", o.getOperatorName());
+		assertEquals("STC", o.getOperatorName());
 		System.err.println(o.toString());
 	}
 }

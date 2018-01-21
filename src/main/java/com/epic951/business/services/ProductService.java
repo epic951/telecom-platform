@@ -41,7 +41,6 @@ public class ProductService {
 		if (viableForUpdate) {
 			newProduct = productRepository.save(p);
 		}
-		// System.err.println("service ~~ " + newProduct.toString());
 		return newProduct;
 	}
 

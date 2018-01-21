@@ -6,7 +6,8 @@ import com.epic951.data.entities.TelecomService;
 
 public class TestUtilities {
 
-	public static Product createTestProduct(String productName, int productId, String productDescription,int minPrice,int maxPrice) {
+	public static Product createTestProduct(int productId, String productName, String productDescription, int minPrice,
+			int maxPrice) {
 		Product testProduct = new Product();
 		testProduct.setProductName(productName);
 		testProduct.setProductId(productId);
@@ -16,7 +17,7 @@ public class TestUtilities {
 		return testProduct;
 	}
 
-	public static Operator createTestOperator(int operatorId, String operatorCountry, String operatorName) {
+	public static Operator createTestOperator(int operatorId, String operatorName, String operatorCountry) {
 		Operator testOperator = new Operator();
 		testOperator.setOperatorId(operatorId);
 		testOperator.setOperatorCountry(operatorCountry);
