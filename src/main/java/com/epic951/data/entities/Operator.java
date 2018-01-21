@@ -17,6 +17,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 @Table(name = "operator", uniqueConstraints = { @UniqueConstraint(columnNames = { "operatorid" }) })
 public class Operator implements Serializable {
@@ -29,13 +31,15 @@ public class Operator implements Serializable {
 	private int operatorId;
 
 	@NotNull
-	@Size(min = 2, max = 50)
+	@Size(min = 3, max = 30)
 	private String operatorName;
 
-	@Size(min = 2, max = 50)
+	@Size(min = 3, max = 30)
 	private String operatorCountry;
 
 	private String imageUrl;
+
+	@Range(min = 1, max = 5)
 	private float rating;
 
 	@OneToMany(mappedBy = "operator")

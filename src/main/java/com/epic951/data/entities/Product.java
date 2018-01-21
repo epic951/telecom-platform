@@ -17,6 +17,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 @Table(name = "product", uniqueConstraints = { @UniqueConstraint(columnNames = { "productid" }) })
 public class Product implements Serializable {
@@ -29,10 +31,10 @@ public class Product implements Serializable {
 	private int productId;
 
 	@NotNull
-	@Size(min = 2, max = 50)
+	@Size(min = 3, max = 30)
 	private String productName;
 
-	@Size(min = 2, max = 50)
+	@Size(min = 2, max = 30)
 	private String productDescription;
 
 	@Min(1)
@@ -44,6 +46,8 @@ public class Product implements Serializable {
 	private int maxPrice;
 
 	private String imageUrl;
+	
+	@Range(min = 1, max = 5)
 	private float rating;
 
 	@OneToMany(mappedBy = "product")

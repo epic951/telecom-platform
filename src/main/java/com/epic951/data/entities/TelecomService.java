@@ -17,6 +17,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 @Table(name = "telecomservice", uniqueConstraints = { @UniqueConstraint(columnNames = { "telecomserviceid" }) })
 public class TelecomService implements Serializable {
@@ -29,7 +31,7 @@ public class TelecomService implements Serializable {
 	private int telecomServiceId;
 
 	@NotNull
-	@Size(min = 3, max = 15)
+	@Size(min = 3, max = 30)
 	private String telecomServiceName;
 
 	private boolean telecomServiceType;
@@ -39,7 +41,7 @@ public class TelecomService implements Serializable {
 	private int operatorId;
 
 	@NotNull
-	@Size(min = 2, max = 50)
+	@Size(min = 3, max = 30)
 	private String operatorName;
 
 	@Min(1)
@@ -52,11 +54,12 @@ public class TelecomService implements Serializable {
 
 	private String imageUrl;
 
+	@Range(min = 1, max = 5)
+	private float rating;
+
 	@ManyToOne
 	@JoinColumn(name = "productid")
 	private Product product;
-
-	private float rating;
 
 	public TelecomService() {
 	}
