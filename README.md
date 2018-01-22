@@ -12,5 +12,5 @@ the credentials are static (username: admin , password: admin)<br>
 Refrain from running all the test packages simultaneously as that would push the app to use more than the maximum amount of connections allowed for the database per Heroku
 
 You may test the API endpoints via a Postman Collection as well on the following link<br>
-https://www.getpostman.com/collections/aaf8a8ed49564ad3634c
-or directly by pressing    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/aaf8a8ed49564ad3634c)
+https://www.getpostman.com/collections/b737b563af754da4efa3
+or directly by pressing    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b737b563af754da4efa3)
