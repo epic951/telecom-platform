@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.epic951.business.controllers.OperatorController;
 import com.epic951.data.entities.Operator;
+import com.epic951.utilities.HTTPUtilities;
 import com.epic951.utilities.TestUtilities;
 
 @RunWith(SpringRunner.class)
@@ -37,7 +38,7 @@ public class OperatorControllerIntegrationTest {
 		ResponseEntity<String> outcome = operatorController.processAddOperator(zain);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome.getBody(), is(equalTo("Success")));
+		assertThat(outcome, is(equalTo(HTTPUtilities.handleResponse("Success"))));
 	}
 
 	@Test
@@ -49,6 +50,6 @@ public class OperatorControllerIntegrationTest {
 		ResponseEntity<String> outcome = operatorController.processAddOperator(zain);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome.getBody(), is(equalTo("Failure")));
+		assertThat(outcome, is(equalTo(HTTPUtilities.handleResponse("Failure"))));
 	}
 }

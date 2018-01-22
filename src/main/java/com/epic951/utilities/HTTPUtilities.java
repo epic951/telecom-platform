@@ -16,7 +16,7 @@ public class HTTPUtilities {
 	public static final ResponseEntity<String> handleResponse(String status) throws JSONException {
 		ResponseEntity<String> response = null;
 		JSONObject json = new JSONObject();
-		switch (status) {
+		switch (status.toLowerCase()) {
 		case "Success":
 			response = new ResponseEntity<String>(json.put("status", "Success").toString(), HttpStatus.OK);
 			break;

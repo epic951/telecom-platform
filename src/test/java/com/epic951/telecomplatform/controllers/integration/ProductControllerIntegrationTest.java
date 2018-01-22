@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.epic951.business.controllers.ProductController;
 import com.epic951.data.entities.Product;
+import com.epic951.utilities.HTTPUtilities;
 import com.epic951.utilities.TestUtilities;
 
 @RunWith(SpringRunner.class)
@@ -38,7 +39,7 @@ public class ProductControllerIntegrationTest {
 		ResponseEntity<String> outcome = productController.processAddProduct(mms);
 
 		// Assert that the outcome is as expected
-		assertThat(outcome.getBody(), is(equalTo("Success")));
+		assertThat(outcome, is(equalTo(HTTPUtilities.handleResponse("Success"))));
 	}
 
 	@Test
@@ -49,6 +50,6 @@ public class ProductControllerIntegrationTest {
 		// POST the new product we just added and check the outcome
 		ResponseEntity<String> outcome = productController.processAddProduct(streaming);
 		// Assert that the outcome is as expected
-		assertThat(outcome.getBody(), is(equalTo("Failure")));
+		assertThat(outcome, is(equalTo(HTTPUtilities.handleResponse("Failure"))));
 	}
 }
