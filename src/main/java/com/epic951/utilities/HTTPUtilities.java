@@ -15,10 +15,10 @@ public class HTTPUtilities {
 		ResponseEntity<String> response = null;
 		switch (status) {
 		case "Success":
-			response = new ResponseEntity<String>("Success", HttpStatus.OK);
+			response = new ResponseEntity<String>("{" + "status" + ":" + "Success" + "}", HttpStatus.OK);
 			break;
 		case "Failure":
-			response = new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
+			response = new ResponseEntity<String>("{" + "status" + ":" + "Failure" + "}", HttpStatus.BAD_REQUEST);
 			break;
 		default:
 			break;
