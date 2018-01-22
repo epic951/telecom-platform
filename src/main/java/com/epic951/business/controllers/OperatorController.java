@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ public class OperatorController {
 	}
 
 	@PostMapping(value = "/addoperator")
-	public ResponseEntity<String> processAddOperator(@RequestBody Operator o) {
+	public ResponseEntity<String> processAddOperator(@RequestBody Operator o) throws JSONException {
 		Operator newOperator = operatorService.addOrUpdateOperator(o);
 		if (newOperator != null) {
 			return HTTPUtilities.handleResponse("Success");
@@ -57,7 +58,7 @@ public class OperatorController {
 
 	@Transactional
 	@DeleteMapping(value = "/deleteoperator")
-	public ResponseEntity<String> processDeleteOperatorByOperatorName(@RequestBody Operator o) {
+	public ResponseEntity<String> processDeleteOperatorByOperatorName(@RequestBody Operator o) throws JSONException {
 		if (operatorService.deleteOperator(o) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
@@ -66,7 +67,7 @@ public class OperatorController {
 
 	@Transactional
 	@PutMapping(value = "/updateoperator")
-	public ResponseEntity<String> processUpdateOperator(@RequestBody Operator o) {
+	public ResponseEntity<String> processUpdateOperator(@RequestBody Operator o) throws JSONException {
 		if (operatorService.addOrUpdateOperator(o) != null) {
 			return HTTPUtilities.handleResponse("Success");
 		}

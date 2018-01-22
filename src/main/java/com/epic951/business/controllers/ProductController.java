@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ public class ProductController {
 	}
 
 	@PostMapping(value = "/addproduct")
-	public ResponseEntity<String> processAddProduct(@RequestBody Product p) {
+	public ResponseEntity<String> processAddProduct(@RequestBody Product p) throws JSONException {
 		Product newProduct = productService.addOrUpdateProduct(p);
 		if (newProduct != null) {
 			return HTTPUtilities.handleResponse("Success");
@@ -57,7 +58,7 @@ public class ProductController {
 
 	@Transactional
 	@DeleteMapping(value = "/deleteproduct")
-	public ResponseEntity<String> processDeleteProductByProductName(@RequestBody Product p) {
+	public ResponseEntity<String> processDeleteProductByProductName(@RequestBody Product p) throws JSONException {
 		if (productService.deleteProduct(p) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
@@ -66,7 +67,7 @@ public class ProductController {
 
 	@Transactional
 	@PutMapping(value = "/updateproduct")
-	public ResponseEntity<String> processUpdateProduct(@RequestBody Product p) {
+	public ResponseEntity<String> processUpdateProduct(@RequestBody Product p) throws JSONException {
 		if (productService.addOrUpdateProduct(p) != null) {
 			return HTTPUtilities.handleResponse("Success");
 		}

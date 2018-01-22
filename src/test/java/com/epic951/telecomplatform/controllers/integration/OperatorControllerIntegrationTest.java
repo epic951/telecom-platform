@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import javax.transaction.Transactional;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class OperatorControllerIntegrationTest {
 	private OperatorController operatorController;
 
 	@Test
-	public void testAddOperator() {
+	public void testAddOperator() throws JSONException {
 
 		// Create an Operator
 		Operator zain = TestUtilities.createTestOperator(7479, "STC", "UAE", 1);
@@ -40,7 +41,7 @@ public class OperatorControllerIntegrationTest {
 	}
 
 	@Test
-	public void testAddOperatorWithoutName() {
+	public void testAddOperatorWithoutName() throws JSONException {
 		// Create an Operator
 		Operator zain = TestUtilities.createTestOperator(7479, null, "UAE", 1);
 

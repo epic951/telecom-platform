@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import javax.transaction.Transactional;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ProductControllerIntegrationTest {
 	private ProductController productController;
 
 	@Test
-	public void testAddProduct() {
+	public void testAddProduct() throws JSONException {
 
 		// Create a Product
 		Product mms = TestUtilities.createTestProduct(6621, "Video-Messaging-Service", "Video-messaging-service", 435,
@@ -41,7 +42,7 @@ public class ProductControllerIntegrationTest {
 	}
 
 	@Test
-	public void testAddProductWithoutName() {
+	public void testAddProductWithoutName() throws JSONException {
 
 		Product streaming = TestUtilities.createTestProduct(65, null, "Youtube", 7, 88, 2);
 

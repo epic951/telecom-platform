@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import javax.transaction.Transactional;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class TelecomServiceIntegrationTest {
 	private TelecomServiceController telecomServiceController;
 
 	@Test
-	public void testAddService() {
+	public void testAddService() throws JSONException {
 		// Create a service
 		TelecomService gpsTracking = TestUtilities.createTestTelecomService(92934, "Zain", "GPS-tracking", false, 89,
 				6585, 799, 1);
@@ -40,7 +41,7 @@ public class TelecomServiceIntegrationTest {
 	}
 
 	@Test
-	public void testAddServiceWithoutTelecomServiceName() {
+	public void testAddServiceWithoutTelecomServiceName() throws JSONException {
 		// Create a service
 		TelecomService gpsTracking = TestUtilities.createTestTelecomService(1, "Zain", null, false, 8, 9, 4, 1);
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ public class TelecomServiceController {
 	}
 
 	@PostMapping(value = "/addservice")
-	public ResponseEntity<String> processAddService(@RequestBody TelecomService s) {
+	public ResponseEntity<String> processAddService(@RequestBody TelecomService s) throws JSONException {
 		System.err.println(s.getTelecomServiceName());
 		TelecomService newService = telecomService.addOrUpdateService(s);
 		if (newService != null) {
@@ -58,7 +59,7 @@ public class TelecomServiceController {
 
 	@Transactional
 	@DeleteMapping(value = "/deleteservice")
-	public ResponseEntity<String> processDeleteTelecomService(@RequestBody TelecomService s) {
+	public ResponseEntity<String> processDeleteTelecomService(@RequestBody TelecomService s) throws JSONException {
 		if (telecomService.deleteService(s) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
@@ -67,7 +68,7 @@ public class TelecomServiceController {
 
 	@Transactional
 	@PutMapping(value = "/updateservice")
-	public ResponseEntity<String> processUpdateTelecomService(@RequestBody TelecomService s) {
+	public ResponseEntity<String> processUpdateTelecomService(@RequestBody TelecomService s) throws JSONException {
 		if (telecomService.addOrUpdateService(s) != null) {
 			return HTTPUtilities.handleResponse("Success");
 		}
