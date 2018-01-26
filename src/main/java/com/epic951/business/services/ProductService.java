@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.epic951.data.entities.Product;
 import com.epic951.data.repositories.ProductRepository;
+import com.epic951.utilities.HTTPUtilities;
 import com.epic951.utilities.TestUtilities;
 
 @Service
@@ -32,15 +33,15 @@ public class ProductService {
 		Product newProduct = null;
 		boolean alreadyAdded = productRepository.findByProductName(p.getProductName()).isPresent();
 		boolean viableForUpdate = productRepository.findByProductId(p.getProductId()).isPresent();
-		// System.err.println("alreadyAdded " + alreadyAdded + " --- viableForUpdate " +
-		// viableForUpdate + " values "
-		// + p.getProductId() + " " + p.getProductName());
-		if (!alreadyAdded && p.getProductName() != null && !p.getProductName().isEmpty()) {
-			newProduct = productRepository.save(initializeProduct(p, "Create"));
+		if (!alreadyAdded) {
+			newProduct = validateParameters(p, "Create");
 			return newProduct;
 		}
 		if (viableForUpdate) {
-			newProduct = productRepository.save(initializeProduct(p, "Update"));
+			newProduct = validateParameters(p, "Update");
+		}
+		if (p.getProductId() <= 0) {
+			setValidationErrors(p, "update");
 		}
 		return newProduct;
 	}
@@ -69,11 +70,12 @@ public class ProductService {
 	}
 
 	public Integer deleteProduct(Product p) {
-		if (p.getProductName() != null && !p.getProductName().isEmpty()) {
+		if (!compareStrings(p.getProductName(), null)) {
 			return productRepository.deleteByProductName(p.getProductName());
 		} else if (p.getProductId() > 0) {
 			return productRepository.deleteByProductId(p.getProductId());
 		}
+		setValidationErrors(p, "delete");
 		return 0;
 	}
 
@@ -84,12 +86,49 @@ public class ProductService {
 		} else if (status.toLowerCase().equals("create")) {
 			temp = TestUtilities.createTestProduct(0, null, "Default", 1, 1, 1);
 		}
-		temp = TestUtilities.createTestProduct(p.getProductId(), p.getProductName(),
-				(p.getProductDescription() == null || p.getProductDescription().isEmpty() ? temp.getProductDescription()
+		temp = TestUtilities.createTestProduct(p.getProductId(),
+				(compareStrings(p.getProductName(), null) ? temp.getProductName() : p.getProductName()),
+				(compareStrings(p.getProductDescription(), null) ? temp.getProductDescription()
 						: p.getProductDescription()),
 				(p.getMinPrice() <= 0 ? temp.getMinPrice() : p.getMinPrice()),
 				(p.getMaxPrice() <= 0 ? temp.getMaxPrice() : p.getMaxPrice()),
 				(p.getRating() <= 0 ? temp.getRating() : p.getRating()));
 		return temp;
 	}
+
+	private boolean compareStrings(String str1, String str2) {
+		return (str1 == null ? str2 == null : str1.equals(str2));
+	}
+
+	private Product validateParameters(Product p, String status) {
+		Product temp = null;
+		if (compareStrings(p.getProductName(), null)) {
+			setValidationErrors(p, "empty");
+		} else {
+			temp = productRepository.save(initializeProduct(p, status));
+		}
+		return temp;
+	}
+
+	private void setValidationErrors(Product p, String field) {
+		HTTPUtilities.setErrors(new ArrayList<>());
+		switch (field.toLowerCase()) {
+		case "empty":
+			HTTPUtilities.setErrors("Product Name can not be empty or null");
+			HTTPUtilities.setErrorMessage("Product name is a required field and can not be empty");
+			break;
+		case "update":
+			HTTPUtilities.setErrors("Product ID can not be empty or null");
+			HTTPUtilities.setErrorMessage("Product ID is required to perform updating");
+			break;
+		case "delete":
+			HTTPUtilities.setErrors("Product ID & Product Name can not both be empty or null");
+			HTTPUtilities.setErrorMessage("Either Product ID or Product Name is required to perform deletion");
+			break;
+		default:
+			break;
+		}
+
+	}
+
 }

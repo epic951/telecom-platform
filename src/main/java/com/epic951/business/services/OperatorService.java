@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.epic951.data.entities.Operator;
 import com.epic951.data.repositories.OperatorRepository;
+import com.epic951.utilities.HTTPUtilities;
 import com.epic951.utilities.TestUtilities;
 
 @Service
@@ -33,23 +34,26 @@ public class OperatorService {
 		Operator newOperator = null;
 		boolean alreadyAdded = operatorRepository.findByOperatorName(o.getOperatorName()).isPresent();
 		boolean viableForUpdate = operatorRepository.findByOperatorId(o.getOperatorId()).isPresent();
-		if (!alreadyAdded && o.getOperatorName() != null && !o.getOperatorName().isEmpty()) {
-			newOperator = operatorRepository.save(initializeOperator(o, "Create"));
-			System.err.println(newOperator.toString());
+		if (!alreadyAdded) {
+			newOperator = validateParameters(o, "Create");
 			return newOperator;
 		}
 		if (viableForUpdate) {
-			newOperator = operatorRepository.save(initializeOperator(o, "Update"));
+			newOperator = validateParameters(o, "Update");
+		}
+		if (o.getOperatorId() <= 0) {
+			setValidationErrors(o, "update");
 		}
 		return newOperator;
 	}
 
 	public Integer deleteOperator(Operator o) {
-		if (o.getOperatorName() != null && !o.getOperatorName().isEmpty()) {
+		if (!compareStrings(o.getOperatorName(), null)) {
 			return operatorRepository.deleteByOperatorName(o.getOperatorName());
 		} else if (o.getOperatorId() > 0) {
 			return operatorRepository.deleteByOperatorId(o.getOperatorId());
 		}
+		setValidationErrors(o, "delete");
 		return 0;
 	}
 
@@ -66,11 +70,46 @@ public class OperatorService {
 		} else if (status.toLowerCase().equals("create")) {
 			temp = TestUtilities.createTestOperator(0, null, "Default", 1);
 		}
-		temp = TestUtilities.createTestOperator(o.getOperatorId(), o.getOperatorName(),
-				(o.getOperatorCountry() == null || o.getOperatorCountry().isEmpty() ? temp.getOperatorCountry()
-						: o.getOperatorCountry()),
+		temp = TestUtilities.createTestOperator(o.getOperatorId(),
+				(compareStrings(o.getOperatorName(), null) ? temp.getOperatorName() : o.getOperatorName()),
+				(compareStrings(o.getOperatorCountry(), null) ? temp.getOperatorCountry() : o.getOperatorCountry()),
 				(o.getRating() <= 0 ? temp.getRating() : o.getRating()));
 		return temp;
+	}
+
+	private boolean compareStrings(String str1, String str2) {
+		return (str1 == null ? str2 == null : str1.equals(str2));
+	}
+
+	private Operator validateParameters(Operator o, String status) {
+		Operator temp = null;
+		if (compareStrings(o.getOperatorName(), null)) {
+			setValidationErrors(o, "empty");
+		} else {
+			temp = operatorRepository.save(initializeOperator(o, status));
+		}
+		return temp;
+	}
+
+	private void setValidationErrors(Operator o, String field) {
+		HTTPUtilities.setErrors(new ArrayList<>());
+		switch (field.toLowerCase()) {
+		case "empty":
+			HTTPUtilities.setErrors("Operator Name can not be empty or null");
+			HTTPUtilities.setErrorMessage("Operator name is a required field and can not be empty");
+			break;
+		case "update":
+			HTTPUtilities.setErrors("Operator ID can not be empty or null");
+			HTTPUtilities.setErrorMessage("Operator ID is required to perform updating");
+			break;
+		case "delete":
+			HTTPUtilities.setErrors("Operator ID & Operator Name can not both be empty or null");
+			HTTPUtilities.setErrorMessage("Either Operator ID or Operator Name is required to perform deletion");
+			break;
+		default:
+			break;
+		}
+
 	}
 
 }

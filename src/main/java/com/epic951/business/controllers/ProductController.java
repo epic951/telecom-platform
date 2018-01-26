@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.epic951.business.exceptions.MissingRequiredValueException;
+import com.epic951.business.exceptions.OperatorRequirementsViolationException;
 import com.epic951.business.services.ProductService;
 import com.epic951.data.entities.Product;
 import com.epic951.utilities.HTTPUtilities;
@@ -48,7 +50,7 @@ public class ProductController {
 	}
 
 	@PostMapping(value = "/addproduct")
-	public ResponseEntity<String> processAddProduct(@RequestBody Product p) throws JSONException {
+	public ResponseEntity<String> processAddProduct(@RequestBody Product p) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		Product newProduct = productService.addOrUpdateProduct(p);
 		if (newProduct != null) {
 			return HTTPUtilities.handleResponse("Success");
@@ -58,7 +60,7 @@ public class ProductController {
 
 	@Transactional
 	@DeleteMapping(value = "/deleteproduct")
-	public ResponseEntity<String> processDeleteProductByProductName(@RequestBody Product p) throws JSONException {
+	public ResponseEntity<String> processDeleteProductByProductName(@RequestBody Product p) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		if (productService.deleteProduct(p) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
@@ -67,7 +69,7 @@ public class ProductController {
 
 	@Transactional
 	@PutMapping(value = "/updateproduct")
-	public ResponseEntity<String> processUpdateProduct(@RequestBody Product p) throws JSONException {
+	public ResponseEntity<String> processUpdateProduct(@RequestBody Product p) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		if (productService.addOrUpdateProduct(p) != null) {
 			return HTTPUtilities.handleResponse("Success");
 		}

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.epic951.business.exceptions.MissingRequiredValueException;
+import com.epic951.business.exceptions.OperatorRequirementsViolationException;
 import com.epic951.business.services.TelecomServiceHandler;
 import com.epic951.data.entities.TelecomService;
 import com.epic951.utilities.HTTPUtilities;
@@ -48,8 +50,7 @@ public class TelecomServiceController {
 	}
 
 	@PostMapping(value = "/addservice")
-	public ResponseEntity<String> processAddService(@RequestBody TelecomService s) throws JSONException {
-		System.err.println(s.getTelecomServiceName());
+	public ResponseEntity<String> processAddService(@RequestBody TelecomService s) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		TelecomService newService = telecomService.addOrUpdateService(s);
 		if (newService != null) {
 			return HTTPUtilities.handleResponse("Success");
@@ -59,7 +60,7 @@ public class TelecomServiceController {
 
 	@Transactional
 	@DeleteMapping(value = "/deleteservice")
-	public ResponseEntity<String> processDeleteTelecomService(@RequestBody TelecomService s) throws JSONException {
+	public ResponseEntity<String> processDeleteTelecomService(@RequestBody TelecomService s) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		if (telecomService.deleteService(s) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
@@ -68,7 +69,7 @@ public class TelecomServiceController {
 
 	@Transactional
 	@PutMapping(value = "/updateservice")
-	public ResponseEntity<String> processUpdateTelecomService(@RequestBody TelecomService s) throws JSONException {
+	public ResponseEntity<String> processUpdateTelecomService(@RequestBody TelecomService s) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		if (telecomService.addOrUpdateService(s) != null) {
 			return HTTPUtilities.handleResponse("Success");
 		}

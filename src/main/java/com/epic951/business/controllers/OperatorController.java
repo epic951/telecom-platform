@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.epic951.business.exceptions.MissingRequiredValueException;
+import com.epic951.business.exceptions.OperatorRequirementsViolationException;
 import com.epic951.business.services.OperatorService;
 import com.epic951.data.entities.Operator;
 import com.epic951.utilities.HTTPUtilities;
@@ -48,7 +50,7 @@ public class OperatorController {
 	}
 
 	@PostMapping(value = "/addoperator")
-	public ResponseEntity<String> processAddOperator(@RequestBody Operator o) throws JSONException {
+	public ResponseEntity<String> processAddOperator(@RequestBody Operator o) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		Operator newOperator = operatorService.addOrUpdateOperator(o);
 		if (newOperator != null) {
 			return HTTPUtilities.handleResponse("Success");
@@ -58,7 +60,7 @@ public class OperatorController {
 
 	@Transactional
 	@DeleteMapping(value = "/deleteoperator")
-	public ResponseEntity<String> processDeleteOperatorByOperatorName(@RequestBody Operator o) throws JSONException {
+	public ResponseEntity<String> processDeleteOperatorByOperatorName(@RequestBody Operator o) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		if (operatorService.deleteOperator(o) == 1) {
 			return HTTPUtilities.handleResponse("Success");
 		}
@@ -67,7 +69,7 @@ public class OperatorController {
 
 	@Transactional
 	@PutMapping(value = "/updateoperator")
-	public ResponseEntity<String> processUpdateOperator(@RequestBody Operator o) throws JSONException {
+	public ResponseEntity<String> processUpdateOperator(@RequestBody Operator o) throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		if (operatorService.addOrUpdateOperator(o) != null) {
 			return HTTPUtilities.handleResponse("Success");
 		}
