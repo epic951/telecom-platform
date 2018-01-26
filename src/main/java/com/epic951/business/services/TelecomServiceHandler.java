@@ -31,13 +31,13 @@ public class TelecomServiceHandler {
 		boolean alreadyAdded = serviceRepository.findByTelecomServiceName(s.getTelecomServiceName()).isPresent();
 		boolean viableForUpdate = serviceRepository.findByTelecomServiceId(s.getTelecomServiceId()).isPresent();
 		if (!alreadyAdded) {
-			newService = validateParameters(s, "Create");
+			newService = validateParameters(s, "create");
 		}
 		if (viableForUpdate) {
-			newService = validateParameters(s, "Update");
-		}
-		if (s.getTelecomServiceId() <= 0) {
-			setValidationErrors(s, "update");
+			if (s.getTelecomServiceId() <= 0) {
+				setValidationErrors(s, "update");
+			}
+			newService = validateParameters(s, "update");
 		}
 		return newService;
 	}

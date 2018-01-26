@@ -35,14 +35,14 @@ public class OperatorService {
 		boolean alreadyAdded = operatorRepository.findByOperatorName(o.getOperatorName()).isPresent();
 		boolean viableForUpdate = operatorRepository.findByOperatorId(o.getOperatorId()).isPresent();
 		if (!alreadyAdded) {
-			newOperator = validateParameters(o, "Create");
+			newOperator = validateParameters(o, "create");
 			return newOperator;
 		}
 		if (viableForUpdate) {
-			newOperator = validateParameters(o, "Update");
-		}
-		if (o.getOperatorId() <= 0) {
-			setValidationErrors(o, "update");
+			if (o.getOperatorId() <= 0) {
+				setValidationErrors(o, "update");
+			}
+			newOperator = validateParameters(o, "update");
 		}
 		return newOperator;
 	}

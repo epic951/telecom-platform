@@ -34,14 +34,14 @@ public class ProductService {
 		boolean alreadyAdded = productRepository.findByProductName(p.getProductName()).isPresent();
 		boolean viableForUpdate = productRepository.findByProductId(p.getProductId()).isPresent();
 		if (!alreadyAdded) {
-			newProduct = validateParameters(p, "Create");
+			newProduct = validateParameters(p, "create");
 			return newProduct;
 		}
 		if (viableForUpdate) {
-			newProduct = validateParameters(p, "Update");
-		}
-		if (p.getProductId() <= 0) {
-			setValidationErrors(p, "update");
+			if (p.getProductId() <= 0) {
+				setValidationErrors(p, "update");
+			}
+			newProduct = validateParameters(p, "update");
 		}
 		return newProduct;
 	}
