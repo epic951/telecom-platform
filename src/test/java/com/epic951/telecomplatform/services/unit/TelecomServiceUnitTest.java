@@ -45,8 +45,8 @@ public class TelecomServiceUnitTest {
 	public void testAddTelecomService() {
 
 		// Create a telecomservice
-		TelecomService roaming = TestUtilities.createTestTelecomService(16, "Etisalat", "Roaming", true, 14, 43, 76, 1);
-		TelecomService stickers = TestUtilities.createTestTelecomService(22, "Vodafone", "Stickers", false, 72, 30, 10,
+		TelecomService roaming = TestUtilities.createTestTelecomService(16, "Roaming", "Etisalat", true, 14, 43, 76, 1);
+		TelecomService stickers = TestUtilities.createTestTelecomService(22, "Stickers", "Vodafone", false, 72, 30, 10,
 				1);
 		System.err.println(roaming.toString() + "\n" + stickers.toString());
 
@@ -65,7 +65,7 @@ public class TelecomServiceUnitTest {
 	@Test
 	public void testDeleteTelecomService() {
 
-		TelecomService roaming = TestUtilities.createTestTelecomService(16, "Etisalat", "Roaming", true, 14, 43, 76, 1);
+		TelecomService roaming = TestUtilities.createTestTelecomService(16, "Roaming", "Etisalat", true, 14, 43, 76, 1);
 
 		// stub repository methods
 		when(mockedTelecomServiceRepository.deleteByTelecomServiceName(anyString())).thenReturn(1);

@@ -28,8 +28,8 @@ public class TestUtilities {
 		return testOperator;
 	}
 
-	public static TelecomService createTestTelecomService(int telecomServiceId, String operatorName,
-			String telecomServiceName, boolean telecomServiceType, int operatorId, int operatorServiceId,
+	public static TelecomService createTestTelecomService(int telecomServiceId, String telecomServiceName,
+			String operatorName, boolean telecomServiceType, int operatorId, int operatorServiceId,
 			int operatorPackageId, float rating) {
 		TelecomService testTelecomService = new TelecomService();
 		testTelecomService.setTelecomServiceId(telecomServiceId);

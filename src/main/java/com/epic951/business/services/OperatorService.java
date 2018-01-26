@@ -68,7 +68,7 @@ public class OperatorService {
 		if (status.toLowerCase().equals("update")) {
 			temp = operatorRepository.findByOperatorId(o.getOperatorId()).get();
 		} else if (status.toLowerCase().equals("create")) {
-			temp = TestUtilities.createTestOperator(0, null, "Default", 1);
+			temp = TestUtilities.createTestOperator(0, "default-operator-name", "default-operator-country", 1);
 		}
 		temp = TestUtilities.createTestOperator(o.getOperatorId(),
 				(compareStrings(o.getOperatorName(), null) ? temp.getOperatorName() : o.getOperatorName()),

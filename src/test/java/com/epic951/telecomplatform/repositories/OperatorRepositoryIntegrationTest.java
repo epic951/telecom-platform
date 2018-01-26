@@ -38,7 +38,6 @@ public class OperatorRepositoryIntegrationTest {
 
 		// find an inserted record using repository class
 		Operator foundOperator = operatorRepository.findByOperatorName(persisted.getOperatorName()).get();
-
 		// Assertion
 		assertThat(foundOperator.getOperatorName(), is(equalTo("STC")));
 	}

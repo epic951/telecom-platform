@@ -50,7 +50,7 @@ public class TelecomServiceUnitTest {
 	public void testAddProduct() throws Exception {
 
 		// setup mock product returned from the mocked service component
-		TelecomService mockTelecomService = TestUtilities.createTestTelecomService(87, "Zain", "Stickers", false, 6363,
+		TelecomService mockTelecomService = TestUtilities.createTestTelecomService(87, "Stickers", "Zain", false, 6363,
 				858, 326, 1);
 
 		when(telecomServiceHandler.addOrUpdateService(Mockito.isA(TelecomService.class)))

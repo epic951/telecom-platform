@@ -35,7 +35,7 @@ public class TelecomServiceIntegrationTest {
 	public void testAddService()
 			throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		// Create a service
-		TelecomService gpsTracking = TestUtilities.createTestTelecomService(92934, "Zain", "GPS-tracking", false, 89,
+		TelecomService gpsTracking = TestUtilities.createTestTelecomService(92934, "GPS-tracking", "Zain", false, 89,
 				6585, 799, 1);
 
 		// POST the new service we just added and check the outcome
@@ -49,7 +49,7 @@ public class TelecomServiceIntegrationTest {
 	public void testAddServiceWithoutTelecomServiceName()
 			throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		// Create a service
-		TelecomService gpsTracking = TestUtilities.createTestTelecomService(1, "Zain", null, false, 8, 9, 4, 1);
+		TelecomService gpsTracking = TestUtilities.createTestTelecomService(1, null, "Zain", false, 8, 9, 4, 1);
 
 		// Assert that the faulty adding process fails and throws an exception as
 		// expected

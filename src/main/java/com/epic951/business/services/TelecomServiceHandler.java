@@ -68,13 +68,14 @@ public class TelecomServiceHandler {
 		if (status.toLowerCase().equals("update")) {
 			temp = serviceRepository.findByTelecomServiceId(s.getTelecomServiceId()).get();
 		} else if (status.toLowerCase().equals("create")) {
-			temp = TestUtilities.createTestTelecomService(0, "", "", false, 0, 1, 1, 1);
+			temp = TestUtilities.createTestTelecomService(0, "default-telecom-service-name", "default-operator-name",
+					false, 0, 1, 1, 1);
 		}
 		temp = TestUtilities.createTestTelecomService(s.getTelecomServiceId(),
 				(compareStrings(s.getTelecomServiceName(), null) ? temp.getTelecomServiceName()
 						: s.getTelecomServiceName()),
-				s.getTelecomServiceName(), s.isTelecomServiceType(),
-				(s.getOperatorId() <= 0 ? temp.getOperatorId() : s.getOperatorId()),
+				(compareStrings(s.getOperatorName(), null) ? temp.getOperatorName() : s.getOperatorName()),
+				s.isTelecomServiceType(), (s.getOperatorId() <= 0 ? temp.getOperatorId() : s.getOperatorId()),
 				(s.getOperatorServiceId() <= 0 ? temp.getOperatorServiceId() : s.getOperatorServiceId()),
 				(s.getOperatorPackageId() <= 0 ? temp.getOperatorPackageId() : s.getOperatorPackageId()),
 				(s.getRating() <= 0 ? temp.getRating() : s.getRating()));
