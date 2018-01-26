@@ -36,7 +36,7 @@ public class OperatorControllerIntegrationTest {
 			throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 
 		// Create an Operator
-		Operator zain = TestUtilities.createTestOperator(7479, "STC", "UAE", 1);
+		Operator zain = TestUtilities.createTestOperator(7479, "STC", "UAE", "", 1);
 
 		// POST the new operator we just added and check the outcome
 		ResponseEntity<String> outcome = operatorController.processAddOperator(zain);
@@ -49,7 +49,7 @@ public class OperatorControllerIntegrationTest {
 	public void testAddOperatorWithoutName()
 			throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 		// Create an Operator
-		Operator zain = TestUtilities.createTestOperator(7479, null, "UAE", 1);
+		Operator zain = TestUtilities.createTestOperator(7479, null, "UAE", "", 1);
 
 		// Assert that the faulty adding process fails and throws an exception as
 		// expected

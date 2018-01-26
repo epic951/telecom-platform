@@ -49,12 +49,12 @@ public class OperatorControllerUnitTest {
 	@Test
 	public void testAddOperator() throws Exception {
 		// setup mock product returned from the mocked service component
-		Operator mockOperator = TestUtilities.createTestOperator(353, "UAE", "Zain", 1);
+		Operator mockOperator = TestUtilities.createTestOperator(353, "UAE", "Zain", "", 1);
 
 		when(operatorService.addOrUpdateOperator(Mockito.isA(Operator.class))).thenReturn(mockOperator);
 
 		// simulate the form bean that would POST from the web page
-		Operator newOperator = TestUtilities.createTestOperator(0, null, null, 1);
+		Operator newOperator = TestUtilities.createTestOperator(0, null, null, "", 1);
 
 		// simulate the form submit (POST)
 		mockMvc.perform(post("/api/addoperator", newOperator).header("Origin", "")

@@ -51,13 +51,13 @@ public class TelecomServiceUnitTest {
 
 		// setup mock product returned from the mocked service component
 		TelecomService mockTelecomService = TestUtilities.createTestTelecomService(87, "Stickers", "Zain", false, 6363,
-				858, 326, 1);
+				858, 326, "", 1);
 
 		when(telecomServiceHandler.addOrUpdateService(Mockito.isA(TelecomService.class)))
 				.thenReturn(mockTelecomService);
 
 		// simulate the form bean that would POST from the web page
-		TelecomService newTelecomService = TestUtilities.createTestTelecomService(0, null, null, false, 0, 0, 0, 1);
+		TelecomService newTelecomService = TestUtilities.createTestTelecomService(0, null, null, false, 0, 0, 0, "", 1);
 
 		// simulate the form submit (POST)
 		mockMvc.perform(post("/api/addservice", newTelecomService).header("Origin", "")

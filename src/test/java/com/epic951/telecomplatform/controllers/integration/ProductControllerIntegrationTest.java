@@ -37,7 +37,7 @@ public class ProductControllerIntegrationTest {
 
 		// Create a Product
 		Product mms = TestUtilities.createTestProduct(6621, "Video-Messaging-Service", "Video-messaging-service", 435,
-				121, 1);
+				121, "", 1);
 
 		// POST the new product we just added and check the outcome
 		ResponseEntity<String> outcome = productController.processAddProduct(mms);
@@ -50,7 +50,7 @@ public class ProductControllerIntegrationTest {
 	public void testAddProductWithoutName()
 			throws JSONException, OperatorRequirementsViolationException, MissingRequiredValueException {
 
-		Product streaming = TestUtilities.createTestProduct(65, null, "Youtube", 7, 88, 2);
+		Product streaming = TestUtilities.createTestProduct(65, null, "Youtube", 7, 88, "", 2);
 
 		// Assert that the faulty adding process fails and throws an exception as
 		// expected

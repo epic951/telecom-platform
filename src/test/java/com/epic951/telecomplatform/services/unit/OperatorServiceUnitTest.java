@@ -46,8 +46,8 @@ public class OperatorServiceUnitTest {
 	public void testAddOperator() {
 
 		// Create an Operator
-		Operator etisalat = TestUtilities.createTestOperator(3, "EGY", "Etisalat", 1);
-		Operator vodafone = TestUtilities.createTestOperator(5, "EG", "Vodafone", 1);
+		Operator etisalat = TestUtilities.createTestOperator(3, "EGY", "Etisalat", "", 1);
+		Operator vodafone = TestUtilities.createTestOperator(5, "EG", "Vodafone", "", 1);
 
 		// stub repository methods
 		when(mockedOperatorRepository.findByOperatorId(Mockito.anyInt())).thenReturn(Optional.empty());
@@ -64,7 +64,7 @@ public class OperatorServiceUnitTest {
 	public void testDeleteByOperatorName() {
 
 		// Create an Operator
-		Operator etisalat = TestUtilities.createTestOperator(3, "EGY", "Etisalat", 1);
+		Operator etisalat = TestUtilities.createTestOperator(3, "EGY", "Etisalat", "", 1);
 
 		// stub repository methods
 		when(mockedOperatorRepository.deleteByOperatorName(anyString())).thenReturn(1);

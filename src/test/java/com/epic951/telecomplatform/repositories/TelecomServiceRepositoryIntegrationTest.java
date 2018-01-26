@@ -33,7 +33,7 @@ public class TelecomServiceRepositoryIntegrationTest {
 
 		// setup data scenario
 		TelecomService newTelecomService = TestUtilities.createTestTelecomService(265, "LTE", "DDD", false, 636, 8585,
-				324, 1);
+				324, "", 1);
 		TelecomService persisted = testEntityManager.merge(newTelecomService);
 		System.err.println(persisted.toString());
 
@@ -50,7 +50,7 @@ public class TelecomServiceRepositoryIntegrationTest {
 
 		// setup data scenario
 		TelecomService newTelecomService = TestUtilities.createTestTelecomService(8335, "GPRS", "DDD", false, 732, 32,
-				74, 1);
+				74, "", 1);
 		testEntityManager.merge(newTelecomService);
 
 		Integer result = telecomServiceRepository.deleteByTelecomServiceName("GPRS");
