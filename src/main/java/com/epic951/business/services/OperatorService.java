@@ -39,11 +39,9 @@ public class OperatorService {
 			return newOperator;
 		}
 		if (viableForUpdate) {
-			if (o.getOperatorId() <= 0) {
-				setValidationErrors(o, "update");
-			}
 			newOperator = validateParameters(o, "update");
 		}
+		setValidationErrors(o, "empty");
 		return newOperator;
 	}
 
@@ -96,12 +94,14 @@ public class OperatorService {
 		HTTPUtilities.setErrors(new ArrayList<>());
 		switch (field.toLowerCase()) {
 		case "empty":
-			HTTPUtilities.setErrors("Operator Name can not be empty or null");
-			HTTPUtilities.setErrorMessage("Operator name is a required field and can not be empty");
-			break;
-		case "update":
-			HTTPUtilities.setErrors("Operator ID can not be empty or null");
-			HTTPUtilities.setErrorMessage("Operator ID is required to perform updating");
+			if (compareStrings(o.getOperatorName(), null)) {
+				HTTPUtilities.setErrors("Operator Name can not be empty or null");
+				HTTPUtilities.setErrorMessage("Operator name is a required field and can not be empty");
+			}
+			if (o.getOperatorId() <= 0) {
+				HTTPUtilities.setErrors("Operator ID can not be empty or null");
+				HTTPUtilities.setErrorMessage("Operator ID is required to perform updating");
+			}
 			break;
 		case "delete":
 			HTTPUtilities.setErrors("Operator ID & Operator Name can not both be empty or null");

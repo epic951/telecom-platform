@@ -38,11 +38,9 @@ public class ProductService {
 			return newProduct;
 		}
 		if (viableForUpdate) {
-			if (p.getProductId() <= 0) {
-				setValidationErrors(p, "update");
-			}
 			newProduct = validateParameters(p, "update");
 		}
+		setValidationErrors(p, "empty");
 		return newProduct;
 	}
 
@@ -116,12 +114,14 @@ public class ProductService {
 		HTTPUtilities.setErrors(new ArrayList<>());
 		switch (field.toLowerCase()) {
 		case "empty":
-			HTTPUtilities.setErrors("Product Name can not be empty or null");
-			HTTPUtilities.setErrorMessage("Product name is a required field and can not be empty");
-			break;
-		case "update":
-			HTTPUtilities.setErrors("Product ID can not be empty or null");
-			HTTPUtilities.setErrorMessage("Product ID is required to perform updating");
+			if (compareStrings(p.getProductName(), null)) {
+				HTTPUtilities.setErrors("Product Name can not be empty or null");
+				HTTPUtilities.setErrorMessage("Product name is a required field and can not be empty");
+			}
+			if (p.getProductId() < 0) {
+				HTTPUtilities.setErrors("Product ID can not be empty or null");
+				HTTPUtilities.setErrorMessage("Product ID is required to perform updating");
+			}
 			break;
 		case "delete":
 			HTTPUtilities.setErrors("Product ID & Product Name can not both be empty or null");

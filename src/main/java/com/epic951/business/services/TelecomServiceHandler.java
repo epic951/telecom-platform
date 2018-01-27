@@ -34,11 +34,9 @@ public class TelecomServiceHandler {
 			newService = validateParameters(s, "create");
 		}
 		if (viableForUpdate) {
-			if (s.getTelecomServiceId() <= 0) {
-				setValidationErrors(s, "update");
-			}
 			newService = validateParameters(s, "update");
 		}
+		setValidationErrors(s, "empty");
 		return newService;
 	}
 
@@ -164,12 +162,12 @@ public class TelecomServiceHandler {
 			if (s.getOperatorId() <= 0) {
 				HTTPUtilities.setErrors("Operator ID can not be empty or less than zero");
 			}
+			if (s.getTelecomServiceId() < 0) {
+				HTTPUtilities.setErrors("Telecom Service ID can not be empty or null");
+				HTTPUtilities.setErrorMessage("Telecom Service ID is required to perform updating");
+			}
 			HTTPUtilities.setErrorMessage("Neither the Telecom Service name" + " or the Operator name can be empty"
-					+ " as well as the Operator ID which can not be empty or less than zero");
-			break;
-		case "update":
-			HTTPUtilities.setErrors("Telecom Service ID can not be empty or null");
-			HTTPUtilities.setErrorMessage("Telecom Service ID is required to perform updating");
+					+ " as well as the Telecom Service ID and Operator ID which can not be empty or less than zero");
 			break;
 		case "delete":
 			HTTPUtilities.setErrors("Telecom Service ID & Telecom Service Name can not both be empty or null");
