@@ -95,12 +95,16 @@ public class OperatorService {
 	private void setValidationErrors(Operator o, String field) {
 		switch (field.toLowerCase()) {
 		case "empty":
+			String temp = new HTTPUtilities().getErrors().get(0);
+			if (temp.contains("#Product") || temp.contains("#Service")) {
+				HTTPUtilities.setErrors(new ArrayList<>());
+			}
 			if (compareStrings(o.getOperatorName(), null)) {
-				HTTPUtilities.setErrors("Operator Name can not be empty or null");
+				HTTPUtilities.setErrors("#Operator Operator Name can not be empty or null");
 				HTTPUtilities.setErrorMessage("Operator name is a required field and can not be empty");
 			}
 			if (o.getOperatorId() <= 0) {
-				HTTPUtilities.setErrors("Operator ID can not be empty or null");
+				HTTPUtilities.setErrors("#Operator Operator ID can not be empty or null");
 				HTTPUtilities.setErrorMessage("Operator ID is required to perform updating");
 			}
 			break;

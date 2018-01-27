@@ -158,21 +158,24 @@ public class TelecomServiceHandler {
 					+ "require the Operator Service not to be null or less than zero");
 			break;
 		case "empty":
+			String temp = new HTTPUtilities().getErrors().get(0);
+			if (temp.contains("#Product") || temp.contains("#Operator")) {
+				HTTPUtilities.setErrors(new ArrayList<>());
+			}
 			if (compareStrings(s.getOperatorName(), null)) {
-				HTTPUtilities.setErrors("Operator Name can not be empty");
+				HTTPUtilities.setErrors("#Service Operator Name can not be empty");
 				HTTPUtilities.setErrorMessage(emptyMessage);
 			}
 			if (compareStrings(s.getTelecomServiceName(), null)) {
-				HTTPUtilities.setErrors("Telecom Service Name can not be empty");
+				HTTPUtilities.setErrors("#Service Telecom Service Name can not be empty");
 				HTTPUtilities.setErrorMessage(emptyMessage);
 			}
 			if (s.getOperatorId() <= 0) {
-				HTTPUtilities.setErrors("Operator ID can not be empty or less than zero");
+				HTTPUtilities.setErrors("#Service Operator ID can not be empty or less than zero");
 				HTTPUtilities.setErrorMessage(emptyMessage);
 			}
 			if (s.getTelecomServiceId() < 0) {
-				HTTPUtilities.setErrors("Telecom Service ID can not be empty or null");
-				HTTPUtilities.setErrorMessage("Telecom Service ID is required to perform updating");
+				HTTPUtilities.setErrors("#Service Telecom Service ID can not be empty or null");
 				HTTPUtilities.setErrorMessage(emptyMessage);
 			}
 			break;
