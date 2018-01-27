@@ -82,8 +82,8 @@ public class ProductService {
 		if (status.toLowerCase().equals("update")) {
 			temp = productRepository.findByProductId(p.getProductId()).get();
 		} else if (status.toLowerCase().equals("create")) {
-			temp = TestUtilities.createTestProduct(0, "default-product-name", "default-product-description", 1, 1, "",
-					1);
+			temp = TestUtilities.createTestProduct(0, "default-product-name", "default-product-description", 1, 1,
+					"https://openclipart.org/download/85345/home-sim-card.svg", 1);
 		}
 		temp = TestUtilities.createTestProduct(p.getProductId(),
 				(compareStrings(p.getProductName(), null) ? temp.getProductName() : p.getProductName()),
@@ -91,7 +91,8 @@ public class ProductService {
 						: p.getProductDescription()),
 				(p.getMinPrice() <= 0 ? temp.getMinPrice() : p.getMinPrice()),
 				(p.getMaxPrice() <= 0 ? temp.getMaxPrice() : p.getMaxPrice()),
-				(compareStrings(p.getImageUrl(), null) ? temp.getImageUrl() : p.getImageUrl()),
+				(compareStrings(p.getImageUrl(), null) || p.getImageUrl().equals("") ? temp.getImageUrl()
+						: p.getImageUrl()),
 				(p.getRating() <= 0 ? temp.getRating() : p.getRating()));
 		return temp;
 	}

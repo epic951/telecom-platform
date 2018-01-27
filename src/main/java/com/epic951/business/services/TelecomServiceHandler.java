@@ -67,7 +67,7 @@ public class TelecomServiceHandler {
 			temp = serviceRepository.findByTelecomServiceId(s.getTelecomServiceId()).get();
 		} else if (status.toLowerCase().equals("create")) {
 			temp = TestUtilities.createTestTelecomService(0, "default-telecom-service-name", "default-operator-name",
-					false, 0, 1, 1, "", 1);
+					false, 0, 1, 1, "https://openclipart.org/download/294225/FX13_phone1.svg", 1);
 		}
 		temp = TestUtilities.createTestTelecomService(s.getTelecomServiceId(),
 				(compareStrings(s.getTelecomServiceName(), null) ? temp.getTelecomServiceName()
@@ -76,7 +76,8 @@ public class TelecomServiceHandler {
 				s.isTelecomServiceType(), (s.getOperatorId() <= 0 ? temp.getOperatorId() : s.getOperatorId()),
 				(s.getOperatorServiceId() <= 0 ? temp.getOperatorServiceId() : s.getOperatorServiceId()),
 				(s.getOperatorPackageId() <= 0 ? temp.getOperatorPackageId() : s.getOperatorPackageId()),
-				(compareStrings(s.getImageUrl(), null) ? temp.getImageUrl() : s.getImageUrl()),
+				(compareStrings(s.getImageUrl(), null) || s.getImageUrl().equals("") ? temp.getImageUrl()
+						: s.getImageUrl()),
 				(s.getRating() <= 0 ? temp.getRating() : s.getRating()));
 		return temp;
 	}
