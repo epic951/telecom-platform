@@ -123,9 +123,11 @@ public class TelecomServiceHandler {
 	}
 
 	private void setValidationErrors(TelecomService s, String field) {
-		HTTPUtilities.setErrors(new ArrayList<>());
+		String emptyMessage = "Neither the Telecom Service name" + " or the Operator name can be empty"
+				+ " as well as the Telecom Service ID and Operator ID which can not be empty or less than zero";
 		switch (field.toLowerCase()) {
 		case "vodafone":
+			HTTPUtilities.setErrors(new ArrayList<>());
 			if (s.getOperatorPackageId() <= 0) {
 				HTTPUtilities.setErrors("Operator Package ID must not be null or less than or equal to zero");
 			}
@@ -138,6 +140,7 @@ public class TelecomServiceHandler {
 					+ "Operator Service ID of the service not to be null or less than or equal to zero");
 			break;
 		case "etisalat":
+			HTTPUtilities.setErrors(new ArrayList<>());
 			if (s.getOperatorPackageId() <= 0) {
 				HTTPUtilities.setErrors("Operator Package ID must not be null or 0");
 			}
@@ -146,6 +149,7 @@ public class TelecomServiceHandler {
 					+ "require the Operator Package not to be null or less than zero");
 			break;
 		case "orange":
+			HTTPUtilities.setErrors(new ArrayList<>());
 			if (s.getOperatorServiceId() <= 0) {
 				HTTPUtilities.setErrors("Operator Service ID must not be null or 0");
 			}
@@ -156,21 +160,24 @@ public class TelecomServiceHandler {
 		case "empty":
 			if (compareStrings(s.getOperatorName(), null)) {
 				HTTPUtilities.setErrors("Operator Name can not be empty");
+				HTTPUtilities.setErrorMessage(emptyMessage);
 			}
 			if (compareStrings(s.getTelecomServiceName(), null)) {
 				HTTPUtilities.setErrors("Telecom Service Name can not be empty");
+				HTTPUtilities.setErrorMessage(emptyMessage);
 			}
 			if (s.getOperatorId() <= 0) {
 				HTTPUtilities.setErrors("Operator ID can not be empty or less than zero");
+				HTTPUtilities.setErrorMessage(emptyMessage);
 			}
 			if (s.getTelecomServiceId() < 0) {
 				HTTPUtilities.setErrors("Telecom Service ID can not be empty or null");
 				HTTPUtilities.setErrorMessage("Telecom Service ID is required to perform updating");
+				HTTPUtilities.setErrorMessage(emptyMessage);
 			}
-			HTTPUtilities.setErrorMessage("Neither the Telecom Service name" + " or the Operator name can be empty"
-					+ " as well as the Telecom Service ID and Operator ID which can not be empty or less than zero");
 			break;
 		case "delete":
+			HTTPUtilities.setErrors(new ArrayList<>());
 			HTTPUtilities.setErrors("Telecom Service ID & Telecom Service Name can not both be empty or null");
 			HTTPUtilities.setErrorMessage(
 					"Either Telecom Service ID or Telecom Service Name is required to perform deletion");

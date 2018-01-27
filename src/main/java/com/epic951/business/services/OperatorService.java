@@ -93,7 +93,6 @@ public class OperatorService {
 	}
 
 	private void setValidationErrors(Operator o, String field) {
-		HTTPUtilities.setErrors(new ArrayList<>());
 		switch (field.toLowerCase()) {
 		case "empty":
 			if (compareStrings(o.getOperatorName(), null)) {
@@ -106,6 +105,7 @@ public class OperatorService {
 			}
 			break;
 		case "delete":
+			HTTPUtilities.setErrors(new ArrayList<>());
 			HTTPUtilities.setErrors("Operator ID & Operator Name can not both be empty or null");
 			HTTPUtilities.setErrorMessage("Either Operator ID or Operator Name is required to perform deletion");
 			break;

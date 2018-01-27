@@ -112,7 +112,6 @@ public class ProductService {
 	}
 
 	private void setValidationErrors(Product p, String field) {
-		HTTPUtilities.setErrors(new ArrayList<>());
 		switch (field.toLowerCase()) {
 		case "empty":
 			if (compareStrings(p.getProductName(), null)) {
@@ -125,6 +124,7 @@ public class ProductService {
 			}
 			break;
 		case "delete":
+			HTTPUtilities.setErrors(new ArrayList<>());
 			HTTPUtilities.setErrors("Product ID & Product Name can not both be empty or null");
 			HTTPUtilities.setErrorMessage("Either Product ID or Product Name is required to perform deletion");
 			break;
