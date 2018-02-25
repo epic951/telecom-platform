@@ -100,11 +100,11 @@ public class OperatorService {
 				HTTPUtilities.setErrors(new ArrayList<>());
 			}
 			if (compareStrings(o.getOperatorName(), null)) {
-				HTTPUtilities.setErrors("#Operator Operator Name can not be empty or null");
+				HTTPUtilities.setErrors("#Operator Name can not be empty or null");
 				HTTPUtilities.setErrorMessage("Operator name is a required field and can not be empty");
 			}
 			if (o.getOperatorId() <= 0) {
-				HTTPUtilities.setErrors("#Operator Operator ID can not be empty or null");
+				HTTPUtilities.setErrors("#Operator ID can not be empty or null");
 				HTTPUtilities.setErrorMessage("Operator ID is required to perform updating");
 			}
 			break;

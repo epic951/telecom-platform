@@ -119,11 +119,11 @@ public class ProductService {
 				HTTPUtilities.setErrors(new ArrayList<>());
 			}
 			if (compareStrings(p.getProductName(), null)) {
-				HTTPUtilities.setErrors("#Product Product Name can not be empty or null");
+				HTTPUtilities.setErrors("#Product Name can not be empty or null");
 				HTTPUtilities.setErrorMessage("Product name is a required field and can not be empty");
 			}
 			if (p.getProductId() < 0) {
-				HTTPUtilities.setErrors("#Product Product ID can not be empty or null");
+				HTTPUtilities.setErrors("#Product ID can not be empty or null");
 				HTTPUtilities.setErrorMessage("Product ID is required to perform updating");
 			}
 			break;
